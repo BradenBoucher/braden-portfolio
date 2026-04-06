@@ -48,6 +48,17 @@
   .detail-item:hover { border-color: var(--accent); }
   .detail-img { width: 180px; height: 130px; background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 8px; display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; text-align: center; overflow: hidden; }
   .detail-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .detail-img a { width: 100%; height: 100%; }
+  .detail-img a img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .slider { position: relative; width: 180px; height: 130px; background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 8px; overflow: hidden; }
+  .slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; opacity: 0; transition: opacity 0.3s; }
+  .slider img.active { opacity: 1; }
+  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.7rem; z-index: 2; display: flex; align-items: center; justify-content: center; }
+  .slider-btn.prev { left: 4px; }
+  .slider-btn.next { right: 4px; }
+  .slider-dots { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; z-index: 2; }
+  .slider-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .slider-dots span.active { background: var(--accent); }
   .detail-content h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
   .detail-content .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
   .detail-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
@@ -92,8 +103,8 @@
   <button class="back-btn" onclick="hideSection('presentations')">&#8592; Back</button>
   <h2>Presentations</h2>
   <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO · Charlotte, NC · May 2026</div><p>Upcoming presentation at the Conference on Lasers and Electro-Optics.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><a href="docs/harvard-poster.pdf" target="_blank"><img src="images/harvard-poster-thumb.png" alt="Harvard NCRC poster"></a></div><div class="detail-content"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="docs/harvard-poster.pdf" target="_blank">Poster (PDF)</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">U of A Winter School · Tucson, AZ · January 2026</div><p>Presented at the University of Arizona Winter School.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="slider" data-slider><img src="images/harvard-1.jpg" alt="Harvard NCRC" class="active"><img src="images/harvard-2.jpg" alt="Harvard NCRC"><img src="images/harvard-3.jpg" alt="Harvard NCRC"><img src="images/harvard-poster-thumb.png" alt="Research poster"><button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button><div class="slider-dots"><span class="active"></span><span></span><span></span><span></span></div></div><div class="detail-content"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="docs/harvard-poster.pdf" target="_blank">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="slider" data-slider><img src="images/arizona-1.jpg" alt="U of A Winter School" class="active"><img src="images/arizona-2.jpg" alt="Wyant College"><button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button><div class="slider-dots"><span class="active"></span><span></span></div></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">U of A Winter School · Tucson, AZ · January 2026</div><p>Presented at the University of Arizona Winter School.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
   <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
   <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
   <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
@@ -119,6 +130,7 @@
 </div></div>
 
 <script>
+function slide(btn,dir){var s=btn.closest('[data-slider]'),imgs=s.querySelectorAll('img'),dots=s.querySelectorAll('.slider-dots span'),cur=s.querySelector('img.active'),idx=[...imgs].indexOf(cur),next=(idx+dir+imgs.length)%imgs.length;cur.classList.remove('active');imgs[next].classList.add('active');dots[idx].classList.remove('active');dots[next].classList.add('active');}
 function showSection(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';document.getElementById(id).scrollTop=0;}
 function hideSection(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.overlay.active').forEach(function(el){el.classList.remove('active');});document.body.style.overflow='';}});
