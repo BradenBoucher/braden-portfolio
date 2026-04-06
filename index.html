@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
     --bg: #0c0f14;
     --surface: #161b24;
@@ -19,235 +18,109 @@
     --accent: #4a9ead;
     --accent-glow: rgba(74, 158, 173, 0.15);
   }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Subtle grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-  }
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ── Header ── */
-  header {
-    padding: 80px 0 20px;
-    text-align: center;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 12px;
-  }
-
-  header p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-
-  header .links {
-    margin-top: 20px;
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-  }
-
-  header .links a {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: opacity 0.2s;
-  }
-
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 80px 0 20px; text-align: center; animation: fadeUp 0.8s ease both; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
+  header p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 560px; margin: 0 auto; }
+  header .links { margin-top: 20px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  header .links a { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: opacity 0.2s; }
   header .links a:hover { opacity: 0.7; }
-
-  /* ── Card Grid ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 40px 0 80px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 36px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    transition: background 0.25s, border-color 0.25s, transform 0.25s;
-    cursor: default;
-    animation: fadeUp 0.8s ease both;
-  }
-
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 40px 0 80px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 36px 32px; display: flex; flex-direction: column; gap: 14px; transition: background 0.25s, border-color 0.25s, transform 0.25s; cursor: pointer; animation: fadeUp 0.8s ease both; }
   .card:nth-child(1) { animation-delay: 0.15s; }
   .card:nth-child(2) { animation-delay: 0.25s; }
   .card:nth-child(3) { animation-delay: 0.35s; }
   .card:nth-child(4) { animation-delay: 0.45s; }
-
-  .card:hover {
-    background: var(--surface-hover);
-    border-color: var(--accent);
-    transform: translateY(-4px);
-  }
-
-  .card-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--accent-glow);
-    display: grid;
-    place-items: center;
-    font-size: 1.2rem;
-  }
-
-  .card h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-  }
-
-  .card p {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
-
-  .card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-  }
-
-  .card ul li {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .card ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.8rem;
-  }
-
-  /* ── Footer ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 0;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.82rem;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 640px) {
-    .grid { grid-template-columns: 1fr; }
-    header { padding-top: 48px; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-4px); }
+  .card-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-glow); display: grid; place-items: center; font-size: 1.2rem; }
+  .card h2 { font-family: 'DM Serif Display', serif; font-size: 1.35rem; font-weight: 400; }
+  .card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; }
+  .overlay { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .overlay.active { opacity: 1; pointer-events: all; }
+  .overlay-inner { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; margin-bottom: 32px; }
+  .back-btn:hover { border-color: var(--accent); color: var(--text); }
+  .overlay h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 32px; }
+  .detail-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 16px; display: grid; grid-template-columns: 180px 1fr; gap: 24px; transition: border-color 0.2s; }
+  .detail-item:hover { border-color: var(--accent); }
+  .detail-img { width: 180px; height: 130px; background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 8px; display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; text-align: center; overflow: hidden; }
+  .detail-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .detail-content h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
+  .detail-content .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
+  .detail-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
+  .detail-content .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .detail-content .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
+  .detail-content .detail-links a:hover { background: var(--accent-glow); }
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--text-muted); font-size: 0.82rem; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } header { padding-top: 48px; } .detail-item { grid-template-columns: 1fr; } .detail-img { width: 100%; height: 160px; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
+<div id="home">
   <div class="container">
-
     <header>
       <h1>Braden Boucher</h1>
-      <p>Photonics researcher &amp; software engineer — building at the intersection of optics, machine learning, and mobile development.</p>
+      <p>Photonics researcher &amp; software engineer — optics, machine learning, and mobile development. BSU '26.</p>
       <div class="links">
         <a href="mailto:b1boucher@student.bridgew.edu">Email</a>
-        <a href="https://github.com/b1boucher" target="_blank">GitHub</a>
+        <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
         <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
       </div>
     </header>
-
     <section class="grid">
-
-      <div class="card">
-        <div class="card-icon">📄</div>
-        <h2>Publications</h2>
-        <p>Peer-reviewed papers and conference proceedings in photonics and optoelectronics.</p>
-        <ul>
-          <li>CLEO 2026 — III-V Laser Diodes on Si (first author)</li>
-          <li>MDPI Sensors — Optoelectronic characterization</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🎤</div>
-        <h2>Presentations</h2>
-        <p>Poster sessions and talks at national conferences.</p>
-        <ul>
-          <li>Harvard Conference — Photonics research</li>
-          <li>BSU Undergraduate Research Symposium</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🛠️</div>
-        <h2>Software Projects</h2>
-        <p>iOS apps, web platforms, and ML-powered tools.</p>
-        <ul>
-          <li>ColorCoded — ML sheet music reader (iOS)</li>
-          <li>Workspace MVP — AI-powered workspace</li>
-          <li>History Legends — Educational RPG game</li>
-          <li>StockFlow — Inventory management app</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🔬</div>
-        <h2>Research &amp; Thesis</h2>
-        <p>Optoelectronic characterization of III-V laser diodes on silicon substrates under Dr. Demirbas.</p>
-        <ul>
-          <li>GaAs, InP, DFB laser diode characterization</li>
-          <li>Silver epoxy bonding methodology</li>
-        </ul>
-      </div>
-
+      <div class="card" onclick="showSection('publications')"><div class="card-icon">📄</div><h2>Publications</h2><p>Peer-reviewed papers and conference proceedings in photonics.</p></div>
+      <div class="card" onclick="showSection('presentations')"><div class="card-icon">🎤</div><h2>Presentations</h2><p>Poster sessions and talks at national conferences.</p></div>
+      <div class="card" onclick="showSection('projects')"><div class="card-icon">🛠️</div><h2>Software Projects</h2><p>iOS apps, web platforms, and ML-powered tools.</p></div>
+      <div class="card" onclick="showSection('experience')"><div class="card-icon">🔬</div><h2>Experience &amp; Research</h2><p>Lab research, co-ops, and teaching at BSU and Draper.</p></div>
     </section>
-
-    <footer>
-      &copy; 2026 Braden Boucher · Bridgewater State University
-    </footer>
-
+    <footer>&copy; 2026 Braden Boucher</footer>
   </div>
+</div>
+
+<div class="overlay" id="publications"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideSection('publications')">&#8592; Back</button>
+  <h2>Publications</h2>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO 2026 · First Author</div><p>Bonding micron-scale III-V laser dies to silicon using silver epoxy. Wall-plug efficiencies up to 20%, infrared output above 10 mW.</p><div class="detail-links"><a href="#">View Paper (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>A Review of Solid-State LiDAR Principles and Metasurface-Based LiDAR Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div><p>Literature review covering 100+ papers on solid-state LiDAR principles and metasurface-based sensors.</p><div class="detail-links"><a href="#">View Paper (PDF)</a></div></div></div>
+</div></div>
+
+<div class="overlay" id="presentations"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideSection('presentations')">&#8592; Back</button>
+  <h2>Presentations</h2>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO · Charlotte, NC · May 2026</div><p>Upcoming presentation at the Conference on Lasers and Electro-Optics.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">U of A Winter School · Tucson, AZ · January 2026</div><p>Presented at the University of Arizona Winter School.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+</div></div>
+
+<div class="overlay" id="projects"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideSection('projects')">&#8592; Back</button>
+  <h2>Software Projects</h2>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div><p>ML-powered sheet music reader — scans PDFs, detects noteheads, overlays color-coded pitch annotations with fingering suggestions.</p><div class="detail-links"><a href="https://color-coded.app" target="_blank">Website</a><a href="#">App Store</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI Integration</div><p>AI-powered workspace with spreadsheet integration, canvas blocks, and natural language actions.</p><div class="detail-links"><a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div><p>Educational RPG quiz game covering 7 APUSH eras with 345+ questions and custom sprite art.</p><div class="detail-links"><a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div><p>Cross-platform inventory management app for construction companies with barcode scanning.</p><div class="detail-links"><a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a></div></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optixlog.com</h3><div class="meta">Web Platform · Team Project</div><p>Platform to log, track, and analyze photonic simulations with interactive dashboards.</p><div class="detail-links"><a href="https://optixlog.com" target="_blank">Visit Site</a></div></div></div>
+</div></div>
+
+<div class="overlay" id="experience"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideSection('experience')">&#8592; Back</button>
+  <h2>Experience &amp; Research</h2>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optics-Physics Sensor Engineering Co-Op</h3><div class="meta">Charles Stark Draper Laboratory · Jan–Jun 2025</div><p>Built and optimized optical breadboard test setups. Characterized PIC structures including MZIs, edge couplers, and spirals. Developed Python and MATLAB scripts for data processing.</p></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Undergraduate Researcher</h3><div class="meta">Bridgewater State University · Jan 2024–Present</div><p>IV, LIV, and optical spectrum characterization of DFB and Fabry-Perot laser diodes. Honors thesis on III-V laser diodes on silicon. Supported by Adrian Tinsley Grant.</p></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Research Assistant for NSF Grants</h3><div class="meta">Bridgewater State University · Jan 2023–Present</div><p>PIC and QPIC characterization, heterodyne detection, sustainable manufacturing. Python scripts for data analysis across multiple grant-funded efforts.</p></div></div>
+  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Teaching Assistant, Physics I</h3><div class="meta">Bridgewater State University · Sep–Dec 2024</div><p>TA for General Physics I. Assisted students, taught sessions, held office hours.</p></div></div>
+</div></div>
+
+<script>
+function showSection(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';document.getElementById(id).scrollTop=0;}
+function hideSection(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.overlay.active').forEach(function(el){el.classList.remove('active');});document.body.style.overflow='';}});
+</script>
 </body>
 </html>
