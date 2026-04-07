@@ -24,189 +24,244 @@
   header .links a { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: opacity 0.2s; }
   header .links a:hover { opacity: 0.7; }
 
-  /* Cards — cover image on top, text below */
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 40px 0 80px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: background 0.25s, border-color 0.25s, transform 0.25s; cursor: pointer; animation: fadeUp 0.8s ease both; }
-  .card:nth-child(1) { animation-delay: 0.15s; }
-  .card:nth-child(2) { animation-delay: 0.25s; }
-  .card:nth-child(3) { animation-delay: 0.35s; }
-  .card:nth-child(4) { animation-delay: 0.45s; }
-  .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-4px); }
-  .card-cover { width: 100%; height: 300px; overflow: hidden; background: var(--surface-hover); display: flex; align-items: center; justify-content: center; }
+  /* Filter tabs */
+  .filters { display: flex; gap: 8px; justify-content: center; margin: 28px 0 8px; flex-wrap: wrap; }
+  .filters button { background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; padding: 7px 18px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+  .filters button:hover { border-color: var(--accent); color: var(--text); }
+  .filters button.active { background: var(--accent); border-color: var(--accent); color: #0c0f14; font-weight: 600; }
 
-  /* Vertical detail item — image on top, text below */
-  .detail-item-v { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; transition: border-color 0.2s; }
-  .detail-item-v:hover { border-color: var(--accent); }
-  .detail-item-v .detail-banner { width: 100%; height: 570px; overflow: hidden; position: relative; background: var(--surface-hover); display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; }
-  .detail-item-v .detail-banner img { width: 100%; height: 100%; object-fit: cover; }
-  .detail-item-v .slider { position: relative; width: 100%; height: 570px; overflow: hidden; }
-  .detail-item-v .detail-text { padding: 24px 28px; }
-  .detail-item-v .detail-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
-  .detail-item-v .detail-text .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
-  .detail-item-v .detail-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
-  .detail-item-v .detail-text .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .detail-item-v .detail-text .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
-  .detail-item-v .detail-text .detail-links a:hover { background: var(--accent-glow); }
+  /* Card Grid */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 24px 0 80px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: background 0.25s, border-color 0.25s, transform 0.25s; cursor: pointer; animation: fadeUp 0.6s ease both; }
+  .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-4px); }
+  .card.hidden { display: none; }
+  .card-cover { width: 100%; height: 200px; overflow: hidden; background: var(--surface-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.78rem; }
   .card-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
   .card:hover .card-cover img { transform: scale(1.05); }
-  /* 2x2 icon grid for projects card */
-  .card-icons-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; padding: 16px; height: 300px; box-sizing: border-box; overflow: hidden; }
-  .card-icons-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
-  .card-body { padding: 24px 28px 28px; }
-  .card-body h2 { font-family: 'DM Serif Display', serif; font-size: 1.35rem; font-weight: 400; margin-bottom: 8px; }
-  .card-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; }
+  .card-cover-icon { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background: var(--surface-hover); }
+  .card-cover-icon img { width: 120px; height: 120px; border-radius: 22px; object-fit: cover; }
+  .card-body { padding: 20px 24px 24px; flex: 1; }
+  .card-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 4px; }
+  .card-body .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; }
+  .card-body p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+  .card-body .tag { display: inline-block; color: var(--accent); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
 
-  /* Overlay — slide up */
+  /* Overlay */
   .overlay { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; opacity: 0; transform: translateY(30px); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
   .overlay.active { opacity: 1; transform: translateY(0); pointer-events: all; }
   .overlay-inner { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
   .back-btn { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; margin-bottom: 32px; }
   .back-btn:hover { border-color: var(--accent); color: var(--text); }
-  .overlay h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 32px; }
+  .overlay h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 24px; }
 
-  /* Detail items — side by side: image left, text right */
-  .detail-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 16px; display: grid; grid-template-columns: 180px 1fr; gap: 24px; transition: border-color 0.2s; }
-  .detail-item:hover { border-color: var(--accent); }
-  .detail-img { width: 180px; height: 130px; background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 8px; display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; text-align: center; overflow: hidden; }
-  .detail-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
-  .detail-img a { width: 100%; height: 100%; display: block; }
-  .detail-img a img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  /* Detail banner */
+  .detail-banner { width: 100%; height: 570px; overflow: hidden; position: relative; background: var(--surface-hover); display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; margin-bottom: 28px; border-radius: 12px; }
+  .detail-banner img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+  .detail-banner a { display: block; width: 100%; height: 100%; }
+  .detail-banner a img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
 
-  /* Slider in side panel */
-  .slider { position: relative; width: 180px; height: 130px; background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 8px; overflow: hidden; }
-  .slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; opacity: 0; transition: opacity 0.4s ease; }
+  /* Detail text */
+  .detail-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 8px; }
+  .detail-text .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px; }
+  .detail-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
+  .detail-text .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .detail-text .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 6px 14px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
+  .detail-text .detail-links a:hover { background: var(--accent-glow); }
+
+  /* Presentation items inside overlay */
+  .pres-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; transition: border-color 0.2s; }
+  .pres-item:hover { border-color: var(--accent); }
+  .pres-banner { width: 100%; height: 570px; overflow: hidden; position: relative; background: var(--surface-hover); display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; }
+  .pres-banner img { width: 100%; height: 100%; object-fit: cover; }
+  .pres-text { padding: 24px 28px; }
+  .pres-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
+  .pres-text .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
+  .pres-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
+  .pres-text .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pres-text .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
+  .pres-text .detail-links a:hover { background: var(--accent-glow); }
+
+  /* Slider */
+  .slider { position: relative; width: 100%; height: 570px; overflow: hidden; border-radius: 12px; }
+  .pres-item .slider { border-radius: 0; }
+  .slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease; }
   .slider img.active { opacity: 1; }
-  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); color: #fff; border: none; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 0.75rem; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
   .slider-btn:hover { background: rgba(74,158,173,0.7); }
-  .slider-btn.prev { left: 4px; }
-  .slider-btn.next { right: 4px; }
-  .slider-dots { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; z-index: 2; }
-  .slider-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .slider-btn.prev { left: 12px; }
+  .slider-btn.next { right: 12px; }
+  .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
+  .slider-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); }
   .slider-dots span.active { background: var(--accent); }
 
-  .detail-content h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
-  .detail-content .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
-  .detail-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
-  .detail-content .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .detail-content .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
-  .detail-content .detail-links a:hover { background: var(--accent-glow); }
+  /* Experience items inside overlay */
+  .exp-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; transition: border-color 0.2s; }
+  .exp-item:hover { border-color: var(--accent); }
+  .exp-item h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
+  .exp-item .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
+  .exp-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 
-  /* Detail header with inline icon */
-  .detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-  .detail-header img { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; }
-  .detail-header h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; }
-
+  .year-label { color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 28px 0 12px; }
+  .year-label:first-of-type { margin-top: 0; }
   .show-more-btn { display: block; width: 100%; background: none; border: 1px dashed var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; padding: 14px; border-radius: 10px; cursor: pointer; margin-bottom: 16px; transition: border-color 0.2s, color 0.2s; }
   .show-more-btn:hover { border-color: var(--accent); color: var(--text); }
   .hidden-group { display: none; }
   .hidden-group.show { display: block; }
-  .year-label { color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 28px 0 12px; }
-  .year-label:first-of-type { margin-top: 0; }
 
   footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--text-muted); font-size: 0.82rem; }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } header { padding-top: 48px; } .detail-item { grid-template-columns: 1fr; } .detail-img, .slider { width: 100%; height: 160px; } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } header { padding-top: 48px; } .detail-banner, .slider, .pres-banner { height: 300px; } .card-cover, .card-cover-icon { height: 160px; } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
-<div id="home">
-  <div class="container">
-    <header>
-      <h1>Braden Boucher</h1>
-      <p>Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
-      <div class="links">
-        <a href="mailto:b1boucher@student.bridgew.edu">Email</a>
-        <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
-      </div>
-    </header>
-    <section class="grid">
-      <div class="card" onclick="showSection('publications')">
-        <div class="card-cover"><img src="images/cleo-2026-thumb.png" alt="Publications"></div>
-        <div class="card-body"><h2>Publications</h2><p>Peer-reviewed papers and conference proceedings in photonics.</p></div>
-      </div>
-      <div class="card" onclick="showSection('presentations')">
-        <div class="card-cover"><img src="images/harvard-1.jpg" alt="Presentations"></div>
-        <div class="card-body"><h2>Presentations</h2><p>Poster sessions and talks at national conferences.</p></div>
-      </div>
-      <div class="card" onclick="showSection('projects')">
-        <div class="card-icons-grid">
-          <img src="images/icon-colorcoded.png" alt="ColorCoded">
-          <img src="images/icon-workspace.png" alt="Workspace">
-          <img src="images/icon-historylegends.png" alt="History Legends">
-          <img src="images/icon-stockflow.png" alt="StockFlow">
-        </div>
-        <div class="card-body"><h2>Software Projects</h2><p>iOS apps, web platforms, and ML-powered tools.</p></div>
-      </div>
-      <div class="card" onclick="showSection('experience')">
-        <div class="card-cover"><img src="images/arizona-1.jpg" alt="Experience"></div>
-        <div class="card-body"><h2>Experience &amp; Research</h2><p>Lab research, co-ops, and teaching at BSU and Draper.</p></div>
-      </div>
-    </section>
-    <footer>&copy; 2026 Braden Boucher</footer>
+<div class="container">
+  <header>
+    <h1>Braden Boucher</h1>
+    <p>Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
+    <div class="links">
+      <a href="mailto:b1boucher@student.bridgew.edu">Email</a>
+      <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
+    </div>
+  </header>
+
+  <div class="filters">
+    <button class="active" onclick="filterCards('all',this)">All</button>
+    <button onclick="filterCards('pub',this)">Publications</button>
+    <button onclick="filterCards('pres',this)">Presentations</button>
+    <button onclick="filterCards('proj',this)">Projects</button>
+    <button onclick="filterCards('exp',this)">Experience</button>
   </div>
+
+  <section class="grid">
+    <!-- Publications — individual cards -->
+    <div class="card" data-cat="pub" onclick="showDetail('cleo')">
+      <div class="card-cover"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></div>
+      <div class="card-body"><span class="tag">Publication</span><h3>Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">CLEO 2026 · First Author</div></div>
+    </div>
+    <div class="card" data-cat="pub" onclick="showDetail('sensors')">
+      <div class="card-cover"><img src="images/sensors-lidar-review-thumb.png" alt="MDPI Sensors"></div>
+      <div class="card-body"><span class="tag">Publication</span><h3>Solid-State LiDAR &amp; Metasurface-Based Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div></div>
+    </div>
+
+    <!-- Presentations — single card -->
+    <div class="card" data-cat="pres" onclick="showDetail('presentations')">
+      <div class="card-cover"><img src="images/harvard-1.jpg" alt="Presentations"></div>
+      <div class="card-body"><span class="tag">Presentations</span><h3>Conference Presentations</h3><div class="meta">6 talks · CLEO, Harvard, U of A, NCUR &amp; more</div></div>
+    </div>
+
+    <!-- Projects — individual cards -->
+    <div class="card" data-cat="proj" onclick="showDetail('colorcoded')">
+      <div class="card-cover-icon"><img src="images/icon-colorcoded.png" alt="ColorCoded"></div>
+      <div class="card-body"><span class="tag">Project</span><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div></div>
+    </div>
+    <div class="card" data-cat="proj" onclick="showDetail('workspace')">
+      <div class="card-cover-icon"><img src="images/icon-workspace.png" alt="Workspace"></div>
+      <div class="card-body"><span class="tag">Project</span><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI</div></div>
+    </div>
+    <div class="card" data-cat="proj" onclick="showDetail('historylegends')">
+      <div class="card-cover-icon"><img src="images/icon-historylegends.png" alt="History Legends"></div>
+      <div class="card-body"><span class="tag">Project</span><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div></div>
+    </div>
+    <div class="card" data-cat="proj" onclick="showDetail('stockflow')">
+      <div class="card-cover-icon"><img src="images/icon-stockflow.png" alt="StockFlow"></div>
+      <div class="card-body"><span class="tag">Project</span><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div></div>
+    </div>
+
+    <!-- Experience — single card -->
+    <div class="card" data-cat="exp" onclick="showDetail('experience')">
+      <div class="card-cover"><img src="images/arizona-1.jpg" alt="Experience"></div>
+      <div class="card-body"><span class="tag">Experience</span><h3>Experience &amp; Research</h3><div class="meta">Draper Lab, BSU Research, Teaching</div></div>
+    </div>
+  </section>
+
+  <footer>&copy; 2026 Braden Boucher</footer>
 </div>
 
-<!-- Publications -->
-<div class="overlay" id="publications"><div class="overlay-inner">
-  <button class="back-btn" onclick="hideSection('publications')">&#8592; Back</button>
-  <h2>Publications</h2>
-  <div class="detail-item"><div class="detail-img"><a href="docs/cleo-2026.pdf" target="_blank"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></a></div><div class="detail-content"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO 2026 · First Author</div><p>Bonding micron-scale III-V laser dies to silicon using silver epoxy. Wall-plug efficiencies up to 20%, infrared output above 10 mW.</p><div class="detail-links"><a href="docs/cleo-2026.pdf" target="_blank">View Paper (PDF)</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><a href="docs/sensors-lidar-review.pdf" target="_blank"><img src="images/sensors-lidar-review-thumb.png" alt="MDPI Sensors"></a></div><div class="detail-content"><h3>A Review of Solid-State LiDAR Principles and Metasurface-Based LiDAR Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div><p>Literature review covering 100+ papers on solid-state LiDAR principles and metasurface-based sensors.</p><div class="detail-links"><a href="docs/sensors-lidar-review.pdf" target="_blank">View Paper (PDF)</a></div></div></div>
+<!-- Publication details -->
+<div class="overlay" id="cleo"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('cleo')">&#8592; Back</button>
+  <div class="detail-banner"><a href="docs/cleo-2026.pdf" target="_blank"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></a></div>
+  <div class="detail-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO 2026 · First Author</div><p>Bonding micron-scale III-V laser dies to silicon using silver epoxy. Wall-plug efficiencies up to 20%, infrared output above 10 mW, and a modest efficiency reduction from 14.9% to 14.2% post-bonding.</p><div class="detail-links"><a href="docs/cleo-2026.pdf" target="_blank">View Paper (PDF)</a></div></div>
 </div></div>
 
-<!-- Presentations -->
+<div class="overlay" id="sensors"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('sensors')">&#8592; Back</button>
+  <div class="detail-banner"><a href="docs/sensors-lidar-review.pdf" target="_blank"><img src="images/sensors-lidar-review-thumb.png" alt="Sensors"></a></div>
+  <div class="detail-text"><h3>A Review of Solid-State LiDAR Principles and Metasurface-Based LiDAR Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div><p>Literature review covering 100+ papers on solid-state LiDAR principles, metasurface-based LiDAR sensors, and recent advances in beam steering, phase shift, and field of view.</p><div class="detail-links"><a href="docs/sensors-lidar-review.pdf" target="_blank">View Paper (PDF)</a></div></div>
+</div></div>
+
+<!-- Presentations detail -->
 <div class="overlay" id="presentations"><div class="overlay-inner">
-  <button class="back-btn" onclick="hideSection('presentations')">&#8592; Back</button>
+  <button class="back-btn" onclick="hideDetail('presentations')">&#8592; Back</button>
   <h2>Presentations</h2>
   <div class="year-label">2026</div>
-  <div class="detail-item-v">
-    <div class="detail-banner"><span>Image placeholder</span></div>
-    <div class="detail-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO · Charlotte, NC · May 2026</div><p>Upcoming presentation at the Conference on Lasers and Electro-Optics.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div>
+  <div class="pres-item">
+    <div class="pres-banner"><span>Image placeholder</span></div>
+    <div class="pres-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO · Charlotte, NC · May 2026</div><p>Upcoming presentation at the Conference on Lasers and Electro-Optics.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div>
   </div>
-  <div class="detail-item-v">
-    <div class="slider" data-slider><img src="images/harvard-1.jpg" alt="Harvard NCRC" class="active"><img src="images/harvard-2.jpg" alt="Harvard NCRC"><img src="images/harvard-3.jpg" alt="Harvard NCRC"><img src="images/harvard-poster-thumb.png" alt="Poster"><button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button><div class="slider-dots"><span class="active"></span><span></span><span></span><span></span></div></div>
-    <div class="detail-text"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="docs/harvard-poster.pdf" target="_blank">Poster (PDF)</a></div></div>
+  <div class="pres-item">
+    <div class="slider" data-slider>
+      <img src="images/harvard-1.jpg" alt="Harvard" class="active"><img src="images/harvard-2.jpg" alt="Harvard"><img src="images/harvard-3.jpg" alt="Harvard"><img src="images/harvard-poster-thumb.png" alt="Poster">
+      <button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button>
+      <div class="slider-dots"><span class="active"></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="pres-text"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="docs/harvard-poster.pdf" target="_blank">Poster (PDF)</a></div></div>
   </div>
-  <div class="detail-item-v">
-    <div class="slider" data-slider><img src="images/arizona-1.jpg" alt="Arizona" class="active"><img src="images/arizona-2.jpg" alt="Wyant College"><button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button><div class="slider-dots"><span class="active"></span><span></span></div></div>
-    <div class="detail-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">U of A Winter School · Tucson, AZ · January 2026</div><p>Presented at the University of Arizona Winter School.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div>
+  <div class="pres-item">
+    <div class="slider" data-slider>
+      <img src="images/arizona-1.jpg" alt="Arizona" class="active"><img src="images/arizona-2.jpg" alt="Wyant">
+      <button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button>
+      <div class="slider-dots"><span class="active"></span><span></span></div>
+    </div>
+    <div class="pres-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">U of A Winter School · Tucson, AZ · January 2026</div><p>Presented at the University of Arizona Winter School.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div>
   </div>
   <button class="show-more-btn" onclick="toggleMore(this)">Show earlier presentations &#8595;</button>
   <div class="hidden-group">
     <div class="year-label">2025</div>
-    <div class="detail-item-v"><div class="detail-banner"><span>Image placeholder</span></div><div class="detail-text"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
-    <div class="detail-item-v"><div class="detail-banner"><span>Image placeholder</span></div><div class="detail-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item"><div class="pres-text"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
     <div class="year-label">2024</div>
-    <div class="detail-item-v"><div class="detail-banner"><span>Image placeholder</span></div><div class="detail-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
   </div>
 </div></div>
 
-<!-- Software Projects -->
-<div class="overlay" id="projects"><div class="overlay-inner">
-  <button class="back-btn" onclick="hideSection('projects')">&#8592; Back</button>
-  <h2>Software Projects</h2>
-  <div class="detail-item"><div class="detail-img"><img src="images/icon-colorcoded.png" alt="ColorCoded"></div><div class="detail-content"><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div><p>ML-powered sheet music reader — scans PDFs, detects noteheads, overlays color-coded pitch annotations with fingering suggestions.</p><div class="detail-links"><a href="https://color-coded.app" target="_blank">Website</a><a href="#">App Store</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><img src="images/icon-workspace.png" alt="Workspace"></div><div class="detail-content"><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI Integration</div><p>AI-powered workspace with spreadsheet integration, canvas blocks, and natural language actions.</p><div class="detail-links"><a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><img src="images/icon-historylegends.png" alt="History Legends"></div><div class="detail-content"><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div><p>Educational RPG quiz game covering 7 APUSH eras with 345+ questions and custom sprite art.</p><div class="detail-links"><a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><img src="images/icon-stockflow.png" alt="StockFlow"></div><div class="detail-content"><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div><p>Cross-platform inventory management app for construction companies with barcode scanning.</p><div class="detail-links"><a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a></div></div></div>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optixlog.com</h3><div class="meta">Web Platform · Team Project</div><p>Platform to log, track, and analyze photonic simulations with interactive dashboards.</p><div class="detail-links"><a href="https://optixlog.com" target="_blank">Visit Site</a></div></div></div>
+<!-- Project details -->
+<div class="overlay" id="colorcoded"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('colorcoded')">&#8592; Back</button>
+  <div class="detail-text"><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div><p>ML-powered sheet music reader — scans PDFs, detects noteheads via YOLOX, overlays color-coded pitch annotations with piano fingering suggestions.</p><div class="detail-links"><a href="https://color-coded.app" target="_blank">Website</a><a href="#">App Store</a></div></div>
 </div></div>
 
-<!-- Experience -->
+<div class="overlay" id="workspace"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('workspace')">&#8592; Back</button>
+  <div class="detail-text"><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI Integration</div><p>AI-powered workspace with spreadsheet integration, canvas blocks, and natural language actions.</p><div class="detail-links"><a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a></div></div>
+</div></div>
+
+<div class="overlay" id="historylegends"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('historylegends')">&#8592; Back</button>
+  <div class="detail-text"><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div><p>Educational RPG quiz game covering 7 APUSH eras with 345+ questions and custom sprite art.</p><div class="detail-links"><a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a></div></div>
+</div></div>
+
+<div class="overlay" id="stockflow"><div class="overlay-inner">
+  <button class="back-btn" onclick="hideDetail('stockflow')">&#8592; Back</button>
+  <div class="detail-text"><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div><p>Cross-platform inventory management app for construction companies with barcode scanning.</p><div class="detail-links"><a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a></div></div>
+</div></div>
+
+<!-- Experience detail -->
 <div class="overlay" id="experience"><div class="overlay-inner">
-  <button class="back-btn" onclick="hideSection('experience')">&#8592; Back</button>
+  <button class="back-btn" onclick="hideDetail('experience')">&#8592; Back</button>
   <h2>Experience &amp; Research</h2>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Optics-Physics Sensor Engineering Co-Op</h3><div class="meta">Charles Stark Draper Laboratory · Jan–Jun 2025</div><p>Built and optimized optical breadboard test setups. Characterized PIC structures including MZIs, edge couplers, and spirals. Developed Python and MATLAB scripts for data processing.</p></div></div>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Undergraduate Researcher</h3><div class="meta">Bridgewater State University · Jan 2024–Present</div><p>IV, LIV, and optical spectrum characterization of DFB and Fabry-Perot laser diodes. Honors thesis on III-V laser diodes on silicon. Supported by Adrian Tinsley Grant.</p></div></div>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Research Assistant for NSF Grants</h3><div class="meta">Bridgewater State University · Jan 2023–Present</div><p>PIC and QPIC characterization, heterodyne detection, sustainable manufacturing. Python scripts for data analysis across multiple grant-funded efforts.</p></div></div>
-  <div class="detail-item"><div class="detail-img"><span>Image<br>placeholder</span></div><div class="detail-content"><h3>Teaching Assistant, Physics I</h3><div class="meta">Bridgewater State University · Sep–Dec 2024</div><p>TA for General Physics I. Assisted students, taught sessions, held office hours.</p></div></div>
+  <div class="exp-item"><h3>Optics-Physics Sensor Engineering Co-Op</h3><div class="meta">Charles Stark Draper Laboratory · Jan–Jun 2025</div><p>Built and optimized optical breadboard test setups. Characterized PIC structures including MZIs, edge couplers, and spirals. Developed Python and MATLAB scripts for data processing.</p></div>
+  <div class="exp-item"><h3>Undergraduate Researcher</h3><div class="meta">Bridgewater State University · Jan 2024–Present</div><p>IV, LIV, and optical spectrum characterization of DFB and Fabry-Perot laser diodes. Honors thesis on III-V laser diodes on silicon. Supported by Adrian Tinsley Grant.</p></div>
+  <div class="exp-item"><h3>Research Assistant for NSF Grants</h3><div class="meta">Bridgewater State University · Jan 2023–Present</div><p>PIC and QPIC characterization, heterodyne detection, sustainable manufacturing. Python scripts for data analysis across multiple grant-funded efforts.</p></div>
+  <div class="exp-item"><h3>Teaching Assistant, Physics I</h3><div class="meta">Bridgewater State University · Sep–Dec 2024</div><p>TA for General Physics I. Assisted students, taught sessions, held office hours.</p></div>
 </div></div>
 
 <script>
 function slide(btn,dir){var s=btn.closest('[data-slider]'),imgs=s.querySelectorAll('img'),dots=s.querySelectorAll('.slider-dots span'),cur=s.querySelector('img.active'),idx=[...imgs].indexOf(cur),next=(idx+dir+imgs.length)%imgs.length;cur.classList.remove('active');imgs[next].classList.add('active');dots[idx].classList.remove('active');dots[next].classList.add('active');}
-function showSection(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';document.getElementById(id).scrollTop=0;}
-function hideSection(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+function showDetail(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';document.getElementById(id).scrollTop=0;}
+function hideDetail(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+function filterCards(cat,btn){document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.card').forEach(c=>{if(cat==='all'||c.dataset.cat===cat){c.classList.remove('hidden');}else{c.classList.add('hidden');}});}
 function toggleMore(btn){var g=btn.nextElementSibling;if(g.classList.contains('show')){g.classList.remove('show');btn.innerHTML='Show earlier presentations \u2193';}else{g.classList.add('show');btn.innerHTML='Hide earlier presentations \u2191';}}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.overlay.active').forEach(function(el){el.classList.remove('active');});document.body.style.overflow='';}});
 </script>
