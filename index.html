@@ -41,23 +41,23 @@
   .container { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
 
   /* ── Reveal system (ColorCoded) ── */
-  .reveal { will-change:transform,opacity; opacity:0; transform:translateY(60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal { will-change:transform,opacity; opacity:0; transform:translateY(30px); transition:opacity 0.5s var(--spring), transform 0.5s var(--spring); }
   .reveal.visible { opacity:1; transform:translateY(0); }
-  .reveal-scale { will-change:transform,opacity; opacity:0; transform:scale(0.92); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-scale { will-change:transform,opacity; opacity:0; transform:scale(0.92); transition:opacity 0.5s var(--spring), transform 0.5s var(--spring); }
   .reveal-scale.visible { opacity:1; transform:scale(1); }
-  .reveal-pop { will-change:transform,opacity; opacity:0; transform:scale(0.88) translateY(40px); transition:opacity 0.8s var(--spring), transform 0.8s var(--spring); }
+  .reveal-pop { will-change:transform,opacity; opacity:0; transform:scale(0.92) translateY(20px); transition:opacity 0.45s var(--spring), transform 0.45s var(--spring); }
   .reveal-pop.visible { opacity:1; transform:scale(1) translateY(0); }
-  .reveal-left { will-change:transform,opacity; opacity:0; transform:translateX(-60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-left { will-change:transform,opacity; opacity:0; transform:translateX(-60px); transition:opacity 0.5s var(--spring), transform 0.5s var(--spring); }
   .reveal-left.visible { opacity:1; transform:translateX(0); }
-  .reveal-right { will-change:transform,opacity; opacity:0; transform:translateX(60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-right { will-change:transform,opacity; opacity:0; transform:translateX(60px); transition:opacity 0.5s var(--spring), transform 0.5s var(--spring); }
   .reveal-right.visible { opacity:1; transform:translateX(0); }
-  .reveal-delay-1{transition-delay:.1s} .reveal-delay-2{transition-delay:.2s} .reveal-delay-3{transition-delay:.3s}
-  .reveal-delay-4{transition-delay:.4s} .reveal-delay-5{transition-delay:.5s} .reveal-delay-6{transition-delay:.6s} .reveal-delay-7{transition-delay:.7s}
+  .reveal-delay-1{transition-delay:.05s} .reveal-delay-2{transition-delay:.1s} .reveal-delay-3{transition-delay:.15s}
+  .reveal-delay-4{transition-delay:.2s} .reveal-delay-5{transition-delay:.25s} .reveal-delay-6{transition-delay:.3s} .reveal-delay-7{transition-delay:.35s}
 
   /* Hero animation */
   @keyframes hero-fade-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-  .hero-animate { animation:hero-fade-up 1s var(--spring) forwards; opacity:0; }
-  .hero-delay-1{animation-delay:.15s} .hero-delay-2{animation-delay:.3s} .hero-delay-3{animation-delay:.45s} .hero-delay-4{animation-delay:.6s}
+  .hero-animate { animation:hero-fade-up 0.6s var(--spring) forwards; opacity:0; }
+  .hero-delay-1{animation-delay:.05s} .hero-delay-2{animation-delay:.15s} .hero-delay-3{animation-delay:.25s} .hero-delay-4{animation-delay:.35s}
 
   /* Line grow divider */
   @keyframes line-grow { from{transform:scaleX(0)} to{transform:scaleX(1)} }
@@ -87,7 +87,7 @@
   .card-cover img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
   .card:hover .card-cover img { transform:scale(1.05); }
   .card-cover-icon { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:var(--surface-hover); }
-  .card-cover-icon img { width:55%; aspect-ratio:1; border-radius:22px; object-fit:cover; transition:transform 0.4s ease; }
+  .card-cover-icon img { width:70%; aspect-ratio:1; border-radius:22px; object-fit:cover; transition:transform 0.4s ease; }
   .card:hover .card-cover-icon img { transform:scale(1.08); }
   .card-body { padding:20px 24px 24px; flex:1; }
   .card-body h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:4px; }
@@ -190,7 +190,7 @@
     <h1 class="hero-animate hero-delay-1">Braden Boucher</h1>
     <p class="hero-animate hero-delay-2">Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
     <div class="links hero-animate hero-delay-3">
-      <a href="mailto:b1boucher@student.bridgew.edu?subject=Consultation%20Request">Schedule a Consultation</a>
+      <a href="mailto:b1boucher@student.bridgew.edu?subject=Consultation%20Request">Email</a>
       <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
     </div>
@@ -546,7 +546,7 @@ function toggleMore(btn){
     g.classList.add('show');
     // Reveal items inside
     g.querySelectorAll('.reveal').forEach(function(el,i){
-      setTimeout(function(){el.classList.add('visible');},i*80);
+      setTimeout(function(){el.classList.add('visible');},i*40);
     });
     btn.innerHTML='Hide earlier presentations \u2191';
   }
@@ -575,7 +575,7 @@ var revealObs=new IntersectionObserver(function(entries){
       exitTimers.set(entry.target,timer);
     }
   });
-},{threshold:0.05, rootMargin:'20px 0px -20px 0px'});
+},{threshold:0.05, rootMargin:'50px 0px 50px 0px'});
 
 requestAnimationFrame(function(){
   document.querySelectorAll('.reveal,.reveal-scale,.reveal-pop,.reveal-left,.reveal-right,.line-grow').forEach(function(el){
