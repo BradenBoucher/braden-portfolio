@@ -108,6 +108,29 @@
   .hidden-group { display: none; }
   .hidden-group.show { display: block; }
 
+  /* Product detail page */
+  .product-hero { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; }
+  .product-hero img { width: 80px; height: 80px; border-radius: 18px; object-fit: cover; }
+  .product-hero-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 4px; }
+  .product-hero-text .meta { color: var(--text-muted); font-size: 0.9rem; }
+  .product-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+  .product-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 8px 18px; border: 1px solid var(--accent); border-radius: 8px; transition: background 0.2s; }
+  .product-links a:hover { background: var(--accent-glow); }
+  .product-section { margin-bottom: 32px; }
+  .product-section h4 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 12px; color: var(--text); }
+  .product-section p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 12px; }
+  .product-section ul { list-style: none; padding: 0; }
+  .product-section ul li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; padding-left: 18px; position: relative; margin-bottom: 6px; }
+  .product-section ul li::before { content: '\2192'; position: absolute; left: 0; color: var(--accent); }
+  .screenshot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+  .screenshot-grid .ss { background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 9/16; display: grid; place-items: center; color: var(--text-muted); font-size: 0.75rem; overflow: hidden; }
+  .screenshot-grid .ss img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+  .screenshot-grid-wide { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .screenshot-grid-wide .ss { background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 16/10; display: grid; place-items: center; color: var(--text-muted); font-size: 0.75rem; overflow: hidden; }
+  .screenshot-grid-wide .ss img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+  .tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .tech-pills span { background: var(--accent-glow); color: var(--accent); font-size: 0.78rem; font-weight: 500; padding: 4px 12px; border-radius: 14px; }
+
   footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--text-muted); font-size: 0.82rem; }
   @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } header { padding-top: 48px; } .detail-banner, .slider, .pres-banner { height: 300px; } .card-cover, .card-cover-icon { height: 160px; } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -226,25 +249,199 @@
   </div>
 </div></div>
 
-<!-- Project details -->
+<!-- Product details -->
 <div class="overlay" id="colorcoded"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('colorcoded')">&#8592; Back</button>
-  <div class="detail-text"><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div><p>ML-powered sheet music reader — scans PDFs, detects noteheads via YOLOX, overlays color-coded pitch annotations with piano fingering suggestions.</p><div class="detail-links"><a href="https://color-coded.app" target="_blank">Website</a><a href="#">App Store</a></div></div>
+  <div class="product-hero">
+    <img src="images/icon-colorcoded.png" alt="ColorCoded">
+    <div class="product-hero-text"><h3>ColorCoded Music</h3><div class="meta">iOS App · Available on the App Store</div></div>
+  </div>
+  <div class="product-links">
+    <a href="https://color-coded.app" target="_blank">Website</a>
+    <a href="#">App Store</a>
+  </div>
+
+  <div class="product-section">
+    <h4>Overview</h4>
+    <p>ColorCoded Music is an iOS application that transforms the way beginner and intermediate pianists learn to read sheet music. Using on-device machine learning, the app scans any PDF of sheet music, detects individual noteheads, and overlays a color-coded system directly onto the page — making it immediately clear which notes to play and where to find them on the keyboard.</p>
+    <p>The app also generates intelligent fingering suggestions for each hand, helping players build proper technique from the start. Whether you're working through a classical piece, a pop arrangement, or a hymnal, ColorCoded gives you a visual shortcut to understanding the music.</p>
+  </div>
+
+  <div class="product-section">
+    <h4>Screenshots</h4>
+    <div class="screenshot-grid">
+      <div class="ss"><span>Screenshot 1</span></div>
+      <div class="ss"><span>Screenshot 2</span></div>
+      <div class="ss"><span>Screenshot 3</span></div>
+    </div>
+  </div>
+
+  <div class="product-section">
+    <h4>How It Works</h4>
+    <p>At the core of ColorCoded is a custom-trained YOLOX object detection model running entirely on-device through Apple's CoreML framework. The model was trained on thousands of annotated sheet music samples across 24 notehead classes, achieving high accuracy at 1280×1280 input resolution. When a user imports a PDF, the app processes each page through the following pipeline:</p>
+    <ul>
+      <li>The PDF is rendered at high resolution and passed through the YOLOX CoreML model to detect noteheads with bounding box coordinates and class predictions.</li>
+      <li>Detected noteheads are mapped to musical pitch using staff-relative positioning. The system identifies staff lines, assigns notes to the correct hand (right hand for even-indexed staves, left for odd), and normalizes pitch values.</li>
+      <li>Each pitch class receives a distinct color — C is red, D is orange, E is yellow, F is green, G is cyan, A is blue, and B is violet — creating an intuitive visual rainbow across the musical scale.</li>
+      <li>A rule-based fingering engine (FingeringSuggester v6.4) runs a six-pass pipeline to assign fingers 1–5, accounting for hand position, chord spacing, phrase boundaries, and scale patterns.</li>
+      <li>The colored overlays and fingering numbers are rendered directly onto the page, which the user can zoom, scroll, and navigate seamlessly.</li>
+    </ul>
+  </div>
+
+  <div class="product-section">
+    <h4>Key Features</h4>
+    <ul>
+      <li>PDF sheet music import with multi-page support and page range selection</li>
+      <li>On-device ML notehead detection — no internet connection required, fully private</li>
+      <li>Color-coded pitch visualization using a 7-color chromatic system</li>
+      <li>Automatic piano fingering suggestions for both hands</li>
+      <li>Public library for sharing annotated scores with other users</li>
+      <li>Scan confirmation workflow with start/end page selection and append mode</li>
+      <li>Built with Swift, SwiftUI, CoreML, and Firebase</li>
+    </ul>
+  </div>
+
+  <div class="product-section">
+    <h4>Technical Stack</h4>
+    <div class="tech-pills">
+      <span>Swift</span><span>SwiftUI</span><span>CoreML</span><span>YOLOX</span><span>Firebase</span><span>StoreKit 2</span><span>PDFKit</span><span>Vision</span>
+    </div>
+  </div>
 </div></div>
 
 <div class="overlay" id="workspace"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('workspace')">&#8592; Back</button>
-  <div class="detail-text"><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI Integration</div><p>AI-powered workspace with spreadsheet integration, canvas blocks, and natural language actions.</p><div class="detail-links"><a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a></div></div>
+  <div class="product-hero">
+    <img src="images/icon-workspace.png" alt="Workspace">
+    <div class="product-hero-text"><h3>Workspace MVP</h3><div class="meta">Web Application · Next.js</div></div>
+  </div>
+  <div class="product-links">
+    <a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a>
+  </div>
+
+  <div class="product-section">
+    <h4>Overview</h4>
+    <p>Workspace MVP is an AI-powered productivity platform that combines the flexibility of a freeform canvas with the structure of spreadsheets and the intelligence of natural language AI. It's designed for individuals and small teams who need a single environment to organize information, run calculations, and take action — all through conversation.</p>
+    <p>Rather than switching between a notes app, a spreadsheet, and a chat interface, Workspace brings everything into one unified space where blocks of content live on an infinite canvas and can be manipulated by AI or by hand.</p>
+  </div>
+
+  <div class="product-section">
+    <h4>Screenshots</h4>
+    <div class="screenshot-grid-wide">
+      <div class="ss"><span>Screenshot 1</span></div>
+      <div class="ss"><span>Screenshot 2</span></div>
+    </div>
+  </div>
+
+  <div class="product-section">
+    <h4>Key Features</h4>
+    <ul>
+      <li>Infinite canvas with draggable, resizable content blocks (CanvasBlock architecture)</li>
+      <li>Integrated AI spreadsheet — read and write cell data, format columns and rows through natural language</li>
+      <li>Action confirmation UI with undo support for AI-triggered operations</li>
+      <li>Full-text search across all blocks with ⌘+F keyboard shortcut</li>
+      <li>Real-time sync with Firebase Firestore for persistence and collaboration</li>
+      <li>Deployed on both Vercel and Railway for flexibility and longer timeout support</li>
+    </ul>
+  </div>
+
+  <div class="product-section">
+    <h4>Technical Stack</h4>
+    <div class="tech-pills">
+      <span>Next.js 14</span><span>React</span><span>Firebase</span><span>Firestore</span><span>Vercel</span><span>Railway</span><span>AI Integration</span>
+    </div>
+  </div>
 </div></div>
 
 <div class="overlay" id="historylegends"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('historylegends')">&#8592; Back</button>
-  <div class="detail-text"><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div><p>Educational RPG quiz game covering 7 APUSH eras with 345+ questions and custom sprite art.</p><div class="detail-links"><a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a></div></div>
+  <div class="product-hero">
+    <img src="images/icon-historylegends.png" alt="History Legends">
+    <div class="product-hero-text"><h3>History Legends</h3><div class="meta">Web Game · React</div></div>
+  </div>
+  <div class="product-links">
+    <a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a>
+  </div>
+
+  <div class="product-section">
+    <h4>Overview</h4>
+    <p>History Legends is an educational RPG-style quiz game designed to make studying AP United States History engaging and effective. The game covers all 7 APUSH eras with over 345 carefully balanced questions, organized across 40 nodes on a progression map. Players advance through historical eras, earn experience, and unlock new content as they master the material.</p>
+    <p>The game features custom sprite art for each era, generated through a combination of Leonardo.ai for image-to-image processing and Gemini for text-to-image generation, followed by a Python cleanup pipeline for background removal and consistent sizing.</p>
+  </div>
+
+  <div class="product-section">
+    <h4>Screenshots</h4>
+    <div class="screenshot-grid-wide">
+      <div class="ss"><span>Screenshot 1</span></div>
+      <div class="ss"><span>Screenshot 2</span></div>
+      <div class="ss"><span>Screenshot 3</span></div>
+      <div class="ss"><span>Screenshot 4</span></div>
+    </div>
+  </div>
+
+  <div class="product-section">
+    <h4>Key Features</h4>
+    <ul>
+      <li>345+ carefully balanced quiz questions across 7 APUSH eras with answer length ratios between 1.2–1.8x to prevent guessing by length</li>
+      <li>40-node progression map with branching paths and era-specific challenges</li>
+      <li>Custom sprite art pipeline: AI generation → Python cleanup (flood-fill background removal, resize to 512px height)</li>
+      <li>RPG-style experience system with leveling, unlockable content, and era completion tracking</li>
+      <li>Responsive design that works on desktop and mobile browsers</li>
+      <li>Deployed on Firebase Hosting with Git-based CI/CD workflow</li>
+    </ul>
+  </div>
+
+  <div class="product-section">
+    <h4>Technical Stack</h4>
+    <div class="tech-pills">
+      <span>React</span><span>Vite</span><span>Firebase Hosting</span><span>Leonardo.ai</span><span>Gemini</span><span>Python</span>
+    </div>
+  </div>
 </div></div>
 
 <div class="overlay" id="stockflow"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('stockflow')">&#8592; Back</button>
-  <div class="detail-text"><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div><p>Cross-platform inventory management app for construction companies with barcode scanning.</p><div class="detail-links"><a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a></div></div>
+  <div class="product-hero">
+    <img src="images/icon-stockflow.png" alt="StockFlow">
+    <div class="product-hero-text"><h3>StockFlow</h3><div class="meta">Cross-Platform App · React Native</div></div>
+  </div>
+  <div class="product-links">
+    <a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a>
+  </div>
+
+  <div class="product-section">
+    <h4>Overview</h4>
+    <p>StockFlow is a cross-platform inventory management application built for construction companies and field teams who need to track materials, tools, and supplies across job sites. The app runs on both iOS and web, giving office managers and on-site workers a shared real-time view of inventory levels, movements, and usage history.</p>
+    <p>Designed around the daily workflows of construction operations, StockFlow replaces clipboard-and-spreadsheet tracking with barcode scanning, real-time sync, and role-based access — reducing errors, preventing stockouts, and saving hours of manual data entry every week.</p>
+  </div>
+
+  <div class="product-section">
+    <h4>Screenshots</h4>
+    <div class="screenshot-grid">
+      <div class="ss"><span>Screenshot 1</span></div>
+      <div class="ss"><span>Screenshot 2</span></div>
+      <div class="ss"><span>Screenshot 3</span></div>
+    </div>
+  </div>
+
+  <div class="product-section">
+    <h4>Key Features</h4>
+    <ul>
+      <li>Barcode scanning for rapid item lookup and check-in/check-out workflows</li>
+      <li>Cross-platform: native iOS experience via Expo with a full web version at the same URL</li>
+      <li>Real-time inventory sync across all connected devices via Firebase Firestore</li>
+      <li>Role-based access control for managers, supervisors, and field workers</li>
+      <li>Gmail SMTP Cloud Function for password reset and account management emails</li>
+      <li>Responsive web interface that works on tablets and desktops for office use</li>
+    </ul>
+  </div>
+
+  <div class="product-section">
+    <h4>Technical Stack</h4>
+    <div class="tech-pills">
+      <span>React Native</span><span>Expo</span><span>Firebase</span><span>Firestore</span><span>Cloud Functions</span><span>Barcode API</span>
+    </div>
+  </div>
 </div></div>
 
 <!-- Experience detail -->
