@@ -35,11 +35,11 @@
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: background 0.25s, border-color 0.25s, transform 0.25s; cursor: pointer; animation: fadeUp 0.6s ease both; }
   .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-4px); }
   .card.hidden { display: none; }
-  .card-cover { width: 100%; height: 200px; overflow: hidden; background: var(--surface-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.78rem; }
+  .card-cover { width: 100%; aspect-ratio: 1; overflow: hidden; background: var(--surface-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.78rem; }
   .card-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
   .card:hover .card-cover img { transform: scale(1.05); }
-  .card-cover-icon { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background: var(--surface-hover); }
-  .card-cover-icon img { width: 120px; height: 120px; border-radius: 22px; object-fit: cover; }
+  .card-cover-icon { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--surface-hover); }
+  .card-cover-icon img { width: 55%; aspect-ratio: 1; border-radius: 22px; object-fit: cover; }
   .card-body { padding: 20px 24px 24px; flex: 1; }
   .card-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 4px; }
   .card-body .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; }
@@ -119,7 +119,7 @@
     <h1>Braden Boucher</h1>
     <p>Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
     <div class="links">
-      <a href="mailto:b1boucher@student.bridgew.edu">Email</a>
+      <a href="mailto:b1boucher@student.bridgew.edu?subject=Consultation%20Request">Schedule a Consultation</a>
       <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
     </div>
@@ -129,7 +129,7 @@
     <button class="active" onclick="filterCards('all',this)">All</button>
     <button onclick="filterCards('pub',this)">Publications</button>
     <button onclick="filterCards('pres',this)">Presentations</button>
-    <button onclick="filterCards('proj',this)">Projects</button>
+    <button onclick="filterCards('proj',this)">Products</button>
     <button onclick="filterCards('exp',this)">Experience</button>
   </div>
 
@@ -153,19 +153,19 @@
     <!-- Projects — individual cards -->
     <div class="card" data-cat="proj" onclick="showDetail('colorcoded')">
       <div class="card-cover-icon"><img src="images/icon-colorcoded.png" alt="ColorCoded"></div>
-      <div class="card-body"><span class="tag">Project</span><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div></div>
+      <div class="card-body"><span class="tag">Product</span><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div></div>
     </div>
     <div class="card" data-cat="proj" onclick="showDetail('workspace')">
       <div class="card-cover-icon"><img src="images/icon-workspace.png" alt="Workspace"></div>
-      <div class="card-body"><span class="tag">Project</span><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI</div></div>
+      <div class="card-body"><span class="tag">Product</span><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI</div></div>
     </div>
     <div class="card" data-cat="proj" onclick="showDetail('historylegends')">
       <div class="card-cover-icon"><img src="images/icon-historylegends.png" alt="History Legends"></div>
-      <div class="card-body"><span class="tag">Project</span><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div></div>
+      <div class="card-body"><span class="tag">Product</span><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div></div>
     </div>
     <div class="card" data-cat="proj" onclick="showDetail('stockflow')">
       <div class="card-cover-icon"><img src="images/icon-stockflow.png" alt="StockFlow"></div>
-      <div class="card-body"><span class="tag">Project</span><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div></div>
+      <div class="card-body"><span class="tag">Product</span><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div></div>
     </div>
 
     <!-- Experience — single card -->
