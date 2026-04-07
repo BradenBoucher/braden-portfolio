@@ -12,157 +12,191 @@
     --bg: #0c0f14; --surface: #161b24; --surface-hover: #1e2530;
     --border: #2a3140; --text: #e8ecf1; --text-muted: #8893a4;
     --accent: #4a9ead; --accent-glow: rgba(74, 158, 173, 0.15);
+    --spring: cubic-bezier(0.16, 1, 0.3, 1);
   }
+  html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; inset: 0; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
-  header { padding: 80px 0 20px; text-align: center; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.1s forwards; }
-  header p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 560px; margin: 0 auto; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.25s forwards; }
-  header .links { margin-top: 20px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.4s forwards; }
-  header .links a { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: opacity 0.2s; }
-  header .links a:hover { opacity: 0.7; }
+  /* Page color wash */
+  .page-bg {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 120% 50% at -10% 20%, rgba(74,158,173,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 50% at 110% 25%, rgba(100,80,200,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 40% at 50% 80%, rgba(74,158,173,0.04) 0%, transparent 50%);
+    background-size: 100% 300vh; background-repeat: repeat-y;
+  }
 
-  /* Filter tabs */
-  .filters { display: flex; gap: 8px; justify-content: center; margin: 28px 0 8px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.5s forwards; }
-  .filters button { background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; padding: 7px 18px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
-  .filters button:hover { border-color: var(--accent); color: var(--text); }
-  .filters button.active { background: var(--accent); border-color: var(--accent); color: #0c0f14; font-weight: 600; }
+  /* Floating glow orbs */
+  @keyframes float-slow { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.05)} 66%{transform:translate(-20px,15px) scale(0.95)} }
+  @keyframes float-slower { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-40px,25px) scale(1.1)} }
+  .glow-orb { position:fixed; border-radius:50%; pointer-events:none; filter:blur(80px); z-index:0; }
+  .glow-orb-1 { width:400px; height:400px; top:10%; left:-5%; background:rgba(74,158,173,0.07); animation:float-slow 20s ease-in-out infinite; }
+  .glow-orb-2 { width:350px; height:350px; top:40%; right:-8%; background:rgba(100,80,200,0.05); animation:float-slower 25s ease-in-out infinite; }
+  .glow-orb-3 { width:300px; height:300px; bottom:10%; left:30%; background:rgba(74,158,173,0.04); animation:float-slow 22s ease-in-out infinite 5s; }
+
+  /* Noise overlay */
+  body::after { content:''; position:fixed; inset:0; opacity:0.03; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; z-index:999; }
+
+  .container { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+  /* ── Reveal system (ColorCoded) ── */
+  .reveal { will-change:transform,opacity; opacity:0; transform:translateY(60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-scale { will-change:transform,opacity; opacity:0; transform:scale(0.92); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-scale.visible { opacity:1; transform:scale(1); }
+  .reveal-pop { will-change:transform,opacity; opacity:0; transform:scale(0.88) translateY(40px); transition:opacity 0.8s var(--spring), transform 0.8s var(--spring); }
+  .reveal-pop.visible { opacity:1; transform:scale(1) translateY(0); }
+  .reveal-left { will-change:transform,opacity; opacity:0; transform:translateX(-60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-right { will-change:transform,opacity; opacity:0; transform:translateX(60px); transition:opacity 0.9s var(--spring), transform 0.9s var(--spring); }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
+  .reveal-delay-1{transition-delay:.1s} .reveal-delay-2{transition-delay:.2s} .reveal-delay-3{transition-delay:.3s}
+  .reveal-delay-4{transition-delay:.4s} .reveal-delay-5{transition-delay:.5s} .reveal-delay-6{transition-delay:.6s} .reveal-delay-7{transition-delay:.7s}
+
+  /* Hero animation */
+  @keyframes hero-fade-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  .hero-animate { animation:hero-fade-up 1s var(--spring) forwards; opacity:0; }
+  .hero-delay-1{animation-delay:.15s} .hero-delay-2{animation-delay:.3s} .hero-delay-3{animation-delay:.45s} .hero-delay-4{animation-delay:.6s}
+
+  /* Line grow divider */
+  @keyframes line-grow { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+  .line-grow { height:1px; background:var(--border); transform:scaleX(0); transform-origin:center; margin:40px 0; }
+  .line-grow.visible { animation:line-grow 1s var(--spring) forwards; }
+
+  /* Header */
+  header { padding:80px 0 20px; text-align:center; }
+  header h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,3.6rem); font-weight:400; letter-spacing:-0.02em; margin-bottom:12px; }
+  header p { color:var(--text-muted); font-size:1.05rem; line-height:1.6; max-width:560px; margin:0 auto; }
+  header .links { margin-top:20px; display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+  header .links a { color:var(--accent); text-decoration:none; font-size:0.9rem; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; transition:opacity 0.2s; }
+  header .links a:hover { opacity:0.7; }
+
+  /* Filters */
+  .filters { display:flex; gap:8px; justify-content:center; margin:28px 0 8px; flex-wrap:wrap; }
+  .filters button { background:none; border:1px solid var(--border); color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:0.85rem; padding:7px 18px; border-radius:20px; cursor:pointer; transition:all 0.2s; }
+  .filters button:hover { border-color:var(--accent); color:var(--text); }
+  .filters button.active { background:var(--accent); border-color:var(--accent); color:#0c0f14; font-weight:600; }
 
   /* Card Grid */
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 24px 0 80px; }
-  /* Card animations — start hidden, reveal on scroll */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: background 0.25s, border-color 0.25s, transform 0.25s; cursor: pointer; opacity: 0; transform: translateY(30px); }
-  .card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s, border-color 0.25s; }
-  .card:nth-child(1) { transition-delay: 0.05s; }
-  .card:nth-child(2) { transition-delay: 0.12s; }
-  .card:nth-child(3) { transition-delay: 0.19s; }
-  .card:nth-child(4) { transition-delay: 0.26s; }
-  .card:nth-child(5) { transition-delay: 0.33s; }
-  .card:nth-child(6) { transition-delay: 0.4s; }
-  .card:nth-child(7) { transition-delay: 0.47s; }
-  .card:nth-child(8) { transition-delay: 0.54s; }
-  .card:nth-child(9) { transition-delay: 0.61s; }
-  .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-4px); }
-  .card.hidden { display: none; }
-  .card-cover { width: 100%; aspect-ratio: 1; overflow: hidden; background: var(--surface-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.78rem; }
-  .card-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-  .card:hover .card-cover img { transform: scale(1.05); }
-  .card-cover-icon { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--surface-hover); }
-  .card-cover-icon img { width: 55%; aspect-ratio: 1; border-radius: 22px; object-fit: cover; }
-  .card-body { padding: 20px 24px 24px; flex: 1; }
-  .card-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 4px; }
-  .card-body .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; }
-  .card-body p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
-  .card-body .tag { display: inline-block; color: var(--accent); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:24px 0 80px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; cursor:pointer; }
+  .card:hover { background:var(--surface-hover); border-color:var(--accent); transform:scale(1) translateY(-4px) !important; }
+  .card.hidden { display:none; }
+  .card-cover { width:100%; aspect-ratio:1; overflow:hidden; background:var(--surface-hover); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.78rem; }
+  .card-cover img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+  .card:hover .card-cover img { transform:scale(1.05); }
+  .card-cover-icon { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:var(--surface-hover); }
+  .card-cover-icon img { width:55%; aspect-ratio:1; border-radius:22px; object-fit:cover; transition:transform 0.4s ease; }
+  .card:hover .card-cover-icon img { transform:scale(1.08); }
+  .card-body { padding:20px 24px 24px; flex:1; }
+  .card-body h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:4px; }
+  .card-body .meta { color:var(--text-muted); font-size:0.8rem; margin-bottom:8px; }
+  .card-body .tag { display:inline-block; color:var(--accent); font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
 
   /* Overlay */
-  .overlay { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; opacity: 0; transform: translateY(30px); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
-  .overlay.active { opacity: 1; transform: translateY(0); pointer-events: all; }
-  .overlay-inner { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
-  .back-btn { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; margin-bottom: 32px; }
-  .back-btn:hover { border-color: var(--accent); color: var(--text); }
-  .overlay h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 24px; }
+  .overlay { position:fixed; inset:0; background:var(--bg); z-index:100; overflow-y:auto; opacity:0; transform:translateY(30px); pointer-events:none; transition:opacity 0.35s ease, transform 0.35s ease; }
+  .overlay.active { opacity:1; transform:translateY(0); pointer-events:all; }
+  .overlay-inner { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+  .back-btn { display:inline-flex; align-items:center; gap:8px; background:none; border:1px solid var(--border); color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:0.88rem; padding:8px 16px; border-radius:8px; cursor:pointer; transition:border-color 0.2s, color 0.2s; margin-bottom:32px; }
+  .back-btn:hover { border-color:var(--accent); color:var(--text); }
+  .overlay h2 { font-family:'DM Serif Display',serif; font-size:2rem; font-weight:400; margin-bottom:24px; }
 
   /* Detail banner */
-  .detail-banner { width: 100%; height: 570px; overflow: hidden; position: relative; background: var(--surface-hover); display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; margin-bottom: 28px; border-radius: 12px; }
-  .detail-banner img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-  .detail-banner a { display: block; width: 100%; height: 100%; }
-  .detail-banner a img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+  .detail-banner { width:100%; height:570px; overflow:hidden; position:relative; background:var(--surface-hover); display:grid; place-items:center; color:var(--text-muted); font-size:0.78rem; margin-bottom:28px; border-radius:12px; }
+  .detail-banner img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
+  .detail-banner a { display:block; width:100%; height:100%; }
+  .detail-banner a img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
+  .detail-text h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; font-weight:400; margin-bottom:8px; }
+  .detail-text .meta { color:var(--text-muted); font-size:0.9rem; margin-bottom:14px; }
+  .detail-text p { color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:16px; }
+  .detail-text .detail-links { display:flex; gap:12px; flex-wrap:wrap; }
+  .detail-text .detail-links a { color:var(--accent); text-decoration:none; font-size:0.85rem; font-weight:500; padding:6px 14px; border:1px solid var(--accent); border-radius:6px; transition:background 0.2s, transform 0.2s; }
+  .detail-text .detail-links a:hover { background:var(--accent-glow); transform:translateY(-2px); }
 
-  /* Detail text */
-  .detail-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 8px; }
-  .detail-text .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px; }
-  .detail-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
-  .detail-text .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .detail-text .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 6px 14px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
-  .detail-text .detail-links a:hover { background: var(--accent-glow); }
-
-  /* Presentation items inside overlay */
-  .pres-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; transition: border-color 0.2s; opacity: 0; transform: translateY(20px); }
-  .pres-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s; }
-  .pres-item:hover { border-color: var(--accent); }
-  .pres-banner { width: 100%; height: 570px; overflow: hidden; position: relative; background: var(--surface-hover); display: grid; place-items: center; color: var(--text-muted); font-size: 0.78rem; }
-  .pres-banner img { width: 100%; height: 100%; object-fit: cover; }
-  .pres-text { padding: 24px 28px; }
-  .pres-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
-  .pres-text .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
-  .pres-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
-  .pres-text .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .pres-text .detail-links a { color: var(--accent); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; transition: background 0.2s; }
-  .pres-text .detail-links a:hover { background: var(--accent-glow); }
+  /* Pres items */
+  .pres-item { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:16px; transition:border-color 0.2s; }
+  .pres-item:hover { border-color:var(--accent); }
+  .pres-banner { width:100%; height:570px; overflow:hidden; position:relative; background:var(--surface-hover); display:grid; place-items:center; color:var(--text-muted); font-size:0.78rem; }
+  .pres-banner img { width:100%; height:100%; object-fit:cover; }
+  .pres-text { padding:24px 28px; }
+  .pres-text h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:6px; }
+  .pres-text .meta { color:var(--text-muted); font-size:0.82rem; margin-bottom:10px; }
+  .pres-text p { color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:12px; }
+  .pres-text .detail-links { display:flex; gap:12px; flex-wrap:wrap; }
+  .pres-text .detail-links a { color:var(--accent); text-decoration:none; font-size:0.82rem; font-weight:500; padding:5px 12px; border:1px solid var(--accent); border-radius:6px; transition:background 0.2s; }
+  .pres-text .detail-links a:hover { background:var(--accent-glow); }
 
   /* Slider */
-  .slider { position: relative; width: 100%; height: 570px; overflow: hidden; border-radius: 12px; }
-  .pres-item .slider { border-radius: 0; }
-  .slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease; }
-  .slider img.active { opacity: 1; }
-  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-  .slider-btn:hover { background: rgba(74,158,173,0.7); }
-  .slider-btn.prev { left: 12px; }
-  .slider-btn.next { right: 12px; }
-  .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
-  .slider-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); }
-  .slider-dots span.active { background: var(--accent); }
+  .slider { position:relative; width:100%; height:570px; overflow:hidden; border-radius:12px; }
+  .pres-item .slider { border-radius:0; }
+  .slider img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.4s ease; }
+  .slider img.active { opacity:1; }
+  .slider-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.55); color:#fff; border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem; z-index:2; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .slider-btn:hover { background:rgba(74,158,173,0.7); }
+  .slider-btn.prev { left:12px; }
+  .slider-btn.next { right:12px; }
+  .slider-dots { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:2; }
+  .slider-dots span { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3); }
+  .slider-dots span.active { background:var(--accent); }
 
-  /* Experience items inside overlay */
-  .exp-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; transition: border-color 0.2s; opacity: 0; transform: translateY(20px); }
-  .exp-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s; }
-  .exp-item:hover { border-color: var(--accent); }
-  .exp-item h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 6px; }
-  .exp-item .meta { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 10px; }
-  .exp-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  /* Exp items */
+  .exp-item { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:16px; transition:border-color 0.2s; }
+  .exp-item:hover { border-color:var(--accent); }
+  .exp-item h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:6px; }
+  .exp-item .meta { color:var(--text-muted); font-size:0.82rem; margin-bottom:10px; }
+  .exp-item p { color:var(--text-muted); font-size:0.9rem; line-height:1.6; }
 
-  .year-label { color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 28px 0 12px; }
-  .year-label:first-of-type { margin-top: 0; }
-  .show-more-btn { display: block; width: 100%; background: none; border: 1px dashed var(--border); color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; padding: 14px; border-radius: 10px; cursor: pointer; margin-bottom: 16px; transition: border-color 0.2s, color 0.2s; }
-  .show-more-btn:hover { border-color: var(--accent); color: var(--text); }
-  .hidden-group { display: none; }
-  .hidden-group.show { display: block; }
+  .year-label { color:var(--accent); font-size:0.78rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin:28px 0 12px; }
+  .year-label:first-of-type { margin-top:0; }
+  .show-more-btn { display:block; width:100%; background:none; border:1px dashed var(--border); color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:0.88rem; padding:14px; border-radius:10px; cursor:pointer; margin-bottom:16px; transition:border-color 0.2s, color 0.2s; }
+  .show-more-btn:hover { border-color:var(--accent); color:var(--text); }
+  .hidden-group { display:none; }
+  .hidden-group.show { display:block; }
 
-  /* Product detail page */
-  .product-hero { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease 0.1s forwards; }
-  .product-hero img { width: 80px; height: 80px; border-radius: 18px; object-fit: cover; }
-  .product-hero-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 4px; }
-  .product-hero-text .meta { color: var(--text-muted); font-size: 0.9rem; }
-  .product-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease 0.2s forwards; }
-  .product-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 8px 18px; border: 1px solid var(--accent); border-radius: 8px; transition: background 0.2s; }
-  .product-links a:hover { background: var(--accent-glow); }
-  .product-section { margin-bottom: 32px; opacity: 0; transform: translateY(20px); }
-  .product-section.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .product-section h4 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 12px; color: var(--text); }
-  .product-section p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 12px; }
-  .product-section ul { list-style: none; padding: 0; }
-  .product-section ul li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; padding-left: 18px; position: relative; margin-bottom: 6px; }
-  .product-section ul li::before { content: '\2192'; position: absolute; left: 0; color: var(--accent); }
-  .screenshot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-  .screenshot-grid .ss { background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 9/16; display: grid; place-items: center; color: var(--text-muted); font-size: 0.75rem; overflow: hidden; }
-  .screenshot-grid .ss img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
-  .screenshot-grid-wide { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
-  .screenshot-grid-wide .ss { background: var(--surface-hover); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 16/10; display: grid; place-items: center; color: var(--text-muted); font-size: 0.75rem; overflow: hidden; }
-  .screenshot-grid-wide .ss img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
-  .tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .tech-pills span { background: var(--accent-glow); color: var(--accent); font-size: 0.78rem; font-weight: 500; padding: 4px 12px; border-radius: 14px; }
+  /* Product detail */
+  .product-hero { display:flex; align-items:center; gap:24px; margin-bottom:32px; }
+  .product-hero img { width:80px; height:80px; border-radius:18px; object-fit:cover; }
+  .product-hero-text h3 { font-family:'DM Serif Display',serif; font-size:1.8rem; font-weight:400; margin-bottom:4px; }
+  .product-hero-text .meta { color:var(--text-muted); font-size:0.9rem; }
+  .product-links { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+  .product-links a { color:var(--accent); text-decoration:none; font-size:0.85rem; font-weight:500; padding:8px 18px; border:1px solid var(--accent); border-radius:8px; transition:background 0.2s, transform 0.2s; }
+  .product-links a:hover { background:var(--accent-glow); transform:translateY(-2px); }
+  .product-section { margin-bottom:32px; }
+  .product-section h4 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:12px; color:var(--text); }
+  .product-section p { color:var(--text-muted); font-size:0.95rem; line-height:1.75; margin-bottom:12px; }
+  .product-section ul { list-style:none; padding:0; }
+  .product-section ul li { color:var(--text-muted); font-size:0.92rem; line-height:1.7; padding-left:18px; position:relative; margin-bottom:6px; }
+  .product-section ul li::before { content:'\2192'; position:absolute; left:0; color:var(--accent); }
+  .screenshot-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; }
+  .screenshot-grid .ss { background:var(--surface-hover); border:1px dashed var(--border); border-radius:10px; aspect-ratio:9/16; display:grid; place-items:center; color:var(--text-muted); font-size:0.75rem; overflow:hidden; }
+  .screenshot-grid-wide { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
+  .screenshot-grid-wide .ss { background:var(--surface-hover); border:1px dashed var(--border); border-radius:10px; aspect-ratio:16/10; display:grid; place-items:center; color:var(--text-muted); font-size:0.75rem; overflow:hidden; }
+  .tech-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .tech-pills span { background:var(--accent-glow); color:var(--accent); font-size:0.78rem; font-weight:500; padding:4px 12px; border-radius:14px; transition:transform 0.2s; }
+  .tech-pills span:hover { transform:translateY(-2px); }
 
-  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--text-muted); font-size: 0.82rem; }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } header { padding-top: 48px; } .detail-banner, .slider, .pres-banner { height: 300px; } .card-cover, .card-cover-icon { height: 160px; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  footer { border-top:1px solid var(--border); padding:32px 0; text-align:center; color:var(--text-muted); font-size:0.82rem; }
+  @media (max-width:640px) { .grid{grid-template-columns:1fr} header{padding-top:48px} .detail-banner,.slider,.pres-banner{height:300px} }
 </style>
 </head>
 <body>
+<div class="page-bg">
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+<div class="glow-orb glow-orb-3"></div>
 <div class="container">
   <header>
-    <h1>Braden Boucher</h1>
-    <p>Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
-    <div class="links">
+    <h1 class="hero-animate hero-delay-1">Braden Boucher</h1>
+    <p class="hero-animate hero-delay-2">Optics and photonics engineer with published research in optoelectronic device characterization. Developing practical AI-driven applications for iOS and the web.</p>
+    <div class="links hero-animate hero-delay-3">
       <a href="mailto:b1boucher@student.bridgew.edu?subject=Consultation%20Request">Schedule a Consultation</a>
       <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
     </div>
   </header>
 
-  <div class="filters">
+<div class="filters hero-animate hero-delay-4">
     <button class="active" onclick="filterCards('all',this)">All</button>
     <button onclick="filterCards('pub',this)">Publications</button>
     <button onclick="filterCards('pres',this)">Presentations</button>
@@ -170,61 +204,60 @@
     <button onclick="filterCards('exp',this)">Experience</button>
   </div>
 
+  <div class="line-grow reveal"></div>
   <section class="grid">
     <!-- Publications — individual cards -->
-    <div class="card" data-cat="pub" onclick="showDetail('cleo')">
+    <div class="card reveal-pop reveal-delay-1" data-cat="pub" onclick="showDetail('cleo')">
       <div class="card-cover"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></div>
       <div class="card-body"><span class="tag">Publication</span><h3>Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">CLEO 2026 · First Author</div></div>
     </div>
-    <div class="card" data-cat="pub" onclick="showDetail('sensors')">
+    <div class="card reveal-pop reveal-delay-2" data-cat="pub" onclick="showDetail('sensors')">
       <div class="card-cover"><img src="images/sensors-lidar-review-thumb.png" alt="MDPI Sensors"></div>
       <div class="card-body"><span class="tag">Publication</span><h3>Solid-State LiDAR &amp; Metasurface-Based Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div></div>
     </div>
 
     <!-- Presentations — single card -->
-    <div class="card" data-cat="pres" onclick="showDetail('presentations')">
+    <div class="card reveal-pop reveal-delay-3" data-cat="pres" onclick="showDetail('presentations')">
       <div class="card-cover"><img src="images/harvard-1.jpg" alt="Presentations"></div>
       <div class="card-body"><span class="tag">Presentations</span><h3>Conference Presentations</h3><div class="meta">6 talks · CLEO, Harvard, U of A, NCUR &amp; more</div></div>
     </div>
 
     <!-- Projects — individual cards -->
-    <div class="card" data-cat="proj" onclick="showDetail('colorcoded')">
+    <div class="card reveal-pop reveal-delay-4" data-cat="proj" onclick="showDetail('colorcoded')">
       <div class="card-cover-icon"><img src="images/icon-colorcoded.png" alt="ColorCoded"></div>
       <div class="card-body"><span class="tag">Product</span><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div></div>
     </div>
-    <div class="card" data-cat="proj" onclick="showDetail('workspace')">
+    <div class="card reveal-pop reveal-delay-5" data-cat="proj" onclick="showDetail('workspace')">
       <div class="card-cover-icon"><img src="images/icon-workspace.png" alt="Workspace"></div>
       <div class="card-body"><span class="tag">Product</span><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI</div></div>
     </div>
-    <div class="card" data-cat="proj" onclick="showDetail('historylegends')">
+    <div class="card reveal-pop reveal-delay-6" data-cat="proj" onclick="showDetail('historylegends')">
       <div class="card-cover-icon"><img src="images/icon-historylegends.png" alt="History Legends"></div>
       <div class="card-body"><span class="tag">Product</span><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div></div>
     </div>
-    <div class="card" data-cat="proj" onclick="showDetail('stockflow')">
+    <div class="card reveal-pop reveal-delay-7" data-cat="proj" onclick="showDetail('stockflow')">
       <div class="card-cover-icon"><img src="images/icon-stockflow.png" alt="StockFlow"></div>
       <div class="card-body"><span class="tag">Product</span><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div></div>
     </div>
 
     <!-- Experience — single card -->
-    <div class="card" data-cat="exp" onclick="showDetail('experience')">
+    <div class="card reveal-pop reveal-delay-7" data-cat="exp" onclick="showDetail('experience')">
       <div class="card-cover"><img src="images/arizona-1.jpg" alt="Experience"></div>
       <div class="card-body"><span class="tag">Experience</span><h3>Experience &amp; Research</h3><div class="meta">Draper Lab, BSU Research, Teaching</div></div>
     </div>
   </section>
 
-  <footer>&copy; 2026 Braden Boucher</footer>
-</div>
-
+  <footer>&copy; 2026 Braden Boucher</footer></div>
 <!-- Publication details -->
 <div class="overlay" id="cleo"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('cleo')">&#8592; Back</button>
-  <div class="detail-banner"><a href="docs/cleo-2026.pdf" target="_blank"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></a></div>
+  <div class="detail-banner reveal-scale"><a href="docs/cleo-2026.pdf" target="_blank"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></a></div>
   <div class="detail-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO 2026 · First Author</div><p>Bonding micron-scale III-V laser dies to silicon using silver epoxy. Wall-plug efficiencies up to 20%, infrared output above 10 mW, and a modest efficiency reduction from 14.9% to 14.2% post-bonding.</p><div class="detail-links"><a href="docs/cleo-2026.pdf" target="_blank">View Paper (PDF)</a></div></div>
 </div></div>
 
 <div class="overlay" id="sensors"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('sensors')">&#8592; Back</button>
-  <div class="detail-banner"><a href="docs/sensors-lidar-review.pdf" target="_blank"><img src="images/sensors-lidar-review-thumb.png" alt="Sensors"></a></div>
+  <div class="detail-banner reveal-scale"><a href="docs/sensors-lidar-review.pdf" target="_blank"><img src="images/sensors-lidar-review-thumb.png" alt="Sensors"></a></div>
   <div class="detail-text"><h3>A Review of Solid-State LiDAR Principles and Metasurface-Based LiDAR Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div><p>Literature review covering 100+ papers on solid-state LiDAR principles, metasurface-based LiDAR sensors, and recent advances in beam steering, phase shift, and field of view.</p><div class="detail-links"><a href="docs/sensors-lidar-review.pdf" target="_blank">View Paper (PDF)</a></div></div>
 </div></div>
 
@@ -233,11 +266,11 @@
   <button class="back-btn" onclick="hideDetail('presentations')">&#8592; Back</button>
   <h2>Presentations</h2>
   <div class="year-label">2026</div>
-  <div class="pres-item">
+  <div class="pres-item reveal">
     <div class="pres-banner"><span>Image placeholder</span></div>
     <div class="pres-text"><h3>Effect of Silver Epoxy Bonding of III-V Laser Dies on Silicon for LiDAR Applications</h3><div class="meta">CLEO · Charlotte, NC · May 2026</div><p>Upcoming presentation at the Conference on Lasers and Electro-Optics.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div>
   </div>
-  <div class="pres-item">
+  <div class="pres-item reveal">
     <div class="slider" data-slider>
       <img src="images/harvard-1.jpg" alt="Harvard" class="active"><img src="images/harvard-2.jpg" alt="Harvard"><img src="images/harvard-3.jpg" alt="Harvard"><img src="images/harvard-poster-thumb.png" alt="Poster">
       <button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button>
@@ -245,7 +278,7 @@
     </div>
     <div class="pres-text"><h3>Temperature Dependent Optoelectronic Characterization of III-V Laser Dies on Silicon</h3><div class="meta">Harvard NCRC · Cambridge, MA · January 2026</div><p>Presented at the Harvard National Collegiate Research Conference.</p><div class="detail-links"><a href="docs/harvard-poster.pdf" target="_blank">Poster (PDF)</a></div></div>
   </div>
-  <div class="pres-item">
+  <div class="pres-item reveal">
     <div class="slider" data-slider>
       <img src="images/arizona-1.jpg" alt="Arizona" class="active"><img src="images/arizona-2.jpg" alt="Wyant">
       <button class="slider-btn prev" onclick="slide(this,-1)">&#8249;</button><button class="slider-btn next" onclick="slide(this,1)">&#8250;</button>
@@ -256,32 +289,32 @@
   <button class="show-more-btn" onclick="toggleMore(this)">Show earlier presentations &#8595;</button>
   <div class="hidden-group">
     <div class="year-label">2025</div>
-    <div class="pres-item"><div class="pres-text"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
-    <div class="pres-item"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item reveal"><div class="pres-text"><h3>Lensed Fiber Coupling for Efficient Laser Diode Characterization</h3><div class="meta">BSU Mid-Year Symposium · December 2025</div><p>Fiber coupling techniques for efficient laser diode characterization.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item reveal"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">NCUR · Pittsburgh, PA · April 2025</div><p>National Conference on Undergraduate Research.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
     <div class="year-label">2024</div>
-    <div class="pres-item"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
+    <div class="pres-item reveal"><div class="pres-text"><h3>Optoelectronic Characterization of III-V Laser Dies</h3><div class="meta">MA Undergraduate Research Conference · Amherst, MA · April 2024</div><p>Massachusetts statewide undergraduate research conference.</p><div class="detail-links"><a href="#">Poster (PDF)</a></div></div></div>
   </div>
 </div></div>
 
 <!-- Product details -->
 <div class="overlay" id="colorcoded"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('colorcoded')">&#8592; Back</button>
-  <div class="product-hero">
+  <div class="product-hero reveal">
     <img src="images/icon-colorcoded.png" alt="ColorCoded">
     <div class="product-hero-text"><h3>ColorCoded Music</h3><div class="meta">iOS App · Available on the App Store</div></div>
   </div>
-  <div class="product-links">
+  <div class="product-links reveal reveal-delay-1">
     <a href="https://color-coded.app" target="_blank">Website</a>
     <a href="#">App Store</a>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Overview</h4>
     <p>ColorCoded Music is an iOS application that transforms the way beginner and intermediate pianists learn to read sheet music. Using on-device machine learning, the app scans any PDF of sheet music, detects individual noteheads, and overlays a color-coded system directly onto the page — making it immediately clear which notes to play and where to find them on the keyboard.</p>
     <p>The app also generates intelligent fingering suggestions for each hand, helping players build proper technique from the start. Whether you're working through a classical piece, a pop arrangement, or a hymnal, ColorCoded gives you a visual shortcut to understanding the music.</p>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid">
       <div class="ss"><span>Screenshot 1</span></div>
@@ -290,7 +323,7 @@
     </div>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>How It Works</h4>
     <p>At the core of ColorCoded is a custom-trained YOLOX object detection model running entirely on-device through Apple's CoreML framework. The model was trained on thousands of annotated sheet music samples across 24 notehead classes, achieving high accuracy at 1280×1280 input resolution. When a user imports a PDF, the app processes each page through the following pipeline:</p>
     <ul>
@@ -302,7 +335,7 @@
     </ul>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Key Features</h4>
     <ul>
       <li>PDF sheet music import with multi-page support and page range selection</li>
@@ -315,7 +348,7 @@
     </ul>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Technical Stack</h4>
     <div class="tech-pills">
       <span>Swift</span><span>SwiftUI</span><span>CoreML</span><span>YOLOX</span><span>Firebase</span><span>StoreKit 2</span><span>PDFKit</span><span>Vision</span>
@@ -325,21 +358,21 @@
 
 <div class="overlay" id="workspace"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('workspace')">&#8592; Back</button>
-  <div class="product-hero">
+  <div class="product-hero reveal">
     <img src="images/icon-workspace.png" alt="Workspace">
     <div class="product-hero-text"><h3>Workspace MVP</h3><div class="meta">Web Application · Next.js</div></div>
   </div>
-  <div class="product-links">
+  <div class="product-links reveal reveal-delay-1">
     <a href="https://workspace-mvp.vercel.app" target="_blank">Live Demo</a>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Overview</h4>
     <p>Workspace MVP is an AI-powered productivity platform that combines the flexibility of a freeform canvas with the structure of spreadsheets and the intelligence of natural language AI. It's designed for individuals and small teams who need a single environment to organize information, run calculations, and take action — all through conversation.</p>
     <p>Rather than switching between a notes app, a spreadsheet, and a chat interface, Workspace brings everything into one unified space where blocks of content live on an infinite canvas and can be manipulated by AI or by hand.</p>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid-wide">
       <div class="ss"><span>Screenshot 1</span></div>
@@ -347,7 +380,7 @@
     </div>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Key Features</h4>
     <ul>
       <li>Infinite canvas with draggable, resizable content blocks (CanvasBlock architecture)</li>
@@ -359,7 +392,7 @@
     </ul>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Technical Stack</h4>
     <div class="tech-pills">
       <span>Next.js 14</span><span>React</span><span>Firebase</span><span>Firestore</span><span>Vercel</span><span>Railway</span><span>AI Integration</span>
@@ -369,21 +402,21 @@
 
 <div class="overlay" id="historylegends"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('historylegends')">&#8592; Back</button>
-  <div class="product-hero">
+  <div class="product-hero reveal">
     <img src="images/icon-historylegends.png" alt="History Legends">
     <div class="product-hero-text"><h3>History Legends</h3><div class="meta">Web Game · React</div></div>
   </div>
-  <div class="product-links">
+  <div class="product-links reveal reveal-delay-1">
     <a href="https://historylegends-80b84.web.app" target="_blank">Play Game</a>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Overview</h4>
     <p>History Legends is an educational RPG-style quiz game designed to make studying AP United States History engaging and effective. The game covers all 7 APUSH eras with over 345 carefully balanced questions, organized across 40 nodes on a progression map. Players advance through historical eras, earn experience, and unlock new content as they master the material.</p>
     <p>The game features custom sprite art for each era, generated through a combination of Leonardo.ai for image-to-image processing and Gemini for text-to-image generation, followed by a Python cleanup pipeline for background removal and consistent sizing.</p>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid-wide">
       <div class="ss"><span>Screenshot 1</span></div>
@@ -393,7 +426,7 @@
     </div>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Key Features</h4>
     <ul>
       <li>345+ carefully balanced quiz questions across 7 APUSH eras with answer length ratios between 1.2–1.8x to prevent guessing by length</li>
@@ -405,7 +438,7 @@
     </ul>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Technical Stack</h4>
     <div class="tech-pills">
       <span>React</span><span>Vite</span><span>Firebase Hosting</span><span>Leonardo.ai</span><span>Gemini</span><span>Python</span>
@@ -415,21 +448,21 @@
 
 <div class="overlay" id="stockflow"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('stockflow')">&#8592; Back</button>
-  <div class="product-hero">
+  <div class="product-hero reveal">
     <img src="images/icon-stockflow.png" alt="StockFlow">
     <div class="product-hero-text"><h3>StockFlow</h3><div class="meta">Cross-Platform App · React Native</div></div>
   </div>
-  <div class="product-links">
+  <div class="product-links reveal reveal-delay-1">
     <a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Overview</h4>
     <p>StockFlow is a cross-platform inventory management application built for construction companies and field teams who need to track materials, tools, and supplies across job sites. The app runs on both iOS and web, giving office managers and on-site workers a shared real-time view of inventory levels, movements, and usage history.</p>
     <p>Designed around the daily workflows of construction operations, StockFlow replaces clipboard-and-spreadsheet tracking with barcode scanning, real-time sync, and role-based access — reducing errors, preventing stockouts, and saving hours of manual data entry every week.</p>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid">
       <div class="ss"><span>Screenshot 1</span></div>
@@ -438,7 +471,7 @@
     </div>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Key Features</h4>
     <ul>
       <li>Barcode scanning for rapid item lookup and check-in/check-out workflows</li>
@@ -450,7 +483,7 @@
     </ul>
   </div>
 
-  <div class="product-section">
+  <div class="product-section reveal">
     <h4>Technical Stack</h4>
     <div class="tech-pills">
       <span>React Native</span><span>Expo</span><span>Firebase</span><span>Firestore</span><span>Cloud Functions</span><span>Barcode API</span>
@@ -462,44 +495,94 @@
 <div class="overlay" id="experience"><div class="overlay-inner">
   <button class="back-btn" onclick="hideDetail('experience')">&#8592; Back</button>
   <h2>Experience &amp; Research</h2>
-  <div class="exp-item"><h3>Optics-Physics Sensor Engineering Co-Op</h3><div class="meta">Charles Stark Draper Laboratory · Jan–Jun 2025</div><p>Built and optimized optical breadboard test setups. Characterized PIC structures including MZIs, edge couplers, and spirals. Developed Python and MATLAB scripts for data processing.</p></div>
-  <div class="exp-item"><h3>Undergraduate Researcher</h3><div class="meta">Bridgewater State University · Jan 2024–Present</div><p>IV, LIV, and optical spectrum characterization of DFB and Fabry-Perot laser diodes. Honors thesis on III-V laser diodes on silicon. Supported by Adrian Tinsley Grant.</p></div>
-  <div class="exp-item"><h3>Research Assistant for NSF Grants</h3><div class="meta">Bridgewater State University · Jan 2023–Present</div><p>PIC and QPIC characterization, heterodyne detection, sustainable manufacturing. Python scripts for data analysis across multiple grant-funded efforts.</p></div>
-  <div class="exp-item"><h3>Teaching Assistant, Physics I</h3><div class="meta">Bridgewater State University · Sep–Dec 2024</div><p>TA for General Physics I. Assisted students, taught sessions, held office hours.</p></div>
+  <div class="exp-item reveal"><h3>Optics-Physics Sensor Engineering Co-Op</h3><div class="meta">Charles Stark Draper Laboratory · Jan–Jun 2025</div><p>Built and optimized optical breadboard test setups. Characterized PIC structures including MZIs, edge couplers, and spirals. Developed Python and MATLAB scripts for data processing.</p></div>
+  <div class="exp-item reveal"><h3>Undergraduate Researcher</h3><div class="meta">Bridgewater State University · Jan 2024–Present</div><p>IV, LIV, and optical spectrum characterization of DFB and Fabry-Perot laser diodes. Honors thesis on III-V laser diodes on silicon. Supported by Adrian Tinsley Grant.</p></div>
+  <div class="exp-item reveal"><h3>Research Assistant for NSF Grants</h3><div class="meta">Bridgewater State University · Jan 2023–Present</div><p>PIC and QPIC characterization, heterodyne detection, sustainable manufacturing. Python scripts for data analysis across multiple grant-funded efforts.</p></div>
+  <div class="exp-item reveal"><h3>Teaching Assistant, Physics I</h3><div class="meta">Bridgewater State University · Sep–Dec 2024</div><p>TA for General Physics I. Assisted students, taught sessions, held office hours.</p></div>
 </div></div>
 
 <script>
 function slide(btn,dir){var s=btn.closest('[data-slider]'),imgs=s.querySelectorAll('img'),dots=s.querySelectorAll('.slider-dots span'),cur=s.querySelector('img.active'),idx=[...imgs].indexOf(cur),next=(idx+dir+imgs.length)%imgs.length;cur.classList.remove('active');imgs[next].classList.add('active');dots[idx].classList.remove('active');dots[next].classList.add('active');}
-function showDetail(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';document.getElementById(id).scrollTop=0;}
-function hideDetail(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';
-  // Reset reveal so items animate again next open
-  document.querySelectorAll('#'+id+' .pres-item, #'+id+' .exp-item, #'+id+' .product-section').forEach(function(el){el.classList.remove('visible');});
-}
-function filterCards(cat,btn){document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.card').forEach(c=>{
-  if(cat==='all'||c.dataset.cat===cat){c.classList.remove('hidden');c.classList.remove('visible');revealObserver.observe(c);}
-  else{c.classList.add('hidden');}
-});}
-function toggleMore(btn){var g=btn.nextElementSibling;if(g.classList.contains('show')){g.classList.remove('show');btn.innerHTML='Show earlier presentations \u2193';}else{g.classList.add('show');btn.innerHTML='Hide earlier presentations \u2191';}}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.overlay.active').forEach(function(el){el.classList.remove('active');});document.body.style.overflow='';}});
 
-// Scroll-triggered reveal
-var revealObserver = new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}
-  });
-},{threshold:0.1});
-document.querySelectorAll('.card,.pres-item,.exp-item,.product-section').forEach(function(el){revealObserver.observe(el);});
-
-// Also observe inside overlays when they open
-var origShow = showDetail;
-showDetail = function(id){
-  origShow(id);
+function showDetail(id){
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow='hidden';
+  document.getElementById(id).scrollTop=0;
+  // Stagger reveal overlay content
   setTimeout(function(){
-    document.querySelectorAll('#'+id+' .pres-item, #'+id+' .exp-item, #'+id+' .product-section').forEach(function(el,i){
-      setTimeout(function(){el.classList.add('visible');}, i*100);
+    var els=document.querySelectorAll('#'+id+' .reveal, #'+id+' .reveal-scale, #'+id+' .reveal-pop');
+    els.forEach(function(el,i){
+      setTimeout(function(){el.classList.add('visible');}, i*80);
     });
-  },100);
-};
+  },150);
+}
+
+function hideDetail(id){
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow='';
+  document.querySelectorAll('#'+id+' .reveal, #'+id+' .reveal-scale, #'+id+' .reveal-pop').forEach(function(el){el.classList.remove('visible');});
+}
+
+function filterCards(cat,btn){
+  document.querySelectorAll('.filters button').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(function(c){
+    if(cat==='all'||c.dataset.cat===cat){
+      c.classList.remove('hidden');
+      c.classList.remove('visible');
+      revealObs.observe(c);
+    } else {
+      c.classList.add('hidden');
+    }
+  });
+}
+
+function toggleMore(btn){
+  var g=btn.nextElementSibling;
+  if(g.classList.contains('show')){
+    g.classList.remove('show');
+    btn.innerHTML='Show earlier presentations \u2193';
+  } else {
+    g.classList.add('show');
+    // Reveal items inside
+    g.querySelectorAll('.reveal').forEach(function(el,i){
+      setTimeout(function(){el.classList.add('visible');},i*80);
+    });
+    btn.innerHTML='Hide earlier presentations \u2191';
+  }
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.overlay.active').forEach(function(el){el.classList.remove('active')});
+    document.body.style.overflow='';
+  }
+});
+
+// ColorCoded-style IntersectionObserver
+var exitTimers=new Map();
+var revealObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var t=exitTimers.get(entry.target);
+      if(t){clearTimeout(t);exitTimers.delete(entry.target);}
+      entry.target.classList.add('visible');
+    } else {
+      var timer=setTimeout(function(){
+        entry.target.classList.remove('visible');
+        exitTimers.delete(entry.target);
+      },200);
+      exitTimers.set(entry.target,timer);
+    }
+  });
+},{threshold:0.05, rootMargin:'20px 0px -20px 0px'});
+
+requestAnimationFrame(function(){
+  document.querySelectorAll('.reveal,.reveal-scale,.reveal-pop,.reveal-left,.reveal-right,.line-grow').forEach(function(el){
+    revealObs.observe(el);
+  });
+});
 </script>
+</div><!-- close page-bg -->
 </body>
 </html>
