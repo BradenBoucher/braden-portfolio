@@ -170,8 +170,10 @@
   .product-section ul li::before { content:'\2192'; position:absolute; left:0; color:var(--accent); }
   .screenshot-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; }
   .screenshot-grid .ss { background:var(--surface-hover); border:1px dashed var(--border); border-radius:10px; aspect-ratio:9/16; display:grid; place-items:center; color:var(--text-muted); font-size:0.75rem; overflow:hidden; }
+  .screenshot-grid .ss img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
   .screenshot-grid-wide { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
   .screenshot-grid-wide .ss { background:var(--surface-hover); border:1px dashed var(--border); border-radius:10px; aspect-ratio:16/10; display:grid; place-items:center; color:var(--text-muted); font-size:0.75rem; overflow:hidden; }
+  .screenshot-grid-wide .ss img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
   .tech-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
   .tech-pills span { background:var(--accent-glow); color:var(--accent); font-size:0.78rem; font-weight:500; padding:4px 12px; border-radius:14px; transition:transform 0.2s; }
   .tech-pills span:hover { transform:translateY(-2px); }
@@ -317,9 +319,14 @@
   <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid">
-      <div class="ss"><span>Screenshot 1</span></div>
-      <div class="ss"><span>Screenshot 2</span></div>
-      <div class="ss"><span>Screenshot 3</span></div>
+      <div class="ss"><img src="images/cc-ss-1.jpg" alt="See every note in color"></div>
+      <div class="ss"><img src="images/cc-ss-2.jpg" alt="Customize your display"></div>
+      <div class="ss"><img src="images/cc-ss-4.jpg" alt="Practice with live feedback"></div>
+    </div>
+    <div class="screenshot-grid" style="margin-top:12px">
+      <div class="ss"><img src="images/cc-ss-5.jpg" alt="Browse public library"></div>
+      <div class="ss"><img src="images/cc-ss-6.jpg" alt="Export and share"></div>
+      <div class="ss"><img src="images/cc-ss-3.jpg" alt="Score view"></div>
     </div>
   </div>
 
@@ -419,10 +426,8 @@
   <div class="product-section reveal">
     <h4>Screenshots</h4>
     <div class="screenshot-grid-wide">
-      <div class="ss"><span>Screenshot 1</span></div>
-      <div class="ss"><span>Screenshot 2</span></div>
-      <div class="ss"><span>Screenshot 3</span></div>
-      <div class="ss"><span>Screenshot 4</span></div>
+      <div class="ss"><img src="images/hl-ss-1.jpg" alt="Battle gameplay"></div>
+      <div class="ss"><img src="images/hl-ss-2.jpg" alt="Quiz gameplay"></div>
     </div>
   </div>
 
