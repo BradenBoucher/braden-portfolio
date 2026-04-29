@@ -1,0 +1,650 @@
+/* ============================================================
+   Vista Explorer aero.css
+   Restyles the portfolio in a Frutiger Aero / Vista chrome aesthetic.
+   Overrides existing CSS variables and selectors. No content changes.
+   ============================================================ */
+
+/* ── Palette: light blue/grey + red accent ── */
+:root {
+  --bg: #c8d5e2;
+  --surface: #f4f8fb;
+  --surface-hover: #e8f0f7;
+  --border: rgba(20, 40, 70, 0.4);
+  --border-strong: rgba(20, 40, 70, 0.6);
+  --text: #1c2c45;
+  --text-muted: #4a5a72;
+  --accent: #a02a2a;
+  --accent-glow: rgba(160, 42, 42, 0.12);
+
+  --chrome-light-1: #d8e4ef;
+  --chrome-light-2: #b6c8dd;
+  --chrome-light-3: #9fb6cf;
+  --chrome-light-4: #7d9cba;
+  --chrome-light-5: #5a7a9a;
+
+  --chrome-dark-1: #4a5260;
+  --chrome-dark-2: #2a313c;
+  --chrome-dark-3: #1a1f28;
+
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ── Page background: soft sky-grey gradient ── */
+body {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, #e0ecf6 0%, transparent 60%),
+    linear-gradient(180deg, #c8d8e8 0%, #b6c8dd 40%, #a8becc 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--text) !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.page-bg {
+  background: transparent !important;
+}
+
+/* ── Wrap entire container in a Vista Explorer "window" ── */
+.container {
+  background: linear-gradient(180deg, #f4f8fb 0%, #e3edf5 100%) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 10px !important;
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.25),
+    0 2px 0 rgba(0, 0, 0, 0.08) !important;
+  position: relative !important;
+  padding: 0 24px 24px !important;
+}
+
+/* Title bar at the top of the window */
+.container::before {
+  content: 'Braden Boucher — Portfolio';
+  display: block;
+  position: relative;
+  margin: 0 -24px;
+  padding: 10px 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c2c45;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.01em;
+  background:
+    radial-gradient(ellipse 220% 100% at 50% -30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0) 55%),
+    radial-gradient(ellipse 180% 80% at 50% 100%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 50%),
+    linear-gradient(180deg, #b8cde0 0%, #94afca 30%, #7896b6 55%, #5d7ea0 80%, #3e6088 100%);
+  border: 1px solid rgba(20, 40, 70, 0.5);
+  border-bottom: none;
+  border-radius: 9px 9px 0 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 1px 0 0 rgba(255,255,255,0.4),
+    inset -1px 0 0 rgba(255,255,255,0.4),
+    inset 0 -1px 0 rgba(0,0,0,0.18);
+  margin-bottom: 0;
+}
+
+/* ── Header (hero) ── */
+header {
+  padding: 36px 0 16px !important;
+  text-align: center !important;
+  background:
+    radial-gradient(ellipse 160% 100% at 50% 0%, rgba(255,255,255,0.6) 0%, transparent 60%),
+    linear-gradient(180deg, #f4f8fb 0%, #e3edf5 100%) !important;
+  margin: 0 -24px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  border-bottom: 1px solid rgba(20, 40, 70, 0.15) !important;
+  position: relative !important;
+}
+
+header h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #1c2c45 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+header p {
+  color: var(--text-muted) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Header link buttons (Email / GitHub / LinkedIn / CV) — beveled chrome */
+header .links a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 8px 18px !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+header .links a:hover {
+  transform: translateY(-1px) !important;
+  opacity: 1 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+header .links a:active {
+  transform: translateY(1px) !important;
+  background: linear-gradient(180deg, #d8dee6 0%, #ffffff 100%) !important;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.15),
+    0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+/* ── About section — light glass card ── */
+.about {
+  background: linear-gradient(180deg, #ffffff 0%, #ecf2f8 100%) !important;
+  border: 1px solid rgba(20, 40, 70, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 1px 0 rgba(0, 0, 0, 0.04) !important;
+  margin: 24px auto !important;
+  max-width: 640px !important;
+}
+
+.about p {
+  color: var(--text) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.about img {
+  border: 2px solid rgba(20, 40, 70, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ── Filter buttons: chrome dark rail with neutral keys ── */
+.filters {
+  background: linear-gradient(180deg, var(--chrome-dark-1) 0%, var(--chrome-dark-2) 50%, var(--chrome-dark-3) 100%) !important;
+  border: 1px solid rgba(0, 0, 0, 0.7) !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  margin: 24px auto !important;
+  max-width: 640px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.3) !important;
+  justify-content: center !important;
+}
+
+.filters button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  padding: 6px 14px !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(0, 0, 0, 0.55) !important;
+  background: linear-gradient(180deg, #fafbfd 0%, #d4d8df 50%, #b8bcc4 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(0,0,0,0.1),
+    0 1px 0 rgba(255,255,255,0.15),
+    0 1px 2px rgba(0,0,0,0.4) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  text-transform: none !important;
+}
+
+.filters button:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #dde1e8 50%, #c4c8d0 100%) !important;
+  transform: translateY(-1px) !important;
+  border-color: rgba(0, 0, 0, 0.7) !important;
+  color: var(--text) !important;
+}
+
+.filters button.active {
+  color: white !important;
+  border: 1px solid #6a1818 !important;
+  background: linear-gradient(180deg, #ff8c8c 0%, #d04848 50%, #a02a2a 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.4) !important;
+  text-shadow: 0 -1px 0 rgba(80, 0, 0, 0.6) !important;
+  font-weight: 700 !important;
+}
+
+/* ── Line divider ── */
+.line-grow {
+  background: linear-gradient(90deg, transparent, rgba(20,40,70,0.25), transparent) !important;
+  height: 1px !important;
+}
+
+/* ── Cards: each card is a mini Vista Explorer window ── */
+.card {
+  background: linear-gradient(180deg, #ffffff 0%, #e8f0f7 100%) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 6px 18px rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.3s var(--spring), box-shadow 0.3s !important;
+}
+
+.card:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #dce8f2 100%) !important;
+  border-color: var(--accent) !important;
+  transform: translateY(-3px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 10px 24px rgba(0, 0, 0, 0.25),
+    0 0 0 1px var(--accent),
+    0 1px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.card-cover, .card-cover-icon {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,0.9) 0%, transparent 60%),
+    linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-3) 100%) !important;
+  border-bottom: 1px solid rgba(20, 40, 70, 0.2) !important;
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.card-body h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.card-body .meta {
+  color: var(--text-muted) !important;
+}
+
+.card-body .tag {
+  color: white !important;
+  background: linear-gradient(180deg, #5d7ea0 0%, #3e6088 100%) !important;
+  padding: 2px 8px !important;
+  border-radius: 3px !important;
+  border: 1px solid rgba(20, 40, 70, 0.5) !important;
+  text-shadow: 0 -1px 0 rgba(0, 30, 80, 0.4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 1px rgba(0, 0, 0, 0.15) !important;
+  letter-spacing: 0.05em !important;
+  display: inline-block !important;
+}
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid rgba(20, 40, 70, 0.2) !important;
+  color: var(--text-muted) !important;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.4)) !important;
+  margin: 0 -24px -24px !important;
+  border-radius: 0 0 9px 9px !important;
+  padding: 24px !important;
+}
+
+/* ============================================================
+   Subpage / overlay specific styles
+   ============================================================ */
+
+/* Back button — chrome neutral */
+.back-btn {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  padding: 8px 16px !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.back-btn:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+  color: var(--text) !important;
+  border-color: rgba(20, 40, 70, 0.55) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Headlines on detail pages */
+.overlay h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Detail banner: light chrome window */
+.detail-banner {
+  background: linear-gradient(180deg, #f4f8fb 0%, #d8e4ef 100%) !important;
+  border: 1px solid rgba(20, 40, 70, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.detail-text h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.detail-text p {
+  color: var(--text-muted) !important;
+}
+
+.detail-text .detail-links a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  padding: 8px 16px !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.detail-text .detail-links a:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+  border-color: rgba(20, 40, 70, 0.55) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Presentation list items as mini-windows */
+.pres-item {
+  background: linear-gradient(180deg, #ffffff 0%, #e8f0f7 100%) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+.pres-item:hover {
+  border-color: var(--accent) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 6px 16px rgba(0, 0, 0, 0.18),
+    0 0 0 1px var(--accent) !important;
+}
+
+.pres-banner {
+  background: linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-3) 100%) !important;
+  border-bottom: 1px solid rgba(20, 40, 70, 0.2) !important;
+}
+
+.pres-text h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.pres-text p, .pres-text .meta {
+  color: var(--text-muted) !important;
+}
+
+.pres-text .detail-links a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  padding: 5px 12px !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.pres-text .detail-links a:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+}
+
+/* Slider buttons */
+.slider-btn {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(216,222,230,0.95) 100%) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(20, 40, 70, 0.5) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.slider-btn:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+}
+
+/* Slider dots */
+.slider-dots span {
+  background: rgba(20, 40, 70, 0.3) !important;
+  border: 1px solid rgba(20, 40, 70, 0.5) !important;
+}
+
+.slider-dots span.active {
+  background: var(--accent) !important;
+  border-color: #6a1818 !important;
+  box-shadow: 0 0 4px rgba(160, 42, 42, 0.5) !important;
+}
+
+/* Experience / pres list items */
+.exp-item {
+  background: linear-gradient(180deg, #ffffff 0%, #e8f0f7 100%) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.exp-item:hover {
+  border-color: var(--accent) !important;
+}
+
+.exp-item h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.exp-item p, .exp-item .meta {
+  color: var(--text-muted) !important;
+}
+
+/* Year labels */
+.year-label {
+  color: var(--accent) !important;
+  font-weight: 700 !important;
+}
+
+/* Pres list items (compact list view) */
+.pres-list-item {
+  border-left: 2px solid rgba(20, 40, 70, 0.25) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%) !important;
+  border-radius: 0 6px 6px 0 !important;
+  margin-bottom: 8px !important;
+  padding: 12px 16px !important;
+}
+
+.pres-list-item:hover {
+  border-left-color: var(--accent) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(232,240,247,0.7) 100%) !important;
+}
+
+.pres-list-item h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.pres-list-item .meta {
+  color: var(--text-muted) !important;
+}
+
+.show-more-btn {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.show-more-btn:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+  color: var(--text) !important;
+  border-color: rgba(20, 40, 70, 0.55) !important;
+}
+
+/* Product detail pages */
+.product-hero-text h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.product-hero-text .meta {
+  color: var(--text-muted) !important;
+}
+
+.product-hero img {
+  border: 2px solid rgba(20, 40, 70, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.product-links a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: #1a1f28 !important;
+  border: 1px solid rgba(20, 40, 70, 0.45) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dee6 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.product-links a:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+  border-color: rgba(20, 40, 70, 0.55) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 4px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+.product-section h4 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+.product-section p, .product-section ul li {
+  color: var(--text-muted) !important;
+}
+
+.product-section ul li::before {
+  color: var(--accent) !important;
+}
+
+/* Screenshot grid surfaces */
+.screenshot-grid .ss, .screenshot-grid-wide .ss {
+  background: linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-3) 100%) !important;
+  border: 1px solid rgba(20, 40, 70, 0.3) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Tech pills — small chrome keys */
+.tech-pills span {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: #1a1f28 !important;
+  background: linear-gradient(180deg, #fafbfd 0%, #d4d8df 100%) !important;
+  border: 1px solid rgba(20, 40, 70, 0.4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  border-radius: 4px !important;
+}
+
+.tech-pills span:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #c8d0d8 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 3px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Overlays still dark glass for now (legacy modals) */
+.overlay {
+  background: rgba(40, 60, 90, 0.85) !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .container {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    padding: 0 16px 16px !important;
+  }
+  .container::before {
+    margin: 0 -16px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  header {
+    margin: 0 -16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  footer {
+    margin: 0 -16px -16px !important;
+    padding: 16px !important;
+  }
+}

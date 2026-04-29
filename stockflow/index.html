@@ -3,23 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Braden Boucher — Photonics Engineer & iOS Developer</title>
-<meta name="description" content="Photonics & optical engineering student at Bridgewater State University. Published researcher, Draper Laboratory co-op, indie iOS developer.">
-<meta property="og:title" content="Braden Boucher">
-<meta property="og:description" content="Photonics researcher · iOS developer · Draper Co-Op alum">
-<meta property="og:image" content="https://bradenboucher.com/images/headshot.jpg">
-<meta property="og:url" content="https://bradenboucher.com">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Braden Boucher">
-<meta name="twitter:description" content="Photonics researcher · iOS developer · Draper Co-Op alum">
-<meta name="twitter:image" content="https://bradenboucher.com/images/headshot.jpg">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>StockFlow — Braden Boucher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="images/cleo-2026-thumb.png">
-<link rel="preload" as="image" href="images/sensors-lidar-review-thumb.png">
-<link rel="preload" as="image" href="images/headshot.jpg">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -86,7 +73,7 @@
   .card-cover img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.4s ease; }
   .card:hover .card-cover img { transform:scale(1.1); }
   .card-cover-icon { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:var(--surface-hover); }
-  .card-cover-icon img { width:70%; aspect-ratio:1; border-radius:36px; object-fit:cover; transition:transform 0.4s ease; }
+  .card-cover-icon img { width:70%; aspect-ratio:1; border-radius:28px; object-fit:cover; transition:transform 0.4s ease; }
   .card:hover .card-cover-icon img { transform:scale(1.12); }
   .card-body { padding:20px 24px 24px; flex:1; }
   .card-body h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; font-weight:400; margin-bottom:4px; }
@@ -188,125 +175,49 @@
 .slider img.poster-fit { object-fit:contain !important; background:var(--surface-hover); }
 .pres-banner img { object-fit:contain !important; background:var(--surface-hover); }
 </style>
-<link rel="stylesheet" href="aero.css">
+<link rel="stylesheet" href="../aero.css">
 </head>
 <body>
 <div class="page-bg">
-<div class="container">
-  <header>
-    <h1 class="hero-animate hero-delay-1">Braden Boucher</h1>
-    <div class="links hero-animate hero-delay-2">
-      <a href="mailto:braden@chrisboucher.net?subject=Consultation%20Request">Email</a>
-      <a href="https://github.com/BradenBoucher" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/bradenboucher" target="_blank">LinkedIn</a>
-      <a href="docs/Boucher_CV.pdf" target="_blank">CV</a>
-    </div>
-  </header>
+<div class="container" style="padding-top:40px; padding-bottom:80px;">
+  <a href="/" class="back-btn" style="text-decoration:none;">&#8592; Back</a>
 
-  <!-- About section -->
-  <div class="about hero-animate hero-delay-3" style="display:flex; align-items:center; gap:28px; max-width:640px; margin:0 auto 8px; padding:24px 0;">
-    <img src="images/headshot.jpg" alt="Braden Boucher" style="width:110px; height:110px; border-radius:50%; object-fit:cover; border:2px solid var(--border); flex-shrink:0;">
-    <div>
-      <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.65; margin-bottom:6px;">Photonics &amp; optical engineering student at Bridgewater State University, graduating May 2026. Experienced in III-V laser diode characterization and photonic integrated circuit testing. I also build full-stack apps for iOS and web, focused on solving real problems.</p>
-    </div>
+  <div class="product-hero reveal">
+    <img src="../images/icon-stockflow.png" alt="StockFlow">
+    <div class="product-hero-text"><h3>StockFlow</h3><div class="meta">Cross-Platform App · React Native</div></div>
+  </div>
+  <div class="product-links reveal"><a href="https://stockflow-78ca0.web.app" target="_blank">Live Demo</a></div>
+
+  <div class="product-section reveal"><h4>Overview</h4>
+    <p>StockFlow is an inventory management app I built for construction companies and field teams. It runs on both iOS and web, so office managers and on-site workers can share a real-time view of inventory levels, movements, and usage history.</p>
+    <p>The goal was to replace the clipboard-and-spreadsheet approach most small construction teams use. With barcode scanning, real-time sync, and role-based access, it cuts down on errors and saves time on manual data entry.</p>
   </div>
 
-<div class="filters hero-animate hero-delay-4">
-    <button class="active" onclick="filterCards('all',this)">All</button>
-    <button onclick="filterCards('pub',this)">Publications</button>
-    <button onclick="filterCards('pres',this)">Presentations</button>
-    <button onclick="filterCards('proj',this)">Projects</button>
-    <button onclick="filterCards('exp',this)">Experience</button>
+
+
+  <div class="product-section reveal"><h4>Key Features</h4><ul>
+    <li>Barcode scanning for quick item lookup and check-in/check-out</li>
+    <li>Cross-platform: native iOS via Expo plus a full web version</li>
+    <li>Real-time inventory sync across all devices through Firestore</li>
+    <li>Role-based access for managers, supervisors, and field workers</li>
+    <li>Password reset emails via Gmail SMTP Cloud Function</li>
+    <li>Responsive web interface for tablets and desktops</li>
+  </ul></div>
+
+  <div class="product-section reveal"><h4>Technical Stack</h4>
+    <div class="tech-pills"><span>React Native</span><span>Expo</span><span>Firebase</span><span>Firestore</span><span>Cloud Functions</span><span>Barcode API</span></div>
   </div>
-
-  <div class="line-grow reveal"></div>
-  <section class="grid">
-    <!-- Publications — individual cards -->
-    <div class="card reveal-pop reveal-delay-1" data-cat="pub" onclick="navigateTo('/cleo')">
-      <div class="card-cover"><img src="images/cleo-2026-thumb.png" alt="CLEO 2026"></div>
-      <div class="card-body"><span class="tag">Publication</span><h3>Silver Epoxy Bonding of III-V Laser Dies on Silicon</h3><div class="meta">CLEO 2026 · First Author</div></div>
-    </div>
-    <div class="card reveal-pop reveal-delay-2" data-cat="pub" onclick="navigateTo('/sensors')">
-      <div class="card-cover"><img src="images/sensors-lidar-review-thumb.png" alt="MDPI Sensors"></div>
-      <div class="card-body"><span class="tag">Publication</span><h3>Solid-State LiDAR &amp; Metasurface-Based Sensors</h3><div class="meta">MDPI Sensors 2025 · Second Author</div></div>
-    </div>
-
-    <!-- Presentations — single card -->
-    <div class="card reveal-pop reveal-delay-3" data-cat="pres" onclick="navigateTo('/presentations')">
-      <div class="card-cover"><img src="images/harvard-3.jpg" alt="Presentations" style="object-position:30% center"></div>
-      <div class="card-body"><span class="tag">Presentations</span><h3>Conference Presentations</h3><div class="meta">6 talks · CLEO, Harvard, U of A, NCUR &amp; more</div></div>
-    </div>
-
-    <!-- Projects — individual cards -->
-    <div class="card reveal-pop reveal-delay-4" data-cat="proj" onclick="window.open('https://color-coded.app','_blank')">
-      <div class="card-cover-icon"><img src="images/icon-colorcoded.png" alt="ColorCoded"></div>
-      <div class="card-body"><span class="tag">Product</span><h3>ColorCoded Music</h3><div class="meta">iOS · Swift · CoreML · YOLOX</div></div>
-    </div>
-    <div class="card reveal-pop reveal-delay-5" data-cat="proj" onclick="navigateTo('/workspace')">
-      <div class="card-cover-icon"><img src="images/icon-workspace.png" alt="Workspace"></div>
-      <div class="card-body"><span class="tag">Product</span><h3>Workspace MVP</h3><div class="meta">Next.js · Firebase · AI</div></div>
-    </div>
-    <div class="card reveal-pop reveal-delay-6" data-cat="proj" onclick="navigateTo('/historylegends')">
-      <div class="card-cover-icon"><img src="images/icon-historylegends.png" alt="History Legends"></div>
-      <div class="card-body"><span class="tag">Product</span><h3>History Legends</h3><div class="meta">React · Vite · Firebase</div></div>
-    </div>
-    <div class="card reveal-pop reveal-delay-7" data-cat="proj" onclick="navigateTo('/stockflow')">
-      <div class="card-cover-icon"><img src="images/icon-stockflow.png" alt="StockFlow"></div>
-      <div class="card-body"><span class="tag">Product</span><h3>StockFlow</h3><div class="meta">React Native · Expo · Firebase</div></div>
-    </div>
-
-    <!-- Experience — single card -->
-    <div class="card reveal-pop reveal-delay-7" data-cat="exp" onclick="navigateTo('/experience')">
-      <div class="card-cover"><img src="images/experience-cover.jpg" alt="Experience"></div>
-      <div class="card-body"><span class="tag">Experience</span><h3>Experience &amp; Research</h3><div class="meta">Draper Lab, BSU Research, Teaching</div></div>
-    </div>
-  </section>
-
-  <footer>&copy; 2026 Braden Boucher</footer></div>
-
+</div>
+</div>
 <script>
-function filterCards(cat,btn){
-  document.querySelectorAll('.filters button').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  document.querySelectorAll('.card').forEach(function(c){
-    if(cat==='all'||c.dataset.cat===cat){
-      c.classList.remove('hidden');
-      c.classList.remove('visible');
-      revealObs.observe(c);
-    } else {
-      c.classList.add('hidden');
-    }
-  });
-}
-
-var exitTimers=new Map();
 var revealObs=new IntersectionObserver(function(entries){
   entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      var t=exitTimers.get(entry.target);
-      if(t){clearTimeout(t);exitTimers.delete(entry.target);}
-      entry.target.classList.add('visible');
-    } else {
-      var timer=setTimeout(function(){
-        entry.target.classList.remove('visible');
-        exitTimers.delete(entry.target);
-      },200);
-      exitTimers.set(entry.target,timer);
-    }
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
   });
 },{threshold:0.05, rootMargin:'50px 0px 50px 0px'});
-
-setTimeout(function(){
-  document.querySelectorAll('.reveal,.reveal-scale,.reveal-pop,.reveal-left,.reveal-right,.line-grow').forEach(function(el){
-    revealObs.observe(el);
-  });
-},600);
-
-// Navigate to subpage
-function navigateTo(url){
-  window.location.href=url;
-}
+document.querySelectorAll('.reveal,.reveal-scale,.reveal-pop').forEach(function(el){
+  revealObs.observe(el);
+});
 </script>
-</div><!-- close page-bg -->
 </body>
 </html>
