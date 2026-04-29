@@ -42,11 +42,11 @@ body {
   background: transparent !important;
 }
 
-/* ── Outer container: simple transparent panel, no heavy windowpane ── */
+/* ── Outer container: nearly fully transparent — no frosted glass ── */
 .container {
-  background: rgba(255, 255, 255, 0.18) !important;
-  backdrop-filter: blur(2px) !important;
-  -webkit-backdrop-filter: blur(2px) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border: none !important;
   border-radius: 0 !important;
   margin: 0 auto !important;
@@ -117,7 +117,21 @@ header p {
 }
 
 header .links {
-  margin-top: 32px !important;
+  margin: 32px 0 0 !important;
+  padding: 16px 24px !important;
+  background: rgba(0, 0, 0, 0.10) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.10) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
 }
 
 /* Header link buttons (Email / GitHub / LinkedIn / CV) — true black Aero glossy chrome */
@@ -171,55 +185,43 @@ header .links a:active {
     0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ── About section — light glass panel ── */
+/* ── About section — black tint panel ── */
 .about {
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.25) 100%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(220, 235, 245, 0.45) 100%) !important;
-  backdrop-filter: blur(10px) saturate(1.1) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(1.1) !important;
-  border: 1px solid rgba(20, 40, 70, 0.3) !important;
+  background: rgba(0, 0, 0, 0.10) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
   border-radius: 10px !important;
   padding: 28px 32px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -1px 0 rgba(20, 40, 70, 0.08),
-    0 6px 18px rgba(0, 0, 0, 0.18),
-    0 1px 0 rgba(0, 0, 0, 0.06) !important;
+  box-shadow: none !important;
   margin: 32px auto 40px !important;
   max-width: 660px !important;
   position: relative !important;
 }
 
 .about p {
-  color: var(--text) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
   line-height: 1.7 !important;
+  font-weight: 500 !important;
 }
 
-/* Headshot as a polished glass orb */
 .about img {
-  border: 2px solid rgba(255, 255, 255, 0.95) !important;
-  outline: 1px solid rgba(20, 40, 70, 0.4) !important;
+  border: 2px solid rgba(255, 255, 255, 0.6) !important;
+  outline: 1px solid rgba(0, 0, 0, 0.3) !important;
   box-shadow:
-    inset 0 2px 4px rgba(255, 255, 255, 0.6),
-    0 0 0 4px rgba(255, 255, 255, 0.4),
-    0 6px 14px rgba(0, 0, 0, 0.3),
-    0 2px 0 rgba(255, 255, 255, 0.5) !important;
+    0 2px 6px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* ── Filter buttons: chrome dark rail with glossy keys ── */
+/* ── Filter buttons rail ── */
 .filters {
-  background: linear-gradient(180deg, #2e2e34 0%, #14141a 50%, #050508 100%) !important;
-  border: 1px solid #000000 !important;
+  background: rgba(0, 0, 0, 0.55) !important;
+  border: 1px solid rgba(0, 0, 0, 0.4) !important;
   border-radius: 8px !important;
   padding: 10px 14px !important;
   margin: 40px auto 32px !important;
   max-width: 660px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
-    0 6px 16px rgba(0, 0, 0, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
   justify-content: center !important;
 }
 
@@ -276,41 +278,28 @@ header .links a:active {
 }
 
 /* ── Cards: each card is a mini Vista Explorer window ── */
+/* ── Cards: black tint panels ── */
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(232, 240, 247, 0.55) 100%) !important;
-  backdrop-filter: blur(10px) saturate(1.1) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(1.1) !important;
-  border: 1px solid var(--border-strong) !important;
+  background: rgba(0, 0, 0, 0.10) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
   border-radius: 8px !important;
   overflow: hidden !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 6px 18px rgba(0, 0, 0, 0.18),
-    0 1px 0 rgba(0, 0, 0, 0.05) !important;
-  transition: transform 0.3s var(--spring), box-shadow 0.3s !important;
+  box-shadow: none !important;
+  transition: transform 0.3s var(--spring), background 0.3s, border-color 0.3s !important;
 }
 
 .card:hover {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(220, 232, 242, 0.7) 100%) !important;
-  border-color: var(--accent) !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  border-color: rgba(0, 0, 0, 0.25) !important;
   transform: translateY(-3px) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 10px 24px rgba(0, 0, 0, 0.25),
-    0 0 0 1px var(--accent),
-    0 1px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
 .card-cover, .card-cover-icon {
-  background:
-    radial-gradient(ellipse 220% 100% at 50% -30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0) 55%),
-    radial-gradient(ellipse 180% 80% at 50% 100%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 50%),
-    linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-2) 35%, var(--chrome-light-3) 65%, var(--chrome-light-4) 100%) !important;
-  border-bottom: 1px solid rgba(20, 40, 70, 0.3) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 1px 0 0 rgba(255, 255, 255, 0.5),
-    inset -1px 0 0 rgba(255, 255, 255, 0.5) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+  box-shadow: none !important;
   position: relative !important;
 }
 
@@ -321,27 +310,30 @@ header .links a:active {
 .card-body h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 700 !important;
-  color: var(--text) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
   margin-bottom: 6px !important;
 }
 
 .card-body .meta {
-  color: var(--text-muted) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Aero Archive green tag pills */
+/* Aero green tag pills */
 .card-body .tag {
   color: white !important;
-  background: linear-gradient(180deg, #97c459 0%, #6da82d 50%, #4d8418 100%) !important;
+  background:
+    radial-gradient(ellipse 220% 90% at 50% -30%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.18) 35%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, #b8e070 0%, #97c459 25%, #6da82d 60%, #3a6810 100%) !important;
   padding: 3px 10px !important;
   border-radius: 4px !important;
-  border: 1px solid #3a6810 !important;
-  text-shadow: 0 -1px 0 rgba(20, 50, 0, 0.5) !important;
+  border: 1px solid #2a4a10 !important;
+  text-shadow: 0 -1px 0 rgba(20, 50, 0, 0.6) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 0 rgba(0, 30, 0, 0.2),
-    0 1px 1px rgba(0, 0, 0, 0.2) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 30, 0, 0.3),
+    0 1px 1px rgba(0, 0, 0, 0.25) !important;
   letter-spacing: 0.05em !important;
   display: inline-block !important;
   font-weight: 700 !important;
