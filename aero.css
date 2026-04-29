@@ -42,18 +42,20 @@ body {
   background: transparent !important;
 }
 
-/* ── Outer container: nearly fully transparent — no frosted glass ── */
+/* ── Outer container: ONE big dark panel holding everything ── */
 .container {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  margin: 0 auto !important;
+  background: rgba(15, 18, 24, 0.82) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 14px !important;
+  margin: 32px auto !important;
   max-width: 960px !important;
-  box-shadow: none !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
   position: relative !important;
-  padding: 0 24px !important;
+  padding: 0 32px 48px !important;
 }
 
 /* Kill the title bar pseudo-element */
@@ -88,7 +90,7 @@ body {
 
 /* ── Header (hero) ── */
 header {
-  padding: 56px 0 32px !important;
+  padding: 56px 0 0 !important;
   text-align: center !important;
   background: transparent !important;
   margin: 0 !important;
@@ -102,36 +104,30 @@ header h1 {
   letter-spacing: -0.025em !important;
   background: none !important;
   -webkit-text-fill-color: initial !important;
-  color: #0e1b2e !important;
+  color: #ffffff !important;
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.4),
-    0 2px 8px rgba(255, 255, 255, 0.6) !important;
+    0 1px 0 rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.5) !important;
   filter: none !important;
   margin-bottom: 24px !important;
 }
 
 header p {
-  color: #1a2942 !important;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
   font-weight: 500 !important;
 }
 
 header .links {
-  margin: 32px 0 0 !important;
-  padding: 16px 24px !important;
-  background: rgba(0, 0, 0, 0.10) !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.10) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+  margin: 32px -32px 0 !important;
+  padding: 18px 32px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
   display: flex !important;
   gap: 12px !important;
   justify-content: center !important;
   flex-wrap: wrap !important;
-  width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  right: 50% !important;
-  margin-left: -50vw !important;
-  margin-right: -50vw !important;
 }
 
 /* Header link buttons (Email / GitHub / LinkedIn / CV) — true black Aero glossy chrome */
@@ -185,12 +181,12 @@ header .links a:active {
     0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ── About section — black tint panel ── */
+/* ── About section — lighter sub-panel inside dark container ── */
 .about {
-  background: rgba(0, 0, 0, 0.10) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 10px !important;
   padding: 28px 32px !important;
   box-shadow: none !important;
@@ -200,8 +196,8 @@ header .links a:active {
 }
 
 .about p {
-  color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
   line-height: 1.7 !important;
   font-weight: 500 !important;
 }
@@ -209,8 +205,7 @@ header .links a:active {
 .about img {
   border: 2px solid rgba(255, 255, 255, 0.6) !important;
   outline: 1px solid rgba(0, 0, 0, 0.3) !important;
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* ── Filter buttons rail ── */
@@ -278,12 +273,12 @@ header .links a:active {
 }
 
 /* ── Cards: each card is a mini Vista Explorer window ── */
-/* ── Cards: black tint panels ── */
+/* ── Cards: lighter sub-panels inside dark container ── */
 .card {
-  background: rgba(0, 0, 0, 0.10) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 8px !important;
   overflow: hidden !important;
   box-shadow: none !important;
@@ -291,14 +286,14 @@ header .links a:active {
 }
 
 .card:hover {
-  background: rgba(0, 0, 0, 0.18) !important;
-  border-color: rgba(0, 0, 0, 0.25) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   transform: translateY(-3px) !important;
 }
 
 .card-cover, .card-cover-icon {
-  background: rgba(0, 0, 0, 0.06) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: none !important;
   position: relative !important;
 }
@@ -348,13 +343,13 @@ header .links a:active {
 
 /* ── Footer ── */
 footer {
-  border-top: 1px solid rgba(20, 40, 70, 0.15) !important;
-  color: var(--text) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   background: transparent !important;
-  margin: 32px 0 0 !important;
-  border-radius: 0 !important;
-  padding: 24px 0 32px !important;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7) !important;
+  margin: 32px -32px 0 !important;
+  border-radius: 0 0 13px 13px !important;
+  padding: 24px 32px 28px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
   font-weight: 500 !important;
 }
 
