@@ -29,12 +29,11 @@
   --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* ── Page background: soft sky-grey gradient ── */
+/* ── Page background: real Frutiger Aero wallpaper, fixed so windows scroll over it ── */
 body {
   background:
-    radial-gradient(ellipse 100% 60% at 50% 0%, #e0ecf6 0%, transparent 60%),
-    linear-gradient(180deg, #c8d8e8 0%, #b6c8dd 40%, #a8becc 100%) !important;
-  background-attachment: fixed !important;
+    url('images/bg-aero.jpg') center top / cover no-repeat fixed,
+    linear-gradient(180deg, #5cb0ed 0%, #88d5f3 100%) !important;
   color: var(--text) !important;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
@@ -45,11 +44,14 @@ body {
 
 /* ── Wrap entire container in a Vista Explorer "window" ── */
 .container {
-  background: linear-gradient(180deg, #f4f8fb 0%, #e3edf5 100%) !important;
+  background: linear-gradient(180deg, rgba(244, 248, 251, 0.88) 0%, rgba(227, 237, 245, 0.85) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border: 1px solid var(--border-strong) !important;
   border-radius: 10px !important;
-  margin-top: 24px !important;
-  margin-bottom: 24px !important;
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+  max-width: 880px !important;
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.25),
     0 2px 0 rgba(0, 0, 0, 0.08) !important;
@@ -90,8 +92,8 @@ header {
   padding: 36px 0 16px !important;
   text-align: center !important;
   background:
-    radial-gradient(ellipse 160% 100% at 50% 0%, rgba(255,255,255,0.6) 0%, transparent 60%),
-    linear-gradient(180deg, #f4f8fb 0%, #e3edf5 100%) !important;
+    radial-gradient(ellipse 160% 100% at 50% 0%, rgba(255,255,255,0.5) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(244, 248, 251, 0.6) 0%, rgba(227, 237, 245, 0.5) 100%) !important;
   margin: 0 -24px !important;
   padding-left: 24px !important;
   padding-right: 24px !important;
@@ -155,7 +157,9 @@ header .links a:active {
 
 /* ── About section — light glass card ── */
 .about {
-  background: linear-gradient(180deg, #ffffff 0%, #ecf2f8 100%) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(236, 242, 248, 0.75) 100%) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
   border: 1px solid rgba(20, 40, 70, 0.25) !important;
   border-radius: 8px !important;
   padding: 20px !important;
@@ -240,7 +244,9 @@ header .links a:active {
 
 /* ── Cards: each card is a mini Vista Explorer window ── */
 .card {
-  background: linear-gradient(180deg, #ffffff 0%, #e8f0f7 100%) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(232, 240, 247, 0.8) 100%) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
   border: 1px solid var(--border-strong) !important;
   border-radius: 8px !important;
   overflow: hidden !important;
@@ -252,7 +258,7 @@ header .links a:active {
 }
 
 .card:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #dce8f2 100%) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 232, 242, 0.85) 100%) !important;
   border-color: var(--accent) !important;
   transform: translateY(-3px) !important;
   box-shadow:
@@ -629,8 +635,8 @@ footer {
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .container {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
     padding: 0 16px 16px !important;
   }
   .container::before {
