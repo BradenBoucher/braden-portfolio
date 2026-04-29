@@ -56,7 +56,7 @@ body {
     0 12px 32px rgba(0, 0, 0, 0.25),
     0 2px 0 rgba(0, 0, 0, 0.08) !important;
   position: relative !important;
-  padding: 0 24px 24px !important;
+  padding: 0 32px 48px !important;
 }
 
 /* Title bar at the top of the window */
@@ -64,8 +64,8 @@ body {
   content: 'Braden Boucher — Portfolio';
   display: block;
   position: relative;
-  margin: 0 -24px;
-  padding: 10px 14px;
+  margin: 0 -32px;
+  padding: 10px 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -89,14 +89,12 @@ body {
 
 /* ── Header (hero) ── */
 header {
-  padding: 36px 0 16px !important;
+  padding: 64px 32px 36px !important;
   text-align: center !important;
   background:
     radial-gradient(ellipse 160% 100% at 50% 0%, rgba(255,255,255,0.5) 0%, transparent 60%),
     linear-gradient(180deg, rgba(244, 248, 251, 0.6) 0%, rgba(227, 237, 245, 0.5) 100%) !important;
-  margin: 0 -24px !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  margin: 0 -32px !important;
   border-bottom: 1px solid rgba(20, 40, 70, 0.15) !important;
   position: relative !important;
 }
@@ -104,16 +102,23 @@ header {
 header h1 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 700 !important;
-  letter-spacing: -0.01em !important;
-  background: none !important;
-  -webkit-text-fill-color: initial !important;
-  color: #1c2c45 !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  letter-spacing: -0.025em !important;
+  background: linear-gradient(180deg, #1c2c45 0%, #2a3e5c 60%, #1c2c45 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.8)) drop-shadow(0 4px 8px rgba(20, 40, 70, 0.15)) !important;
+  margin-bottom: 24px !important;
 }
 
 header p {
   color: var(--text-muted) !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+header .links {
+  margin-top: 28px !important;
 }
 
 /* Header link buttons (Email / GitHub / LinkedIn / CV) — beveled chrome */
@@ -155,32 +160,40 @@ header .links a:active {
     0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
-/* ── About section — light glass card ── */
+/* ── About section — light glass panel ── */
 .about {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(236, 242, 248, 0.75) 100%) !important;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.5) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(220, 235, 245, 0.7) 100%) !important;
   backdrop-filter: blur(6px) !important;
   -webkit-backdrop-filter: blur(6px) !important;
-  border: 1px solid rgba(20, 40, 70, 0.25) !important;
-  border-radius: 8px !important;
-  padding: 20px !important;
+  border: 1px solid rgba(20, 40, 70, 0.3) !important;
+  border-radius: 10px !important;
+  padding: 28px 32px !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 4px 12px rgba(0, 0, 0, 0.12),
-    0 1px 0 rgba(0, 0, 0, 0.04) !important;
-  margin: 24px auto !important;
-  max-width: 640px !important;
+    inset 0 -1px 0 rgba(20, 40, 70, 0.08),
+    0 6px 18px rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(0, 0, 0, 0.06) !important;
+  margin: 32px auto 40px !important;
+  max-width: 660px !important;
 }
 
 .about p {
   color: var(--text) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  line-height: 1.7 !important;
 }
 
+/* Headshot as a polished glass orb */
 .about img {
-  border: 2px solid rgba(20, 40, 70, 0.35) !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  outline: 1px solid rgba(20, 40, 70, 0.4) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    0 0 0 4px rgba(255, 255, 255, 0.4),
+    0 6px 14px rgba(0, 0, 0, 0.3),
+    0 2px 0 rgba(255, 255, 255, 0.5) !important;
 }
 
 /* ── Filter buttons: chrome dark rail with neutral keys ── */
@@ -188,9 +201,9 @@ header .links a:active {
   background: linear-gradient(180deg, var(--chrome-dark-1) 0%, var(--chrome-dark-2) 50%, var(--chrome-dark-3) 100%) !important;
   border: 1px solid rgba(0, 0, 0, 0.7) !important;
   border-radius: 8px !important;
-  padding: 8px 12px !important;
-  margin: 24px auto !important;
-  max-width: 640px !important;
+  padding: 10px 14px !important;
+  margin: 40px auto 32px !important;
+  max-width: 660px !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     inset 0 -1px 0 rgba(0, 0, 0, 0.5),
@@ -270,11 +283,19 @@ header .links a:active {
 
 .card-cover, .card-cover-icon {
   background:
-    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,0.9) 0%, transparent 60%),
-    linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-3) 100%) !important;
-  border-bottom: 1px solid rgba(20, 40, 70, 0.2) !important;
+    radial-gradient(ellipse 220% 100% at 50% -30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0) 55%),
+    radial-gradient(ellipse 180% 80% at 50% 100%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 50%),
+    linear-gradient(180deg, var(--chrome-light-1) 0%, var(--chrome-light-2) 35%, var(--chrome-light-3) 65%, var(--chrome-light-4) 100%) !important;
+  border-bottom: 1px solid rgba(20, 40, 70, 0.3) !important;
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.5) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset -1px 0 0 rgba(255, 255, 255, 0.5) !important;
+  position: relative !important;
+}
+
+.card-body {
+  padding: 24px 24px 28px !important;
 }
 
 .card-body h3 {
@@ -282,24 +303,35 @@ header .links a:active {
   font-weight: 700 !important;
   color: var(--text) !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  margin-bottom: 6px !important;
 }
 
 .card-body .meta {
   color: var(--text-muted) !important;
 }
 
+/* Aero Archive green tag pills */
 .card-body .tag {
   color: white !important;
-  background: linear-gradient(180deg, #5d7ea0 0%, #3e6088 100%) !important;
-  padding: 2px 8px !important;
-  border-radius: 3px !important;
-  border: 1px solid rgba(20, 40, 70, 0.5) !important;
-  text-shadow: 0 -1px 0 rgba(0, 30, 80, 0.4) !important;
+  background: linear-gradient(180deg, #97c459 0%, #6da82d 50%, #4d8418 100%) !important;
+  padding: 3px 10px !important;
+  border-radius: 4px !important;
+  border: 1px solid #3a6810 !important;
+  text-shadow: 0 -1px 0 rgba(20, 50, 0, 0.5) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    0 1px 1px rgba(0, 0, 0, 0.15) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 30, 0, 0.2),
+    0 1px 1px rgba(0, 0, 0, 0.2) !important;
   letter-spacing: 0.05em !important;
   display: inline-block !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+
+/* Grid spacing */
+.grid {
+  gap: 24px !important;
+  padding: 12px 0 80px !important;
 }
 
 /* ── Footer ── */
@@ -307,9 +339,54 @@ footer {
   border-top: 1px solid rgba(20, 40, 70, 0.2) !important;
   color: var(--text-muted) !important;
   background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.4)) !important;
-  margin: 0 -24px -24px !important;
+  margin: 0 -32px -48px !important;
   border-radius: 0 0 9px 9px !important;
-  padding: 24px !important;
+  padding: 28px !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Aero sparkle decoration — soft star-glow pseudo elements scattered behind content */
+.about::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  right: 8%;
+  width: 32px;
+  height: 32px;
+  background:
+    radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(180,220,255,0.6) 30%, transparent 60%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.about {
+  position: relative !important;
+}
+
+.filters::before {
+  content: '';
+  position: absolute;
+  top: -28px;
+  left: 12%;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(180,220,255,0.5) 30%, transparent 60%);
+  pointer-events: none;
+}
+
+.filters::after {
+  content: '';
+  position: absolute;
+  top: -16px;
+  right: 18%;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(180,220,255,0.4) 30%, transparent 60%);
+  pointer-events: none;
+}
+
+.filters {
+  position: relative !important;
 }
 
 /* ============================================================
@@ -637,7 +714,7 @@ footer {
   .container {
     margin-top: 12px !important;
     margin-bottom: 12px !important;
-    padding: 0 16px 16px !important;
+    padding: 0 16px 24px !important;
   }
   .container::before {
     margin: 0 -16px;
@@ -646,11 +723,13 @@ footer {
   }
   header {
     margin: 0 -16px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding: 40px 16px 24px !important;
   }
   footer {
-    margin: 0 -16px -16px !important;
-    padding: 16px !important;
+    margin: 0 -16px -24px !important;
+    padding: 20px 16px !important;
+  }
+  .about {
+    padding: 20px 16px !important;
   }
 }
