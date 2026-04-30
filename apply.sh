@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-drift.zip}"
-TAG="pre-aero-drift-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="feat: very slow (120s) background drift + reduced-motion fallback"
+ZIP="${1:-aero-drift2.zip}"
+TAG="pre-aero-drift2-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="feat: actually drift the wallpaper photo (override aero.css's body bg, animate position)"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
