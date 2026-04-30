@@ -91,31 +91,18 @@ header,
   display: none !important;
 }
 
-/* ── CONTAINER 1 - TOP HALF: Header (name + links) ── */
+/* ── CONTAINER 1 - TOP HALF: Header (name + links) ──
+   Panel chrome (background, border, radius, shadow) lives on .hero-block
+   wrapper. This element is now just the inner padding region. */
 header {
-  /* Frosted dark glass — translucent with proper Aero specular top.
-     This element is now JUST the panel — layout is handled by .hero-row inside. */
-  background:
-    linear-gradient(180deg,
-      rgba(255, 255, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.08) 10%,
-      rgba(255, 255, 255, 0.02) 24%,
-      rgba(255, 255, 255, 0)    55%),
-    linear-gradient(180deg,
-      rgba(38, 52, 78, 0.60) 0%,
-      rgba(20, 30, 50, 0.72) 100%) !important;
-  backdrop-filter: blur(22px) saturate(1.4) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.32) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.55) !important;
-  border-bottom: none !important;
-  border-radius: 16px 16px 0 0 !important;
-  padding: 28px 32px !important;
-  margin: 32px 0 0 !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 14px 36px rgba(0, 0, 30, 0.40),
-    0 4px 10px rgba(0, 0, 0, 0.18) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 28px 32px 8px !important;
+  margin: 0 !important;
+  box-shadow: none !important;
   display: block !important;
   position: relative !important;
 }
@@ -253,26 +240,48 @@ header .links a img.btn-icon {
           drop-shadow(0 1px 2px rgba(0, 0, 0, 0.40)) !important;
 }
 
-/* ── CONTAINER 1 - BOTTOM HALF: About card ── */
-.about {
-  /* Flows seamlessly from the header — same gradient continuation,
-     no visible divider between the two sections. */
+/* ── CONTAINER 1 — UNIFIED WRAPPER: Header + About in one rounded glass panel ──
+   The single rounded rectangle that contains the name/icons row AND the
+   headshot+bio row. Specular highlight only at very top (1st stop), so the
+   bottom of the panel stays solid and reads as one continuous container. */
+.hero-block {
   background:
     linear-gradient(180deg,
-      rgba(20, 30, 50, 0.72) 0%,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 4%,
+      rgba(255, 255, 255, 0.02) 10%,
+      rgba(255, 255, 255, 0)    20%),
+    linear-gradient(180deg,
+      rgba(38, 52, 78, 0.60) 0%,
+      rgba(20, 30, 50, 0.72) 30%,
       rgba(15, 24, 42, 0.80) 100%) !important;
   backdrop-filter: blur(22px) saturate(1.4) !important;
   -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.32) !important;
-  border-top: none !important;
-  border-radius: 0 0 16px 16px !important;
-  padding: 28px 32px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.55) !important;
+  border-radius: 16px !important;
+  margin: 32px 0 24px !important;
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 -1px 0 rgba(0, 0, 0, 0.30),
     0 18px 44px rgba(0, 0, 30, 0.45),
     0 8px 18px rgba(0, 0, 0, 0.20) !important;
-  margin: 0 0 24px !important;
+  position: relative !important;
+}
+
+/* ── CONTAINER 1 - BOTTOM HALF: About card ──
+   Panel chrome (background, border, radius, shadow) lives on .hero-block
+   wrapper. This element is now just the inner padding region. */
+.about {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 8px 32px 28px !important;
+  margin: 0 !important;
   max-width: none !important;
+  box-shadow: none !important;
   position: relative !important;
 }
 
