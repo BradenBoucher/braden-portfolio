@@ -652,26 +652,21 @@
     letter-spacing: -0.5px;
   }
 
-  /* 1. Vista Aurora — hard sunbeam */
+  /* 1. Vista Aurora — dimmed sunbeam, simple base */
   .theme-test.theme-1 {
     background:
       linear-gradient(115deg,
         transparent 0%, transparent 14%,
-        rgba(255,255,255,0.55) 19%,
-        rgba(255,255,255,0.42) 27%,
-        rgba(255,255,255,0.10) 34%,
+        rgba(255,255,255,0.30) 19%,
+        rgba(255,255,255,0.22) 27%,
+        rgba(255,255,255,0.05) 34%,
         transparent 40%, transparent 100%),
-      linear-gradient(115deg,
-        transparent 0%, transparent 62%,
-        rgba(15,35,75,0.22) 68%,
-        rgba(15,35,75,0.18) 88%,
-        transparent 100%),
       linear-gradient(180deg,
-        rgba(220,240,255,0.16) 0%,
-        rgba(180,220,255,0.10) 38%,
-        rgba(20,40,80,0.18) 42%,
-        rgba(255,255,255,0.06) 46%,
-        transparent 60%),
+        rgba(220,240,255,0.18) 0%,
+        rgba(180,220,255,0.08) 30%,
+        transparent 50%),
+      radial-gradient(ellipse 130% 130% at 50% 50%,
+        transparent 55%, rgba(15,35,75,0.30) 100%),
       linear-gradient(180deg, #6a9bce 0%, #3a6ba0 50%, #1f4576 100%);
     border: 1px solid rgba(15,35,75,0.70);
     border-top: 1px solid rgba(255,255,255,0.70);
@@ -686,25 +681,20 @@
     text-shadow: 0 1px 0 rgba(255,255,255,0.55), 0 -1px 0 rgba(15,35,75,0.55), 0 2px 6px rgba(15,35,75,0.55);
   }
 
-  /* 2. Zune Dark — hard emission band */
+  /* 2. Zune Dark — smooth gradient, no beam */
   .theme-test.theme-2 {
     background:
-      linear-gradient(115deg,
-        transparent 0%, transparent 18%,
-        rgba(180,230,255,0.22) 24%,
-        rgba(180,230,255,0.10) 36%,
-        transparent 44%, transparent 100%),
       linear-gradient(180deg,
-        transparent 0%, transparent 38%,
-        rgba(80,180,230,0.32) 42%,
-        rgba(80,180,230,0.38) 50%,
-        rgba(80,180,230,0.20) 58%,
-        transparent 62%, transparent 100%),
-      linear-gradient(180deg,
-        rgba(255,255,255,0.20) 0%,
-        rgba(255,255,255,0.05) 28%,
-        transparent 38%),
-      linear-gradient(180deg, #1a2a3c 0%, #0a1422 50%, #040810 100%);
+        rgba(255,255,255,0.22) 0%,
+        rgba(160,210,240,0.12) 25%,
+        transparent 45%),
+      linear-gradient(0deg,
+        rgba(80,180,230,0.18) 0%,
+        rgba(80,180,230,0.08) 25%,
+        transparent 45%),
+      radial-gradient(ellipse 130% 130% at 50% 50%,
+        transparent 50%, rgba(0,0,0,0.45) 100%),
+      linear-gradient(180deg, #1f3147 0%, #0c1828 50%, #04080f 100%);
     border: 1px solid rgba(0,0,0,0.85);
     border-top: 1px solid rgba(120,200,240,0.55);
     box-shadow:
@@ -718,26 +708,18 @@
     text-shadow: 0 1px 0 rgba(180,220,255,0.5), 0 -1px 0 rgba(0,0,0,0.7), 0 0 12px rgba(80,180,230,0.6);
   }
 
-  /* 3. Frutiger Eco — crossing caustic beams */
+  /* 3. Frutiger Eco — smooth gradient, no beams */
   .theme-test.theme-3 {
     background:
-      linear-gradient(115deg,
-        transparent 0%, transparent 14%,
-        rgba(255,250,200,0.50) 19%,
-        rgba(255,250,200,0.40) 27%,
-        rgba(255,250,200,0.10) 34%,
-        transparent 40%, transparent 100%),
-      linear-gradient(65deg,
-        transparent 0%, transparent 58%,
-        rgba(180,255,210,0.22) 64%,
-        rgba(180,255,210,0.10) 72%,
-        transparent 78%, transparent 100%),
       linear-gradient(180deg,
-        rgba(255,250,210,0.18) 0%,
-        rgba(180,240,200,0.12) 38%,
-        rgba(10,40,40,0.16) 42%,
-        rgba(255,255,220,0.04) 46%,
-        transparent 60%),
+        rgba(255,250,200,0.25) 0%,
+        rgba(220,255,210,0.12) 25%,
+        transparent 45%),
+      linear-gradient(0deg,
+        rgba(0,40,30,0.20) 0%,
+        transparent 30%),
+      radial-gradient(ellipse 130% 130% at 50% 50%,
+        transparent 50%, rgba(10,40,40,0.35) 100%),
       linear-gradient(180deg, #4a9088 0%, #27645c 50%, #103530 100%);
     border: 1px solid rgba(10,40,40,0.70);
     border-top: 1px solid rgba(220,255,220,0.60);
@@ -752,26 +734,20 @@
     text-shadow: 0 1px 0 rgba(220,255,220,0.55), 0 -1px 0 rgba(10,40,40,0.55), 0 2px 6px rgba(10,40,40,0.55);
   }
 
-  /* 4. Aqua Pearl — hard sunbeam, sharp gloss/blue split */
+  /* 4. Aqua Pearl — smooth gradient, no beam */
   .theme-test.theme-4 {
     background:
-      linear-gradient(115deg,
-        transparent 0%, transparent 12%,
-        rgba(255,255,255,0.85) 18%,
-        rgba(255,255,255,0.70) 26%,
-        rgba(255,255,255,0.20) 33%,
-        transparent 40%, transparent 100%),
       linear-gradient(180deg,
-        rgba(255,255,255,0.55) 0%,
-        rgba(255,255,255,0.30) 35%,
-        rgba(220,235,250,0.18) 42%,
-        rgba(40,80,140,0.10) 46%,
+        rgba(255,255,255,0.65) 0%,
+        rgba(255,255,255,0.35) 25%,
+        rgba(255,255,255,0.10) 45%,
         transparent 55%),
       linear-gradient(0deg,
-        rgba(80,170,240,0.60) 0%,
-        rgba(160,210,250,0.32) 22%,
-        rgba(220,240,255,0.12) 38%,
+        rgba(80,170,240,0.55) 0%,
+        rgba(160,210,250,0.25) 30%,
         transparent 50%),
+      radial-gradient(ellipse 130% 130% at 50% 50%,
+        transparent 60%, rgba(40,80,140,0.18) 100%),
       linear-gradient(180deg, #f0f6fc 0%, #d0e3f5 50%, #a4c8e8 100%);
     border: 1px solid rgba(40,80,140,0.60);
     border-top: 1px solid rgba(255,255,255,0.95);
