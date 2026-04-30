@@ -627,6 +627,119 @@
   .pres-text .meta,
   .exp-item .meta { color: rgba(255,255,255,0.92); }
   .pres-text p, .exp-item p { color: rgba(255,255,255,0.88); }
+
+  /* ════════════════════════════════════════════════════════════════════
+     THEME TEST STRIP — 4 sample boxes with "test" text
+     Remove these blocks when finished evaluating.
+     ════════════════════════════════════════════════════════════════════ */
+  .theme-test-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .theme-test {
+    height: 130px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-test span {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+  }
+
+  /* 1. Vista Aurora */
+  .theme-test.theme-1 {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.08) 25%, transparent 50%),
+      radial-gradient(ellipse 100% 70% at 50% 28%, rgba(180,225,255,0.50) 0%, rgba(95,140,200,0.70) 60%, rgba(50,90,150,0.85) 100%),
+      linear-gradient(180deg, #5a8bbe 0%, #345f95 100%);
+    border: 1px solid rgba(15,35,75,0.65);
+    border-top: 1px solid rgba(255,255,255,0.65);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.55),
+      inset 0 -2px 0 rgba(15,35,75,0.50),
+      inset 0 0 90px rgba(170,220,255,0.38),
+      0 6px 0 rgba(15,35,75,0.22),
+      0 18px 40px rgba(15,35,75,0.55),
+      0 0 60px rgba(140,200,240,0.28);
+  }
+  .theme-test.theme-1 span {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.55), 0 -1px 0 rgba(15,35,75,0.55), 0 2px 6px rgba(15,35,75,0.55);
+  }
+
+  /* 2. Zune Dark */
+  .theme-test.theme-2 {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 30%, transparent 55%),
+      radial-gradient(ellipse 90% 60% at 50% 40%, rgba(80,180,230,0.35) 0%, rgba(30,70,110,0.85) 55%, rgba(10,20,40,0.95) 100%),
+      linear-gradient(180deg, #1a2735 0%, #060a14 100%);
+    border: 1px solid rgba(0,0,0,0.85);
+    border-top: 1px solid rgba(120,180,220,0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(180,220,255,0.55),
+      inset 0 -2px 0 rgba(0,0,0,0.7),
+      inset 0 0 100px rgba(80,180,230,0.30),
+      0 6px 0 rgba(0,0,0,0.5),
+      0 20px 50px rgba(0,0,0,0.7),
+      0 0 60px rgba(80,180,230,0.20);
+  }
+  .theme-test.theme-2 span {
+    color: #d6ecff;
+    text-shadow: 0 1px 0 rgba(180,220,255,0.5), 0 -1px 0 rgba(0,0,0,0.7), 0 0 12px rgba(80,180,230,0.55);
+  }
+
+  /* 3. Frutiger Eco */
+  .theme-test.theme-3 {
+    background:
+      linear-gradient(135deg, rgba(255,250,200,0.32) 0%, rgba(255,250,200,0.08) 25%, transparent 50%),
+      radial-gradient(ellipse 100% 70% at 50% 30%, rgba(180,255,210,0.45) 0%, rgba(60,150,130,0.70) 60%, rgba(20,80,75,0.85) 100%),
+      linear-gradient(180deg, #3a8076 0%, #1a4a48 100%);
+    border: 1px solid rgba(10,40,40,0.65);
+    border-top: 1px solid rgba(220,255,220,0.55);
+    box-shadow:
+      inset 0 2px 0 rgba(220,255,220,0.45),
+      inset 0 -2px 0 rgba(10,40,40,0.55),
+      inset 0 0 90px rgba(140,255,200,0.32),
+      0 6px 0 rgba(10,40,40,0.25),
+      0 18px 40px rgba(10,40,40,0.55),
+      0 0 50px rgba(120,220,180,0.28);
+  }
+  .theme-test.theme-3 span {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(220,255,220,0.55), 0 -1px 0 rgba(10,40,40,0.55), 0 2px 6px rgba(10,40,40,0.55);
+  }
+
+  /* 4. Aqua Pearl */
+  .theme-test.theme-4 {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.40) 30%, rgba(255,255,255,0.10) 50%, transparent 55%),
+      radial-gradient(ellipse 110% 80% at 50% 100%, rgba(120,200,255,0.55) 0%, rgba(180,220,250,0.35) 50%, rgba(220,240,255,0.20) 100%),
+      linear-gradient(180deg, #e8f1fa 0%, #b8d4ee 100%);
+    border: 1px solid rgba(40,80,140,0.55);
+    border-top: 1px solid rgba(255,255,255,0.95);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.95),
+      inset 0 -2px 0 rgba(40,80,140,0.40),
+      inset 0 0 50px rgba(120,200,255,0.25),
+      0 6px 0 rgba(40,80,140,0.18),
+      0 18px 40px rgba(40,80,140,0.40),
+      0 0 50px rgba(180,220,255,0.40);
+  }
+  .theme-test.theme-4 span {
+    color: #1a3a6a;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.85);
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 640px) {
+    .theme-test-strip { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -648,6 +761,15 @@
       <p class="hero-v2-bio">Photonics &amp; optical engineering student at Bridgewater State University, graduating May 2026. Experienced in III-V laser diode characterization and photonic integrated circuit testing. I also build full-stack apps for iOS and web, focused on solving real problems.</p>
     </div>
   </div>
+
+  <!-- ╔═══ THEME TEST STRIP — REMOVE WHEN DONE EVALUATING ═══╗ -->
+  <div class="theme-test-strip">
+    <div class="theme-test theme-1"><span>test</span></div>
+    <div class="theme-test theme-2"><span>test</span></div>
+    <div class="theme-test theme-3"><span>test</span></div>
+    <div class="theme-test theme-4"><span>test</span></div>
+  </div>
+  <!-- ╚═══════════════════════════════════════════════════════╝ -->
 
 <div class="filters hero-animate hero-delay-4">
     <button class="active" onclick="filterCards('all',this)">All</button>
