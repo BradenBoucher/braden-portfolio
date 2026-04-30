@@ -113,7 +113,6 @@ header {
   margin: 32px 0 0 !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
     0 14px 36px rgba(0, 0, 30, 0.40),
     0 4px 10px rgba(0, 0, 0, 0.18) !important;
   text-align: left !important;
@@ -121,7 +120,7 @@ header {
   align-items: center !important;
   justify-content: space-between !important;
   gap: 24px !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;
   position: relative !important;
 }
 
@@ -147,8 +146,8 @@ header .links {
   background: transparent !important;
   border: none !important;
   display: flex !important;
-  gap: 24px !important;
-  flex-wrap: wrap !important;
+  gap: 18px !important;
+  flex-wrap: nowrap !important;
   justify-content: flex-end !important;
   align-items: center !important;
 }
@@ -217,36 +216,35 @@ header .links a:active {
   box-shadow: none !important;
 }
 
-/* Bigger glossy dome icons — they ARE the buttons now.
-   PNGs already have built-in radial gloss + drop shadow. */
+/* Glossy dome icons — they ARE the buttons.
+   PNGs were chroma-keyed off green so they have no built-in shadow;
+   we add a soft drop-shadow filter here to ground them. */
 header .links a img.btn-icon {
-  width: 60px !important;
-  height: 60px !important;
+  width: 48px !important;
+  height: 48px !important;
   flex-shrink: 0 !important;
   margin: 0 !important;
   display: block !important;
   pointer-events: none !important;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 20, 0.55))
+          drop-shadow(0 1px 2px rgba(0, 0, 0, 0.40)) !important;
 }
 
 /* ── CONTAINER 1 - BOTTOM HALF: About card ── */
 .about {
-  /* Same glass body as header, but no specular — it's the bottom half of the joined container */
+  /* Flows seamlessly from the header — same gradient continuation,
+     no visible divider between the two sections. */
   background:
     linear-gradient(180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.02) 12%,
-      rgba(255, 255, 255, 0)    35%),
-    linear-gradient(180deg,
-      rgba(28, 40, 62, 0.68) 0%,
-      rgba(18, 28, 46, 0.78) 100%) !important;
+      rgba(20, 30, 50, 0.72) 0%,
+      rgba(15, 24, 42, 0.80) 100%) !important;
   backdrop-filter: blur(22px) saturate(1.4) !important;
   -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.32) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-top: none !important;
   border-radius: 0 0 16px 16px !important;
   padding: 28px 32px !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
     inset 0 -1px 0 rgba(0, 0, 0, 0.30),
     0 18px 44px rgba(0, 0, 30, 0.45),
     0 8px 18px rgba(0, 0, 0, 0.20) !important;
