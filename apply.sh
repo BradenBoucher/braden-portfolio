@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-test-strip.zip}"
-TAG="pre-aero-test-strip-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="test: 4-theme test strip on page (Vista/Zune/Eco/Aqua) — remove after evaluating"
+ZIP="${1:-aero-hardlight.zip}"
+TAG="pre-aero-hardlight-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="test: hard-sunlight gradients on test strip — angled beams, sharp waterlines, opposite shadows"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
