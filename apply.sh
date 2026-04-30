@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-crank.zip}"
-TAG="pre-aero-crank-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="feat: crank deep-Aero values — visible inner halos, brighter aurora, embossed type"
+ZIP="${1:-aero-pop3d.zip}"
+TAG="pre-aero-pop3d-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="feat: 3D pop containers — diagonal gloss + radial pool + dark frame + stacked shadows; remove canary X"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
