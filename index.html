@@ -369,24 +369,24 @@
     background:
       conic-gradient(from 200deg at -5% -5%,
         transparent 0deg,
-        rgba(180,220,255,0.20)  10deg,
-        transparent             22deg,
+        rgba(180,225,255,0.45)  10deg,
+        transparent             24deg,
         transparent             40deg,
-        rgba(200,240,255,0.14)  50deg,
-        transparent             62deg,
+        rgba(200,240,255,0.35)  52deg,
+        transparent             66deg,
         transparent             82deg,
-        rgba(170,210,255,0.12)  92deg,
-        transparent            104deg,
-        transparent            360deg),
+        rgba(170,215,255,0.30)  94deg,
+        transparent           108deg,
+        transparent           360deg),
       conic-gradient(from 40deg at 105% -5%,
         transparent 0deg,
-        rgba(255,235,200,0.18)  10deg,
-        transparent             22deg,
-        transparent             36deg,
-        rgba(255,220,180,0.12)  46deg,
-        transparent             58deg,
-        transparent            360deg);
-    filter: blur(2px);
+        rgba(255,235,200,0.40)  10deg,
+        transparent             24deg,
+        transparent             38deg,
+        rgba(255,220,180,0.30)  50deg,
+        transparent             62deg,
+        transparent           360deg);
+    filter: blur(0.5px);
     animation: aurora-drift 40s ease-in-out infinite alternate;
   }
   @keyframes aurora-drift {
@@ -453,7 +453,7 @@
   /* Hero — strongest halo since it's the largest panel */
   .hero-v2 {
     box-shadow:
-      inset 0 0 36px rgba(160,210,255,0.22),
+      inset 0 0 60px rgba(160,220,255,0.45),
       inset 0 1px 0 rgba(255,255,255,0.62),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 18px 44px rgba(60,100,160,0.40),
@@ -475,7 +475,7 @@
     border: 1px solid rgba(255,255,255,0.38);
     border-top-color: rgba(255,255,255,0.62);
     box-shadow:
-      inset 0 0 28px rgba(160,210,255,0.18),
+      inset 0 0 50px rgba(160,220,255,0.40),
       inset 0 1px 0 rgba(255,255,255,0.62),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 10px 28px rgba(50,90,150,0.32);
@@ -486,7 +486,7 @@
     border-color: var(--accent);
     box-shadow:
       0 0 0 1px var(--accent),
-      inset 0 0 32px rgba(160,220,255,0.28),
+      inset 0 0 55px rgba(160,225,255,0.55),
       inset 0 1px 0 rgba(255,255,255,0.65),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 14px 32px rgba(91,212,242,0.30);
@@ -508,7 +508,7 @@
     border: 1px solid rgba(255,255,255,0.38);
     border-top-color: rgba(255,255,255,0.62);
     box-shadow:
-      inset 0 0 24px rgba(160,210,255,0.18),
+      inset 0 0 45px rgba(160,220,255,0.40),
       inset 0 1px 0 rgba(255,255,255,0.6),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 8px 22px rgba(50,90,150,0.28);
@@ -519,7 +519,7 @@
     border-color: var(--accent);
     box-shadow:
       0 0 0 1px var(--accent),
-      inset 0 0 28px rgba(160,220,255,0.26),
+      inset 0 0 50px rgba(160,225,255,0.52),
       inset 0 1px 0 rgba(255,255,255,0.62),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 10px 26px rgba(91,212,242,0.28);
@@ -530,17 +530,19 @@
      instead of "white text with shadow". */
   .hero-v2-name {
     text-shadow:
-      0 1px 0  rgba(255,255,255,0.40),
-      0 -1px 0 rgba(30,55,95,0.50),
-      0 2px 8px rgba(30,55,95,0.45);
+      0 1px 0  rgba(255,255,255,0.75),
+      0 -1px 0 rgba(20,40,75,0.65),
+      0 2px 0  rgba(20,40,75,0.45),
+      0 4px 12px rgba(20,40,75,0.55);
   }
   .card-body h3,
   .pres-text h3,
   .exp-item h3 {
     color: #fff;
     text-shadow:
-      0 1px 0 rgba(255,255,255,0.32),
-      0 2px 6px rgba(30,55,95,0.45);
+      0 1px 0  rgba(255,255,255,0.55),
+      0 -1px 0 rgba(20,40,75,0.45),
+      0 2px 6px rgba(20,40,75,0.55);
   }
   .card-body .meta,
   .pres-text .meta,
