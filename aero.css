@@ -93,17 +93,29 @@ header,
 
 /* ── CONTAINER 1 - TOP HALF: Header (name + links) ── */
 header {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  /* Frosted dark glass — translucent with proper Aero specular top */
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 10%,
+      rgba(255, 255, 255, 0.02) 24%,
+      rgba(255, 255, 255, 0)    55%),
+    linear-gradient(180deg,
+      rgba(38, 52, 78, 0.60) 0%,
+      rgba(20, 30, 50, 0.72) 100%) !important;
+  backdrop-filter: blur(22px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-bottom: none !important;
-  border-radius: 14px 14px 0 0 !important;
+  border-radius: 16px 16px 0 0 !important;
   padding: 28px 32px !important;
   margin: 32px 0 0 !important;
   box-shadow:
-    0 -8px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    0 14px 36px rgba(0, 0, 30, 0.40),
+    0 4px 10px rgba(0, 0, 0, 0.18) !important;
   text-align: left !important;
   display: flex !important;
   align-items: center !important;
@@ -148,11 +160,14 @@ header h1 {
   background: none !important;
   -webkit-text-fill-color: initial !important;
   color: #ffffff !important;
+  /* Aero text: hard drop shadow for legibility + soft cyan halo for luminosity */
   text-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.6),
-    0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    0 1px 0   rgba(0, 0, 0, 0.65),
+    0 2px 12px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(170, 220, 255, 0.45) !important;
   filter: none !important;
-  margin-bottom: 24px !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 header p {
@@ -237,16 +252,26 @@ header .links a:active {
 
 /* ── CONTAINER 1 - BOTTOM HALF: About card ── */
 .about {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 0 0 14px 14px !important;
+  /* Same glass body as header, but no specular — it's the bottom half of the joined container */
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 12%,
+      rgba(255, 255, 255, 0)    35%),
+    linear-gradient(180deg,
+      rgba(28, 40, 62, 0.68) 0%,
+      rgba(18, 28, 46, 0.78) 100%) !important;
+  backdrop-filter: blur(22px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 0 0 16px 16px !important;
   padding: 28px 32px !important;
   box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    0 8px 20px rgba(0, 0, 0, 0.25) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    0 18px 44px rgba(0, 0, 30, 0.45),
+    0 8px 18px rgba(0, 0, 0, 0.20) !important;
   margin: 0 0 24px !important;
   max-width: none !important;
   position: relative !important;
@@ -280,18 +305,30 @@ header .links a:active {
 
 /* ── CONTAINER 2 - TOP HALF: Filter rail ── */
 .filters {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  /* Top of the second container — full specular treatment, same as header */
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 12%,
+      rgba(255, 255, 255, 0.02) 28%,
+      rgba(255, 255, 255, 0)    55%),
+    linear-gradient(180deg,
+      rgba(38, 52, 78, 0.60) 0%,
+      rgba(20, 30, 50, 0.72) 100%) !important;
+  backdrop-filter: blur(22px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-bottom: none !important;
-  border-radius: 14px 14px 0 0 !important;
+  border-radius: 16px 16px 0 0 !important;
   padding: 16px 20px !important;
   margin: 0 !important;
   max-width: none !important;
   box-shadow:
-    0 -8px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    0 14px 36px rgba(0, 0, 30, 0.40),
+    0 4px 10px rgba(0, 0, 0, 0.18) !important;
   justify-content: center !important;
   display: flex !important;
   gap: 10px !important;
@@ -416,17 +453,26 @@ header .links a:active {
 
 /* ── CONTAINER 2 - BOTTOM HALF: Cards grid ── */
 .grid {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 0 0 14px 14px !important;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 12%,
+      rgba(255, 255, 255, 0)    35%),
+    linear-gradient(180deg,
+      rgba(28, 40, 62, 0.68) 0%,
+      rgba(18, 28, 46, 0.78) 100%) !important;
+  backdrop-filter: blur(22px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 0 0 16px 16px !important;
   padding: 24px !important;
   margin: 0 0 32px !important;
   box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    0 8px 20px rgba(0, 0, 0, 0.25) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    0 18px 44px rgba(0, 0, 30, 0.45),
+    0 8px 18px rgba(0, 0, 0, 0.20) !important;
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 20px !important;
