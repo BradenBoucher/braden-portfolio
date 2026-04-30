@@ -250,6 +250,20 @@ header .links a:active {
     0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Glossy 3D-feel icons inside the header buttons.
+   Hard black drop-shadow gives the "engraved" feel; soft white halo
+   reads as light bouncing off curved glass — same vocabulary as
+   the button surface itself. */
+header .links a svg.btn-icon {
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
+  margin-right: 2px !important;
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.30)) !important;
+}
+
 /* ── CONTAINER 1 - BOTTOM HALF: About card ── */
 .about {
   /* Same glass body as header, but no specular — it's the bottom half of the joined container */
