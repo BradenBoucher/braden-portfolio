@@ -1,17 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
+    <!-- vibrant sky-blue base, the Aero default -->
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#26344e"/>
-      <stop offset="1" stop-color="#0f182a"/>
+      <stop offset="0"   stop-color="#5fb7ff"/>
+      <stop offset="0.5" stop-color="#1f7ed8"/>
+      <stop offset="1"   stop-color="#0a3a7a"/>
     </linearGradient>
+    <!-- curved upper gloss -->
     <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0"   stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="0.7" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="1"   stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
+    <!-- bottom inner glow (Aero "lit from below" trick) -->
+    <radialGradient id="underglow" cx="0.5" cy="1" r="0.7">
+      <stop offset="0" stop-color="#a8e6ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#a8e6ff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+  <!-- base -->
   <rect width="32" height="32" rx="7" fill="url(#bg)"/>
-  <rect width="32" height="14" rx="7" fill="url(#gloss)"/>
-  <text x="16" y="23" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+  <!-- under-glow -->
+  <rect width="32" height="32" rx="7" fill="url(#underglow)"/>
+  <!-- curved gloss (ellipse clip = the jellybean reflection) -->
+  <path d="M 0 7 Q 0 0 7 0 L 25 0 Q 32 0 32 7 L 32 14 Q 16 22 0 14 Z" fill="url(#gloss)"/>
+  <!-- bright top rim (1px highlight) -->
+  <path d="M 7 0.5 L 25 0.5" stroke="#ffffff" stroke-opacity="0.9" stroke-width="0.6" stroke-linecap="round" fill="none"/>
+  <!-- dark bottom rim (recessed bezel) -->
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="#000000" stroke-opacity="0.35" stroke-width="0.6"/>
+  <text x="16" y="22.5" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
         font-size="17" font-weight="800" fill="#ffffff"
-        text-anchor="middle" letter-spacing="-1">BB</text>
+        text-anchor="middle" letter-spacing="-1"
+        style="paint-order:stroke;stroke:#1a4380;stroke-width:0.6;stroke-opacity:0.5">BB</text>
 </svg>
