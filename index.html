@@ -187,8 +187,112 @@
   @media (max-width:640px) { .grid{grid-template-columns:1fr} header{padding-top:48px} .detail-banner,.slider,.pres-banner{height:300px} }
 .slider img.poster-fit { object-fit:contain !important; background:var(--surface-hover); }
 .pres-banner img { object-fit:contain !important; background:var(--surface-hover); }
+
+/* ── HERO v2 — self-contained reference container ──────────────────────
+   Inline here (not in aero.css) so it ships with the HTML and can't be
+   served from a stale stylesheet cache. Class names are unique (.hero-v2*)
+   so no existing rule can leak into them. */
+.hero-v2 {
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0.08) 4%,
+      rgba(255,255,255,0.02) 10%,
+      rgba(255,255,255,0)    20%),
+    linear-gradient(180deg,
+      rgba(38,52,78,0.60)  0%,
+      rgba(20,30,50,0.72)  30%,
+      rgba(15,24,42,0.80) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+          backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.32);
+  border-top: 1px solid rgba(255,255,255,0.55);
+  border-radius: 16px;
+  padding: 44px 56px;
+  margin: 0 0 24px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    inset 0 -1px 0 rgba(0,0,0,0.30),
+    0 18px 44px rgba(0,0,30,0.45),
+    0 8px 18px rgba(0,0,0,0.20);
+  position: relative;
+}
+.hero-v2-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.hero-v2-name {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.5);
+  margin: 0;
+  white-space: nowrap;
+  line-height: 1;
+}
+.hero-v2-icons {
+  display: flex;
+  gap: 18px;
+  flex-shrink: 0;
+  align-items: center;
+}
+.hero-v2-icons a { display: block; line-height: 0; }
+.hero-v2-icons img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  filter:
+    drop-shadow(0 4px 6px rgba(0,0,20,0.55))
+    drop-shadow(0 1px 2px rgba(0,0,0,0.40));
+  transition: transform 0.25s ease;
+}
+.hero-v2-icons a:hover img { transform: translateY(-2px); }
+.hero-v2-bottom {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.hero-v2-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.6);
+  outline: 1px solid rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+.hero-v2-bio {
+  color: rgba(255,255,255,0.92);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  margin: 0;
+}
+.hero-v2-label {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font: 600 10px/1 'DM Sans', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+@media (max-width: 640px) {
+  .hero-v2 { padding: 28px 22px; }
+  .hero-v2-top { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 22px; }
+  .hero-v2-name { white-space: normal; font-size: 2rem; }
+  .hero-v2-bottom { flex-direction: column; align-items: flex-start; gap: 18px; }
+}
 </style>
-<link rel="stylesheet" href="aero.css?v=7">
+<link rel="stylesheet" href="aero.css?v=8">
 </head>
 <body>
 
@@ -215,6 +319,24 @@
     </div>
   </div>
   </div><!-- /.hero-block -->
+
+  <!-- HERO v2 — reference container (delete .hero-block above once happy with this) -->
+  <div class="hero-v2">
+    <span class="hero-v2-label">v2 — new layout</span>
+    <div class="hero-v2-top">
+      <h1 class="hero-v2-name">Braden Boucher</h1>
+      <div class="hero-v2-icons">
+        <a href="mailto:braden@chrisboucher.net?subject=Consultation%20Request" aria-label="Email"><img src="images/icon-email.png" alt=""></a>
+        <a href="https://github.com/BradenBoucher" target="_blank" aria-label="GitHub"><img src="images/icon-github.png" alt=""></a>
+        <a href="https://www.linkedin.com/in/bradenboucher" target="_blank" aria-label="LinkedIn"><img src="images/icon-linkedin.png" alt=""></a>
+        <a href="docs/Boucher_CV.pdf" target="_blank" aria-label="CV"><img src="images/icon-cv.png" alt=""></a>
+      </div>
+    </div>
+    <div class="hero-v2-bottom">
+      <img class="hero-v2-photo" src="images/headshot.jpg" alt="Braden Boucher">
+      <p class="hero-v2-bio">Photonics &amp; optical engineering student at Bridgewater State University, graduating May 2026. Experienced in III-V laser diode characterization and photonic integrated circuit testing. I also build full-stack apps for iOS and web, focused on solving real problems.</p>
+    </div>
+  </div>
 
 <div class="filters hero-animate hero-delay-4">
     <button class="active" onclick="filterCards('all',this)">All</button>
