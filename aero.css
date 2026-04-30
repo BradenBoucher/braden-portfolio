@@ -116,11 +116,13 @@ header {
     0 14px 36px rgba(0, 0, 30, 0.40),
     0 4px 10px rgba(0, 0, 0, 0.18) !important;
   text-align: left !important;
-  display: flex !important;
+  /* CSS Grid: name in column 1 (takes remaining space), icons in column 2 (auto width).
+     This is bulletproof for left+right layouts — no flex-wrap, no shrink/grow issues. */
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  grid-template-rows: auto !important;
   align-items: center !important;
-  justify-content: space-between !important;
   gap: 24px !important;
-  flex-wrap: nowrap !important;
   position: relative !important;
 }
 
@@ -156,6 +158,10 @@ header h1 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 800 !important;
   letter-spacing: -0.025em !important;
+  /* Smaller responsive cap so name + icons reliably fit in one row */
+  font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+  /* Prevent text from wrapping to a second line within the h1 */
+  white-space: nowrap !important;
   background: none !important;
   -webkit-text-fill-color: initial !important;
   color: #ffffff !important;
@@ -166,7 +172,7 @@ header h1 {
     0 0 28px rgba(170, 220, 255, 0.45) !important;
   filter: none !important;
   margin: 0 !important;
-  flex-shrink: 0 !important;
+  min-width: 0 !important;
 }
 
 header p {
