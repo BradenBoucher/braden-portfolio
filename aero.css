@@ -100,7 +100,7 @@ header {
   -webkit-backdrop-filter: none !important;
   border: none !important;
   border-radius: 0 !important;
-  padding: 28px 32px 8px !important;
+  padding: 40px 48px 12px !important;
   margin: 0 !important;
   box-shadow: none !important;
   display: block !important;
@@ -278,7 +278,7 @@ header .links a img.btn-icon {
   -webkit-backdrop-filter: none !important;
   border: none !important;
   border-radius: 0 !important;
-  padding: 8px 32px 28px !important;
+  padding: 12px 48px 32px !important;
   margin: 0 !important;
   max-width: none !important;
   box-shadow: none !important;
