@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-themes.zip}"
-TAG="pre-aero-themes-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="feat: Vista Aurora hero + Zune Dark filter bar"
+ZIP="${1:-aero-test-strip.zip}"
+TAG="pre-aero-test-strip-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="test: 4-theme test strip on page (Vista/Zune/Eco/Aqua) — remove after evaluating"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
