@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-clean.zip}"
-TAG="pre-aero-clean-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="cleanup: remove test strip + drop diagonal sheen on hero, use high-contrast vertical gradient"
+ZIP="${1:-aero-drift.zip}"
+TAG="pre-aero-drift-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="feat: very slow (120s) background drift + reduced-motion fallback"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
