@@ -35,24 +35,10 @@
   body {
     font-family: 'DM Sans', sans-serif; color: var(--text);
     min-height: 100vh; overflow-x: hidden;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 0%,   rgba(180,220,255,0.45), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(150,255,210,0.20), transparent 60%),
-      linear-gradient(180deg, #4a85c8 0%, #5fa0d8 35%, #7ec0e8 65%, #4a85c8 100%);
-    background-attachment: fixed;
-    background-size: 110% 110%;            /* slight overscan so drift doesn't reveal edges */
-    background-position: 50% 50%;
-    animation: bg-drift 120s ease-in-out infinite alternate;
-  }
-  /* Slow horizontal+vertical drift — 2-minute cycle */
-  @keyframes bg-drift {
-    0%   { background-position:  0%  0%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position:  0% 100%; }
+    /* Background painted by aero.css and re-declared in our override layer below. */
   }
   /* Accessibility: respect users who don't want motion */
   @media (prefers-reduced-motion: reduce) {
-    body { animation: none; }
     body::before, body::after, html::before { animation: none !important; }
   }
   /* Aero orb backdrop */
@@ -363,6 +349,28 @@
 }
 </style>
 <link rel="stylesheet" href="aero.css?v=10">
+<style>
+  /* ── Wallpaper drift override ─────────────────────────────────────────
+     aero.css line 35 paints bg-aero.jpg on body with `background-attachment: fixed`.
+     Re-declare here (later in cascade) keeping the photo + adding slow drift. */
+  body {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%,   rgba(180,220,255,0.45), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(150,255,210,0.20), transparent 60%),
+      url('images/bg-aero.jpg') center top / 115% auto no-repeat,
+      linear-gradient(180deg, #4a85c8 0%, #5fa0d8 35%, #7ec0e8 65%, #4a85c8 100%);
+    background-attachment: fixed, fixed, fixed, fixed;
+    animation: bg-drift 120s ease-in-out infinite alternate;
+  }
+  @keyframes bg-drift {
+    0%   { background-position: 50% 0%,    50% 100%, 0%   30%, 50% 50%; }
+    50%  { background-position: 50% 0%,    50% 100%, 100% 50%, 50% 50%; }
+    100% { background-position: 50% 0%,    50% 100%, 0%   70%, 50% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body { animation: none; }
+  }
+</style>
 <style>
   /* ── Deep Aero layer (after aero.css) ──────────────────────────────────
      Cascading wins by source order. Six refinements:
