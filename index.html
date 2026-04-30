@@ -350,10 +350,115 @@
 </style>
 <link rel="stylesheet" href="aero.css?v=10">
 <style>
-  /* ── Final override layer (after aero.css) ─────────────────────────────
-     Loaded after aero.css so source-order cascade wins. The recipe below
-     is the SAME mixture used in .hero-v2 — cards, presentation items, and
-     experience items all share the hero's medium-blue frosted glass. */
+  /* ── Deep Aero layer (after aero.css) ──────────────────────────────────
+     Cascading wins by source order. Six refinements:
+       1. Skeuomorphic 3D buttons (filter pills)
+       2. Inner cyan glow halo on every glass container
+       3. Aurora streaks layer behind everything (html::before)
+       4. Layered lighting via cumulative box-shadows
+       5. Saturated functional accent (active filter goes Vista-green)
+       6. Embossed type via dual top-highlight + bottom-shadow text-shadows
+     ──────────────────────────────────────────────────────────────────── */
+
+  /* === 3. Aurora streaks layer ============================================
+     Sits on <html> so it stays behind body::before bokeh + body::after sun.
+     Two conic gradients = two light sources radiating from the top corners. */
+  html::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      conic-gradient(from 200deg at -5% -5%,
+        transparent 0deg,
+        rgba(180,220,255,0.20)  10deg,
+        transparent             22deg,
+        transparent             40deg,
+        rgba(200,240,255,0.14)  50deg,
+        transparent             62deg,
+        transparent             82deg,
+        rgba(170,210,255,0.12)  92deg,
+        transparent            104deg,
+        transparent            360deg),
+      conic-gradient(from 40deg at 105% -5%,
+        transparent 0deg,
+        rgba(255,235,200,0.18)  10deg,
+        transparent             22deg,
+        transparent             36deg,
+        rgba(255,220,180,0.12)  46deg,
+        transparent             58deg,
+        transparent            360deg);
+    filter: blur(2px);
+    animation: aurora-drift 40s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-drift {
+    0%   { opacity: 0.85; transform: translate(0, 0); }
+    100% { opacity: 1.00; transform: translate(20px, -10px); }
+  }
+
+  /* === 1+5. Skeuomorphic filter pills =====================================
+     Heavy 3D treatment — bottom-darker base, glossy upper half, bright top
+     highlight, dark bottom bezel, drop shadow. Active = saturated green. */
+  .filters button {
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.22) 0%,
+        rgba(255,255,255,0.06) 48%,
+        rgba(0,0,0,0.10)       52%,
+        rgba(0,0,0,0.30)      100%),
+      linear-gradient(180deg, #2c3a5a 0%, #16213a 100%);
+    border: 1px solid rgba(0,0,0,0.45);
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.55), 0 -1px 0 rgba(255,255,255,0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.45),
+      inset 0 -1px 0 rgba(0,0,0,0.50),
+      inset 0 0 18px rgba(120,180,230,0.10),
+      0 2px 4px rgba(0,20,50,0.35);
+    transform: translateZ(0);   /* triggers compositor for crisper edges */
+  }
+  .filters button:hover {
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.28) 0%,
+        rgba(255,255,255,0.08) 48%,
+        rgba(0,0,0,0.10)       52%,
+        rgba(0,0,0,0.30)      100%),
+      linear-gradient(180deg, #36476b 0%, #1f2c47 100%);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .filters button.active {
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.32) 0%,
+        rgba(255,255,255,0.10) 48%,
+        rgba(0,30,0,0.15)      52%,
+        rgba(0,30,0,0.35)     100%),
+      linear-gradient(180deg, #8de065 0%, #4ba735 100%);
+    border-color: rgba(0,40,0,0.55);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,40,0,0.6), 0 -1px 0 rgba(255,255,255,0.30);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.65),
+      inset 0 -1px 0 rgba(0,30,0,0.45),
+      inset 0 0 14px rgba(180,255,120,0.30),
+      0 2px 6px rgba(20,60,10,0.45);
+  }
+
+  /* === 2+4. Glass containers with inner cyan glow halo ===================
+     The inset 0 0 28px rgba(160,210,255,...) is the new bit — light bleeds
+     inward from each edge, the move that gives Aero panels their "lit
+     glass" quality instead of "card with stroke". */
+
+  /* Hero — strongest halo since it's the largest panel */
+  .hero-v2 {
+    box-shadow:
+      inset 0 0 36px rgba(160,210,255,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.62),
+      inset 0 -1px 0 rgba(40,70,120,0.35),
+      0 18px 44px rgba(60,100,160,0.40),
+      0 8px 18px rgba(50,85,140,0.20);
+  }
 
   /* Project / publication cards */
   .card {
@@ -370,6 +475,7 @@
     border: 1px solid rgba(255,255,255,0.38);
     border-top-color: rgba(255,255,255,0.62);
     box-shadow:
+      inset 0 0 28px rgba(160,210,255,0.18),
       inset 0 1px 0 rgba(255,255,255,0.62),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 10px 28px rgba(50,90,150,0.32);
@@ -380,19 +486,16 @@
     border-color: var(--accent);
     box-shadow:
       0 0 0 1px var(--accent),
+      inset 0 0 32px rgba(160,220,255,0.28),
       inset 0 1px 0 rgba(255,255,255,0.65),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 14px 32px rgba(91,212,242,0.30);
   }
-  /* Card thumb backdrops */
   .card-cover, .card-cover-icon {
     background: linear-gradient(180deg, rgba(180,210,240,0.45), rgba(140,180,225,0.55));
   }
-  /* Body text on lighter glass */
-  .card-body h3   { color: #fff; text-shadow: 0 1px 2px rgba(30,55,95,0.45); }
-  .card-body .meta{ color: rgba(255,255,255,0.92); }
 
-  /* Detail-page containers (presentations + experience) — same glass */
+  /* Detail-page containers */
   .pres-item, .exp-item {
     background:
       linear-gradient(180deg,
@@ -405,15 +508,43 @@
     border: 1px solid rgba(255,255,255,0.38);
     border-top-color: rgba(255,255,255,0.62);
     box-shadow:
+      inset 0 0 24px rgba(160,210,255,0.18),
       inset 0 1px 0 rgba(255,255,255,0.6),
       inset 0 -1px 0 rgba(40,70,120,0.35),
       0 8px 22px rgba(50,90,150,0.28);
     -webkit-backdrop-filter: blur(14px) saturate(1.35);
             backdrop-filter: blur(14px) saturate(1.35);
   }
-  .pres-item:hover, .exp-item:hover { border-color: var(--accent); }
-  .pres-text h3, .exp-item h3 { color: #fff; text-shadow: 0 1px 2px rgba(30,55,95,0.45); }
-  .pres-text .meta, .exp-item .meta { color: rgba(255,255,255,0.92); }
+  .pres-item:hover, .exp-item:hover {
+    border-color: var(--accent);
+    box-shadow:
+      0 0 0 1px var(--accent),
+      inset 0 0 28px rgba(160,220,255,0.26),
+      inset 0 1px 0 rgba(255,255,255,0.62),
+      inset 0 -1px 0 rgba(40,70,120,0.35),
+      0 10px 26px rgba(91,212,242,0.28);
+  }
+
+  /* === 6. Embossed type ==================================================
+     Dual text-shadow: bright top edge + dark bottom edge = "lit from above"
+     instead of "white text with shadow". */
+  .hero-v2-name {
+    text-shadow:
+      0 1px 0  rgba(255,255,255,0.40),
+      0 -1px 0 rgba(30,55,95,0.50),
+      0 2px 8px rgba(30,55,95,0.45);
+  }
+  .card-body h3,
+  .pres-text h3,
+  .exp-item h3 {
+    color: #fff;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,0.32),
+      0 2px 6px rgba(30,55,95,0.45);
+  }
+  .card-body .meta,
+  .pres-text .meta,
+  .exp-item .meta { color: rgba(255,255,255,0.92); }
   .pres-text p, .exp-item p { color: rgba(255,255,255,0.88); }
 </style>
 </head>
