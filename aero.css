@@ -93,7 +93,8 @@ header,
 
 /* ── CONTAINER 1 - TOP HALF: Header (name + links) ── */
 header {
-  /* Frosted dark glass — translucent with proper Aero specular top */
+  /* Frosted dark glass — translucent with proper Aero specular top.
+     This element is now JUST the panel — layout is handled by .hero-row inside. */
   background:
     linear-gradient(180deg,
       rgba(255, 255, 255, 0.22) 0%,
@@ -115,15 +116,31 @@ header {
     inset 0 1px 0 rgba(255, 255, 255, 0.55),
     0 14px 36px rgba(0, 0, 30, 0.40),
     0 4px 10px rgba(0, 0, 0, 0.18) !important;
-  text-align: left !important;
-  /* CSS Grid: name in column 1 (takes remaining space), icons in column 2 (auto width).
-     This is bulletproof for left+right layouts — no flex-wrap, no shrink/grow issues. */
-  display: grid !important;
-  grid-template-columns: 1fr auto !important;
-  grid-template-rows: auto !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* New inner row wrapper — handles name + icons layout.
+   Fresh selector that nothing else in the cascade can override. */
+.hero-row {
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center !important;
   gap: 24px !important;
-  position: relative !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+}
+
+.hero-row h1 {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+}
+
+.hero-row .links {
+  flex: 0 0 auto !important;
+  margin-left: auto !important;
 }
 
 header h1 {
