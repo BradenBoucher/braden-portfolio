@@ -350,25 +350,23 @@
 </style>
 <link rel="stylesheet" href="aero.css?v=10">
 <style>
-  /* ── Wallpaper drift override ─────────────────────────────────────────
-     aero.css line 35 paints bg-aero.jpg on body with `background-attachment: fixed`.
-     Re-declare here (later in cascade) keeping the photo + adding slow drift. */
+  /* ── Wallpaper parallax override ──────────────────────────────────────
+     aero.css line 35 paints bg-aero.jpg fixed on body. Re-declare here
+     (later in cascade) NOT fixed — so we can move it via JS. The scroll
+     handler at the bottom of the page sets body.style.backgroundPositionY
+     to scrollY * 0.3, giving a 30%-speed parallax. */
   body {
     background:
       radial-gradient(ellipse 80% 50% at 50% 0%,   rgba(180,220,255,0.45), transparent 60%),
       radial-gradient(ellipse 60% 40% at 20% 100%, rgba(150,255,210,0.20), transparent 60%),
-      url('images/bg-aero.jpg') center top / 115% auto no-repeat,
+      url('images/bg-aero.jpg') center top / cover no-repeat,
       linear-gradient(180deg, #4a85c8 0%, #5fa0d8 35%, #7ec0e8 65%, #4a85c8 100%);
-    background-attachment: fixed, fixed, fixed, fixed;
-    animation: bg-drift 120s ease-in-out infinite alternate;
-  }
-  @keyframes bg-drift {
-    0%   { background-position: 50% 0%,    50% 100%, 0%   30%, 50% 50%; }
-    50%  { background-position: 50% 0%,    50% 100%, 100% 50%, 50% 50%; }
-    100% { background-position: 50% 0%,    50% 100%, 0%   70%, 50% 50%; }
+    /* All four layers attach to viewport (don't scroll-couple).
+       JS will animate the photo (3rd layer) Y position. */
+    background-attachment: fixed, fixed, scroll, fixed;
   }
   @media (prefers-reduced-motion: reduce) {
-    body { animation: none; }
+    body { background-attachment: fixed, fixed, fixed, fixed !important; }
   }
 </style>
 <style>
@@ -769,5 +767,39 @@ function navigateTo(url){
 }
 </script>
 </div><!-- close page-bg -->
+
+<script>
+  // ── Wallpaper parallax ──────────────────────────────────────────────
+  // Page content scrolls at 100%; bg-aero.jpg (3rd background layer)
+  // moves at 30% of scroll speed, creating depth. requestAnimationFrame
+  // throttles (only updates once per repaint, never blocks main thread).
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const PARALLAX_RATE = 0.3;   // 0 = pinned (like fixed), 1 = scrolls with content
+    let ticking = false;
+    let lastY = 0;
+
+    function update() {
+      const offset = lastY * PARALLAX_RATE;
+      // 4 layers: top-tint, bottom-tint, photo, sky-base
+      // Only the 3rd (photo) gets the scroll offset.
+      document.body.style.backgroundPosition =
+        `50% 0%, 50% 100%, center ${-offset}px, 50% 50%`;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      lastY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();   // run once on load in case user reloaded mid-page
+  })();
+</script>
+
 </body>
 </html>
