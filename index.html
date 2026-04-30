@@ -43,13 +43,33 @@
   }
   /* Aero orb backdrop */
   body::before {
-    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    content: ''; position: fixed; inset: -10%; pointer-events: none; z-index: 0;
     background:
       radial-gradient(circle 220px at 12% 18%, rgba(255,255,255,0.18), transparent 70%),
       radial-gradient(circle 160px at 85% 30%, rgba(140,220,255,0.22), transparent 70%),
       radial-gradient(circle 280px at 70% 80%, rgba(180,255,220,0.14), transparent 70%),
       radial-gradient(circle 120px at 25% 75%, rgba(255,255,255,0.12), transparent 70%);
     filter: blur(8px);
+    animation: bokeh-drift 28s ease-in-out infinite alternate;
+  }
+  @keyframes bokeh-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(18px, -12px) scale(1.03); }
+    100% { transform: translate(-14px, 16px) scale(1.05); }
+  }
+
+  /* Aero sun / lens flare */
+  body::after {
+    content: ''; position: fixed; top: -120px; right: -120px;
+    width: 480px; height: 480px; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(circle, rgba(255,245,210,0.55) 0%, rgba(255,210,170,0.25) 25%, rgba(255,180,140,0.10) 45%, transparent 65%);
+    filter: blur(24px);
+    animation: sun-pulse 9s ease-in-out infinite alternate;
+  }
+  @keyframes sun-pulse {
+    0%   { opacity: 0.85; transform: scale(1); }
+    100% { opacity: 1;    transform: scale(1.08); }
   }
 
   /* Page color wash */
@@ -215,6 +235,19 @@
   footer { border-top:1px solid var(--border); padding:32px 0; text-align:center; color:var(--text-muted); font-size:0.82rem; }
 
   .card { position:relative; overflow:hidden; }
+  /* Specular gloss sweep on hover */
+  .card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(255,255,255,0.22) 50%,
+      transparent 70%);
+    transform: translateX(-110%);
+    transition: transform 0.8s var(--spring);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .card:hover::after { transform: translateX(110%); }
   @media (max-width:640px) { .grid{grid-template-columns:1fr} header{padding-top:48px} .detail-banner,.slider,.pres-banner{height:300px} }
 .slider img.poster-fit { object-fit:contain !important; background:var(--surface-hover); }
 .pres-banner img { object-fit:contain !important; background:var(--surface-hover); }
