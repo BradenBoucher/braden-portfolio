@@ -304,7 +304,7 @@
   gap: 18px;
   flex-shrink: 0;
   align-items: center;
-  margin-right: 24px;
+  margin-right: 8px;
 }
 .hero-v2-icons a { display: block; line-height: 0; }
 .hero-v2-icons img {
@@ -349,6 +349,43 @@
 }
 </style>
 <link rel="stylesheet" href="aero.css?v=10">
+<style>
+  /* ── Final override layer (after aero.css) ─────────────────────────────
+     aero.css has its own .card rule that re-darkens to navy. This block
+     loads later in the cascade, same specificity, so it wins source-order.
+     No !important needed. */
+  .card {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(120,160,210,0.55) 0%, rgba(85,125,180,0.65) 100%);
+    border: 1px solid rgba(255,255,255,0.40);
+    border-top-color: rgba(255,255,255,0.65);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.60),
+      inset 0 -1px 0 rgba(40,70,120,0.35),
+      0 10px 24px rgba(50,90,150,0.35);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
+            backdrop-filter: blur(14px) saturate(1.35);
+  }
+  .card:hover {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.14) 35%, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(140,180,225,0.62) 0%, rgba(105,150,200,0.72) 100%);
+    border-color: var(--accent);
+    box-shadow:
+      0 0 0 1px var(--accent),
+      inset 0 1px 0 rgba(255,255,255,0.65),
+      inset 0 -1px 0 rgba(40,70,120,0.35),
+      0 14px 32px rgba(91,212,242,0.30);
+  }
+  /* Card-cover (image thumbs) and card-cover-icon (app icons) backdrops */
+  .card-cover, .card-cover-icon {
+    background: linear-gradient(180deg, rgba(180,210,240,0.45), rgba(140,180,225,0.55));
+  }
+  /* Card body text — readable on the lighter glass */
+  .card-body h3 { color: #fff; text-shadow: 0 1px 2px rgba(30,55,95,0.45); }
+  .card-body .meta { color: rgba(255,255,255,0.88); }
+</style>
 </head>
 <body>
 
