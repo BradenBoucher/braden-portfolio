@@ -397,6 +397,33 @@
   /* === 1+5. Skeuomorphic filter pills =====================================
      Heavy 3D treatment — bottom-darker base, glossy upper half, bright top
      highlight, dark bottom bezel, drop shadow. Active = saturated green. */
+
+  /* Filter bar container — ZUNE DARK theme */
+  .filters {
+    background:
+      linear-gradient(135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.04) 30%,
+        transparent             55%),
+      radial-gradient(ellipse 90% 60% at 50% 40%,
+        rgba(80,180,230,0.35)  0%,
+        rgba(30,70,110,0.85)  55%,
+        rgba(10,20,40,0.95)  100%),
+      linear-gradient(180deg, #1a2735 0%, #060a14 100%);
+    border: 1px solid rgba(0,0,0,0.85);
+    border-top: 1px solid rgba(120,180,220,0.45);
+    border-radius: 14px;
+    padding: 14px 24px;
+    margin: 28px 0 8px;
+    box-shadow:
+      inset 0 1px 0 rgba(180,220,255,0.55),
+      inset 0 -2px 0 rgba(0,0,0,0.7),
+      inset 0 0 0 1px rgba(120,200,240,0.18),
+      inset 0 0 80px rgba(80,180,230,0.25),
+      0 6px 0 rgba(0,0,0,0.45),
+      0 18px 40px rgba(0,0,0,0.55),
+      0 0 60px rgba(80,180,230,0.20);
+  }
   .filters button {
     background:
       linear-gradient(180deg,
@@ -450,40 +477,30 @@
      inward from each edge, the move that gives Aero panels their "lit
      glass" quality instead of "card with stroke". */
 
-  /* Hero — full 3D pop recipe (diagonal gloss + radial pool + dark frame) */
+  /* Hero — VISTA AURORA theme */
   .hero-v2 {
     background:
-      /* Layer 1: diagonal gloss sheen, top-left to mid */
       linear-gradient(135deg,
-        rgba(255,255,255,0.32) 0%,
-        rgba(255,255,255,0.10) 25%,
-        rgba(255,255,255,0)    50%),
-      /* Layer 2: radial bright pool, center-top */
-      radial-gradient(ellipse 100% 70% at 50% 30%,
-        rgba(190,225,255,0.45) 0%,
-        rgba(120,160,210,0.65) 60%,
-        rgba(80,120,180,0.78)  100%),
-      /* Layer 3: solid base */
-      linear-gradient(180deg,
-        rgba(115,155,205,0.85) 0%,
-        rgba(75,115,170,0.92)  100%);
-    border: 1px solid rgba(20,40,80,0.55);
+        rgba(255,255,255,0.30) 0%,
+        rgba(255,255,255,0.08) 25%,
+        transparent             50%),
+      radial-gradient(ellipse 100% 70% at 50% 28%,
+        rgba(180,225,255,0.50) 0%,
+        rgba(95,140,200,0.70)  60%,
+        rgba(50,90,150,0.85)  100%),
+      linear-gradient(180deg, #5a8bbe 0%, #345f95 100%);
+    border: 1px solid rgba(15,35,75,0.65);
     border-top: 1px solid rgba(255,255,255,0.65);
     border-radius: 18px;
     box-shadow:
-      /* Inner bevel — thick top white edge, thick bottom dark edge */
       inset 0 2px 0 rgba(255,255,255,0.55),
-      inset 0 -2px 0 rgba(20,40,80,0.45),
+      inset 0 -2px 0 rgba(15,35,75,0.50),
       inset 0 0 0 1px rgba(255,255,255,0.18),
-      /* Inner glow pool */
-      inset 0 0 90px rgba(180,225,255,0.35),
-      /* "Thickness" offset — makes panel look raised */
-      0 6px 0 rgba(20,40,80,0.20),
-      /* Main drop shadow */
-      0 22px 48px rgba(20,40,80,0.50),
-      0 8px 20px rgba(20,40,80,0.30),
-      /* Atmospheric outer glow */
-      0 0 80px rgba(140,200,240,0.25);
+      inset 0 0 90px rgba(170,220,255,0.38),
+      0 6px 0 rgba(15,35,75,0.22),
+      0 22px 50px rgba(15,35,75,0.55),
+      0 8px 18px rgba(15,35,75,0.30),
+      0 0 80px rgba(140,200,240,0.28);
     -webkit-backdrop-filter: blur(14px) saturate(1.45);
             backdrop-filter: blur(14px) saturate(1.45);
   }
