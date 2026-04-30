@@ -350,23 +350,34 @@
 </style>
 <link rel="stylesheet" href="aero.css?v=10">
 <style>
-  /* ── Wallpaper parallax override ──────────────────────────────────────
-     aero.css line 35 paints bg-aero.jpg fixed on body. Re-declare here
-     (later in cascade) NOT fixed — so we can move it via JS. The scroll
-     handler at the bottom of the page sets body.style.backgroundPositionY
-     to scrollY * 0.3, giving a 30%-speed parallax. */
+  /* ── Wallpaper parallax (v2) ───────────────────────────────────────────
+     aero.css line 33 paints bg-aero.jpg fixed on body (with !important).
+     We override here to strip the photo from body — keeping only the
+     transparent radial tints — and move the photo into .parallax-bg below,
+     where JS can translate it freely. The dedicated div is sized in JS to
+     viewport + (maxScroll × rate), so the photo never runs out of slack. */
   body {
     background:
       radial-gradient(ellipse 80% 50% at 50% 0%,   rgba(180,220,255,0.45), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(150,255,210,0.20), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(150,255,210,0.20), transparent 60%) !important;
+    background-attachment: fixed, fixed !important;
+    background-color: transparent !important;
+  }
+  .parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;            /* JS overrides with computed height on load */
+    z-index: -1;              /* behind body's transparent overlays */
+    pointer-events: none;
+    background:
       url('images/bg-aero.jpg') center top / cover no-repeat,
-      linear-gradient(180deg, #4a85c8 0%, #5fa0d8 35%, #7ec0e8 65%, #4a85c8 100%);
-    /* All four layers attach to viewport (don't scroll-couple).
-       JS will animate the photo (3rd layer) Y position. */
-    background-attachment: fixed, fixed, scroll, fixed;
+      linear-gradient(180deg, #5cb0ed 0%, #88d5f3 100%);  /* fallback if image fails */
+    will-change: transform;
   }
   @media (prefers-reduced-motion: reduce) {
-    body { background-attachment: fixed, fixed, fixed, fixed !important; }
+    .parallax-bg { transform: none !important; }
   }
 </style>
 <style>
@@ -652,6 +663,8 @@
 </head>
 <body>
 
+<div class="parallax-bg" aria-hidden="true"></div>
+
 <div class="page-bg">
 <div class="container">
   <div class="hero-v2">
@@ -769,24 +782,35 @@ function navigateTo(url){
 </div><!-- close page-bg -->
 
 <script>
-  // ── Wallpaper parallax ──────────────────────────────────────────────
-  // Page content scrolls at 100%; bg-aero.jpg (3rd background layer)
-  // moves at 30% of scroll speed, creating depth. requestAnimationFrame
-  // throttles (only updates once per repaint, never blocks main thread).
+  // ── Wallpaper parallax v2 ──────────────────────────────────────────
+  // Translates .parallax-bg up at 30% of scroll speed via transform
+  // (compositor-accelerated). Sizes the bg dynamically to guarantee
+  // enough image height that we never expose the bottom edge.
   (function() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bg = document.querySelector('.parallax-bg');
+    if (!bg) return;
 
-    const PARALLAX_RATE = 0.3;   // 0 = pinned (like fixed), 1 = scrolls with content
-    let ticking = false;
+    const PARALLAX_RATE = 0.3;   // 0 = pinned, 1 = scrolls with content
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let lastY = 0;
+    let ticking = false;
+
+    function sizeBg() {
+      const sh = document.documentElement.scrollHeight;
+      const vh = window.innerHeight;
+      const slack = Math.max(0, sh - vh) * PARALLAX_RATE;
+      bg.style.height = `${vh + slack}px`;
+    }
 
     function update() {
-      const offset = lastY * PARALLAX_RATE;
-      // 4 layers: top-tint, bottom-tint, photo, sky-base
-      // Only the 3rd (photo) gets the scroll offset.
-      document.body.style.backgroundPosition =
-        `50% 0%, 50% 100%, center ${-offset}px, 50% 50%`;
+      bg.style.transform = `translate3d(0, ${-lastY * PARALLAX_RATE}px, 0)`;
       ticking = false;
+    }
+
+    if (reduceMotion) {
+      sizeBg();
+      return;
     }
 
     window.addEventListener('scroll', () => {
@@ -797,7 +821,24 @@ function navigateTo(url){
       }
     }, { passive: true });
 
-    update();   // run once on load in case user reloaded mid-page
+    window.addEventListener('resize', () => {
+      sizeBg();
+      lastY = window.scrollY;
+      update();
+    }, { passive: true });
+
+    // Run after layout so scrollHeight is final
+    if (document.readyState === 'complete') {
+      sizeBg();
+      lastY = window.scrollY;
+      update();
+    } else {
+      window.addEventListener('load', () => {
+        sizeBg();
+        lastY = window.scrollY;
+        update();
+      }, { once: true });
+    }
   })();
 </script>
 
