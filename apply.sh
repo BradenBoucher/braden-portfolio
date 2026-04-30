@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-pop3d.zip}"
-TAG="pre-aero-pop3d-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="feat: 3D pop containers — diagonal gloss + radial pool + dark frame + stacked shadows; remove canary X"
+ZIP="${1:-aero-themes.zip}"
+TAG="pre-aero-themes-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="feat: Vista Aurora hero + Zune Dark filter bar"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
