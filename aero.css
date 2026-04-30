@@ -42,18 +42,20 @@ body {
   background: transparent !important;
 }
 
-/* ── Outer container: just centers content, panels handle the dark bg ── */
+/* ── ONE big dark container holding everything ── */
 .container {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  margin: 0 auto !important;
+  background: rgba(15, 18, 24, 0.82) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 14px !important;
+  margin: 32px auto !important;
   max-width: 960px !important;
-  box-shadow: none !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
   position: relative !important;
-  padding: 32px 16px !important;
+  padding: 0 32px 40px !important;
 }
 
 /* Kill the title bar pseudo-element */
@@ -86,21 +88,50 @@ body {
   display: none !important;
 }
 
-/* ── Header panel ── */
+/* ── Header: flex row, name left, links right ── */
 header {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 14px !important;
-  padding: 40px 32px 0 !important;
-  text-align: center !important;
-  margin: 0 0 20px !important;
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 32px 0 24px !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
   position: relative !important;
-  overflow: hidden !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+header h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #ffffff !important;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  filter: none !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Links sit to the right of the name, no longer in a separate strip */
+header .links {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
 }
 
 header h1 {
@@ -185,18 +216,16 @@ header .links a:active {
     0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ── About panel — its own dark window ── */
+/* ── About section — light sub-panel inside main container ── */
 .about {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 14px !important;
-  padding: 28px 32px !important;
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  margin: 0 0 20px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
+  padding: 24px 28px !important;
+  box-shadow: none !important;
+  margin: 28px 0 !important;
   max-width: none !important;
   position: relative !important;
 }
@@ -214,19 +243,15 @@ header .links a:active {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* ── Filter panel — its own slim menu bar window ── */
+/* ── Filter buttons rail — recessed strip inside container ── */
 .filters {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 14px !important;
-  padding: 12px 16px !important;
-  margin: 0 0 20px !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  margin: 28px 0 !important;
   max-width: none !important;
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3) !important;
   justify-content: center !important;
   display: flex !important;
   gap: 10px !important;
@@ -334,18 +359,14 @@ header .links a:active {
   display: none !important;
 }
 
-/* ── Cards grid panel ── */
+/* ── Cards grid (no panel - sits inside container) ── */
 .grid {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 14px !important;
-  padding: 24px !important;
-  margin: 0 0 20px !important;
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 20px !important;
@@ -354,25 +375,21 @@ header .links a:active {
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr !important;
-    padding: 16px !important;
   }
 }
 
-/* ── Footer panel ── */
+/* ── Footer ── */
 footer {
-  background: rgba(15, 18, 24, 0.82) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-radius: 14px !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  margin: 0 !important;
-  padding: 20px 24px !important;
+  background: transparent !important;
+  border: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  margin: 28px 0 0 !important;
+  padding: 20px 0 0 !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
   font-weight: 500 !important;
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
 }
 
 /* ============================================================
@@ -698,22 +715,30 @@ footer {
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .container {
-    padding: 16px 8px !important;
+    margin: 16px 8px !important;
+    padding: 0 16px 24px !important;
   }
   header {
-    padding: 28px 20px 0 !important;
+    padding: 24px 0 20px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  header h1 {
+    font-size: 2rem !important;
   }
   header .links {
-    margin: 24px -20px 0 !important;
-    padding: 14px 20px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
   }
   .about {
-    padding: 20px !important;
+    padding: 18px 16px !important;
   }
   .filters {
     padding: 10px !important;
   }
   footer {
-    padding: 16px 20px !important;
+    padding: 16px 0 0 !important;
+    margin-top: 20px !important;
   }
 }
