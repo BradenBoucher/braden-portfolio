@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ZIP="${1:-aero-hardlight.zip}"
-TAG="pre-aero-hardlight-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="test: hard-sunlight gradients on test strip — angled beams, sharp waterlines, opposite shadows"
+ZIP="${1:-aero-mixed.zip}"
+TAG="pre-aero-mixed-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="test: theme 1 keeps dimmer sunbeam, themes 2/3/4 use smooth gradients with edge vignette"
 
 [ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
 [ -f index.html ] || { echo "✗ No index.html."; exit 1; }
