@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# apply.sh — backup, unpack, commit-if-needed, ALWAYS deploy.
-# Run from ~/Downloads/braden-portfolio.
-
 set -uo pipefail
 
-ZIP="${1:-aero-deep.zip}"
-TAG="pre-aero-deep-$(date +%Y%m%d-%H%M%S)"
-COMMIT_MSG="feat: deep Aero — skeuo buttons, inner glow halos, aurora streaks, embossed type"
+ZIP="${1:-aero-crank.zip}"
+TAG="pre-aero-crank-$(date +%Y%m%d-%H%M%S)"
+COMMIT_MSG="feat: crank deep-Aero values — visible inner halos, brighter aurora, embossed type"
 
-[ -d .git ]       || { echo "✗ Not a git repo. cd into ~/Downloads/braden-portfolio."; exit 1; }
-[ -f index.html ] || { echo "✗ No index.html here."; exit 1; }
+[ -d .git ]       || { echo "✗ Not a git repo."; exit 1; }
+[ -f index.html ] || { echo "✗ No index.html."; exit 1; }
 [ -f "$ZIP" ]     || { echo "✗ Zip not found: $ZIP"; exit 1; }
 
 if ! git diff-index --quiet HEAD --; then
@@ -25,13 +22,12 @@ unzip -o "$ZIP" index.html -d .
 
 git add index.html
 if git diff --cached --quiet; then
-  echo "→ index.html unchanged from current HEAD — skipping commit."
+  echo "→ index.html unchanged — skipping commit."
 else
   git commit -m "$COMMIT_MSG"
   git push
 fi
 
-echo "→ vercel --prod (always)..."
 vercel --prod
 
 echo ""
